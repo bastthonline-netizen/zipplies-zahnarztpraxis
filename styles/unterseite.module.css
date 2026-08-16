@@ -1,0 +1,608 @@
+/* Gemeinsame Bausteine fuer die Unterseiten. Baut auf denselben Tokens wie
+   startseite.module.css auf, keine eigenen Farben oder Groessen erfunden. */
+
+/* Header ist jetzt position:fixed (siehe site.module.css), nimmt also keinen
+   Platz im normalen Fluss mehr ein — jede Unterseite gleicht das hier selbst
+   aus, damit der Titel nicht unter dem Header verschwindet. */
+.hero{padding-top:calc(var(--header-h) + var(--space-13));padding-bottom:var(--space-11);background:var(--surface-page)}
+.heroOverline{margin-bottom:var(--space-6)}
+.heroTitel{
+  font-family:var(--font-display);
+  font-size:var(--size-display-xl,var(--size-display));
+  font-weight:var(--weight-regular);
+  line-height:var(--lh-heading);
+  letter-spacing:var(--tracking-display);
+  color:var(--text-heading);
+  max-width:18ch;
+}
+.heroLede{margin-top:var(--space-6);font-size:var(--size-body-lg);color:var(--text-body);max-width:52ch}
+
+/* Hero-Variante mit Bild — bisher nur auf /implantologie, der wichtigsten
+   Unterseite. Text links, Bild rechts; der Titel wird schmaler, weil er sich
+   die Breite jetzt teilt. */
+.heroMitBild{padding-bottom:var(--space-13)}
+
+.heroRaster{
+  display:grid;
+  grid-template-columns:minmax(0,50fr) minmax(0,50fr);
+  gap:var(--space-12);
+  align-items:center;
+}
+.heroMitBild .heroTitel{max-width:14ch}
+.heroMitBild .heroLede{max-width:44ch}
+
+.heroBild{
+  position:relative;
+  margin:0;
+  aspect-ratio:4/3;
+  border-radius:var(--radius-xl);
+  overflow:hidden;
+  box-shadow:0 28px 56px -30px rgba(14,30,56,.28);
+  background:var(--surface-sunken);
+}
+.heroBild img{width:100%;height:100%;object-fit:cover;display:block}
+
+.heroBildHinweis{
+  position:absolute;
+  left:var(--space-4);
+  bottom:var(--space-4);
+  padding:var(--space-2) var(--space-3);
+  border-radius:var(--radius-full);
+  background:rgba(14,30,56,.6);
+  color:var(--white);
+  font-size:var(--size-caption);
+  backdrop-filter:blur(6px);
+}
+
+@media (max-width:1000px){
+  .heroRaster{grid-template-columns:1fr;gap:var(--space-9)}
+  .heroMitBild .heroTitel{max-width:18ch}
+  .heroBild{aspect-ratio:16/10}
+}
+
+.abschnitt{padding-block:var(--space-13);background:var(--surface-page)}
+.abschnittSunken{background:var(--surface-sunken)}
+.abschnittTint{background:var(--surface-tint)}
+.abschnittDunkel{background:var(--surface-inverse);color:var(--text-on-dark)}
+
+.raster{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12);align-items:center}
+.rasterKopfLastig{align-items:start}
+
+.titel{
+  font-family:var(--font-display);
+  font-size:var(--size-display);
+  font-weight:var(--weight-regular);
+  line-height:var(--lh-heading);
+  letter-spacing:var(--tracking-display);
+  max-width:16ch;
+}
+.text{margin-top:var(--space-6);max-width:46ch;color:var(--text-body);line-height:var(--lh-loose)}
+
+.bild{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:4/3}
+.bild img{width:100%;height:100%;object-fit:cover}
+
+/* Kennzeichnung fuer generierte Stimmungsbilder — Probewebsite, keine echten
+   Praxisfotos. Bleibt sichtbar, damit niemand es fuer bare Muenze nimmt. */
+.bildHinweis{
+  position:absolute;
+  left:var(--space-5);
+  bottom:var(--space-5);
+  padding:var(--space-2) var(--space-4);
+  border-radius:var(--radius-full);
+  background:rgba(15,23,42,.62);
+  color:var(--white);
+  font-size:var(--size-caption);
+  letter-spacing:.02em;
+  backdrop-filter:blur(6px);
+}
+
+/* ---------- Leistungswahl: Liste links, Detailpanel rechts ---------- */
+/* Man bleibt auf /leistungen; der URL-Hash wandert mit, siehe
+   components/LeistungsWahl.tsx. */
+
+.wahlRaster{
+  display:grid;
+  grid-template-columns:minmax(0,38fr) minmax(0,62fr);
+  gap:var(--space-12);
+  align-items:start;
+}
+
+.wahlListe{
+  list-style:none;
+  margin:0;
+  padding:0;
+  border-top:1px solid var(--border-default);
+  position:sticky;
+  top:calc(var(--header-h) + var(--space-8));
+}
+
+.wahlEintrag{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:var(--space-5);
+  width:100%;
+  min-height:var(--control-h);
+  padding-block:var(--space-5);
+  border:0;
+  border-bottom:1px solid var(--border-default);
+  background:none;
+  text-align:left;
+  cursor:pointer;
+  color:var(--text-body);
+  transition:var(--transition-control);
+}
+.wahlEintrag:hover{color:var(--text-accent)}
+.wahlEintrag:focus-visible{
+  outline:none;
+  box-shadow:var(--focus-ring);
+  border-radius:var(--radius-sm);
+}
+
+.wahlEintragAktiv{color:var(--text-accent)}
+.wahlEintragAktiv .wahlTitel{font-weight:var(--weight-medium)}
+.wahlEintragAktiv .wahlPfeil{opacity:1;transform:translateX(2px)}
+
+.wahlNummer{
+  font-size:var(--size-caption);
+  color:var(--text-subtle);
+  font-variant-numeric:tabular-nums;
+}
+.wahlTitel{
+  font-family:var(--font-display);
+  font-size:var(--size-h4);
+  line-height:var(--lh-heading);
+  color:inherit;
+}
+.wahlPfeil{
+  width:18px;height:18px;
+  opacity:0;
+  transition:opacity var(--dur) var(--ease-calm),transform var(--dur) var(--ease-calm);
+}
+.wahlEintrag:hover .wahlPfeil{opacity:.6}
+
+.wahlPanel{
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-xl);
+  padding:var(--space-10) var(--space-9);
+  box-shadow:0 24px 48px -30px rgba(14,30,56,.18);
+}
+
+.wahlPanelTitel{
+  font-family:var(--font-display);
+  font-size:var(--size-h2);
+  font-weight:var(--weight-regular);
+  line-height:var(--lh-heading);
+  letter-spacing:var(--tracking-heading);
+  color:var(--text-heading);
+  text-wrap:balance;
+}
+.wahlPanelText{
+  margin-top:var(--space-6);
+  color:var(--text-body);
+  line-height:var(--lh-loose);
+  max-width:var(--measure-body);
+  text-wrap:pretty;
+}
+
+.wahlAblaufTitel{margin-top:var(--space-10);margin-bottom:var(--space-6)}
+
+.wahlAblauf{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:var(--space-5);
+}
+.wahlAblaufPunkt{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  align-items:baseline;
+  gap:var(--space-5);
+  font-size:var(--size-body-sm);
+  color:var(--text-body);
+}
+.wahlAblaufNummer{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:24px;height:24px;
+  border-radius:var(--radius-full);
+  background:var(--surface-tint);
+  color:var(--text-accent);
+  font-size:var(--size-caption);
+  font-variant-numeric:tabular-nums;
+}
+
+@media (max-width:1000px){
+  .wahlRaster{grid-template-columns:1fr;gap:var(--space-9)}
+  .wahlListe{position:static}
+  .wahlPanel{padding:var(--space-9) var(--space-7)}
+}
+
+.liste{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-8)}
+.listeEintrag{padding-top:var(--space-8);border-top:1px solid var(--border-default)}
+.listeEintragTitel{
+  font-family:var(--font-display);
+  font-size:var(--size-h3);
+  font-weight:var(--weight-regular);
+  color:var(--text-heading);
+  margin-bottom:var(--space-3);
+}
+.listeEintragText{color:var(--text-body);max-width:var(--measure-body)}
+
+/* ---------- Vollbreites Bildband mit Unterschrift ---------- */
+/* Genutzt fuer das Schlussbild auf /praxis (echtes Foto vom Utzhof) und fuer
+   das Gemeinschaftsbild auf /team. Die Unterschrift steht UNTER dem Bild, nicht
+   darauf: sie erklaert, was echt ist und was nicht — dafuer muss sie lesbar
+   sein, nicht huebsch auf dem Motiv liegen. */
+.hausBand{margin:0}
+.hausBild{
+  position:relative;
+  aspect-ratio:16/9;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow-lg);
+  background:var(--surface-sunken);
+}
+/* Der Giebel mit der Lueftlmalerei sitzt im oberen Drittel des Originals —
+   ohne den Versatz schneidet der 16:9-Ausschnitt genau das weg, worum es geht. */
+.hausBild img{width:100%;height:100%;object-fit:cover;object-position:center 24%;display:block}
+
+.hausUnterschrift{
+  margin-top:var(--space-6);
+  max-width:64ch;
+  font-size:var(--size-body-sm);
+  color:var(--text-muted);
+  line-height:var(--lh-body);
+  text-wrap:pretty;
+}
+.hausUnterschriftStark{color:var(--text-body);font-weight:var(--weight-medium)}
+
+/* Gruppenbild: Koepfe sitzen mittig, kein Versatz noetig. */
+.teamGruppenBild img{object-position:center center}
+
+.abschnittSchmal{padding-block:var(--space-11);background:var(--surface-page)}
+.heroFussnote{
+  margin-top:var(--space-7);
+  max-width:52ch;
+  font-size:var(--size-body-sm);
+  color:var(--text-muted);
+  padding-left:var(--space-5);
+  border-left:1px solid var(--border-strong);
+}
+
+/* ---------- /team: Behandlertafel ---------- */
+/* Kein erfundenes Portraet unter einem echten Namen — stattdessen die drei
+   nachpruefbaren Zeilen. Dunkles Band, weil das die einzige belegte Aussage der
+   Seite ist und sich vom Platzhalter-Rest absetzen soll. */
+.behandler{
+  display:grid;
+  grid-template-columns:minmax(0,46fr) minmax(0,54fr);
+  gap:var(--space-12);
+  align-items:start;
+  background:var(--surface-inverse);
+  color:var(--text-on-dark);
+  border-radius:var(--radius-xl);
+  padding:var(--space-11) var(--space-10);
+}
+.behandlerKopf{min-width:0}
+.behandlerRolle{
+  font-size:var(--size-overline);
+  letter-spacing:var(--tracking-overline);
+  text-transform:uppercase;
+  color:var(--blue-300);
+  margin-bottom:var(--space-5);
+}
+.behandlerName{
+  font-family:var(--font-display);
+  font-size:var(--size-h2);
+  font-weight:var(--weight-regular);
+  line-height:var(--lh-heading);
+  letter-spacing:var(--tracking-heading);
+  color:var(--text-on-dark);
+  text-wrap:balance;
+}
+.behandlerText{
+  margin-top:var(--space-6);
+  max-width:44ch;
+  color:var(--text-on-dark-muted);
+  line-height:var(--lh-loose);
+  text-wrap:pretty;
+}
+/* Leerstelle als Gestaltung, nicht als Loch: die Stelle, an der spaeter das
+   echte Portraet steht, wird benannt statt kaschiert. */
+.behandlerFoto{
+  margin-top:var(--space-8);
+  display:inline-block;
+  padding:var(--space-3) var(--space-5);
+  border:1px dashed var(--border-inverse);
+  border-radius:var(--radius-full);
+  font-size:var(--size-caption);
+  color:var(--blue-200);
+}
+
+.belege{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-6)}
+.belegZeile{
+  display:grid;
+  grid-template-columns:5ch 1fr;
+  gap:var(--space-7);
+  align-items:baseline;
+  padding-top:var(--space-6);
+  border-top:1px solid var(--border-inverse);
+}
+.belegZeile:first-child{padding-top:0;border-top:0}
+.belegJahr{
+  font-family:var(--font-display);
+  font-size:var(--size-h4);
+  color:var(--blue-300);
+  font-variant-numeric:tabular-nums;
+}
+.belegText{color:var(--text-on-dark);line-height:var(--lh-body)}
+
+/* ---------- /team: Karten, die sich umdrehen ---------- */
+/* Vorne das Portraet mit der Rolle, hinten die Beschreibung. Auf Zeigergeraeten
+   dreht der Hover, ueberall sonst der Klick — die Logik dazu steht in
+   components/TeamKarten.tsx.
+
+   Die Karte ist ein <button>, deshalb muessen hier zuerst die Browser-Vorgaben
+   fuer Knoepfe zurueckgesetzt werden. */
+.portraetReihe{
+  list-style:none;
+  margin:var(--space-11) 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:var(--space-9) var(--space-8);
+}
+
+.portraetKarte{
+  display:block;
+  width:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  background:none;
+  font:inherit;
+  color:inherit;
+  text-align:left;
+  cursor:pointer;
+  border-radius:var(--radius-md);
+  /* Die Tiefe der Drehung. Flacher wirkt die Karte wie ein Blatt Papier, das
+     kippt, statt wie eine Karte, die sich dreht. */
+  perspective:1400px;
+}
+.portraetKarte:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+.portraetInnen{
+  position:relative;
+  display:block;
+  aspect-ratio:4/5;
+  transform-style:preserve-3d;
+  transform:rotateY(0deg);
+  /* Laenger als --dur-slow: eine Drehung im Raum braucht mehr Weg als ein
+     Farbwechsel, sonst wirkt sie hektisch statt ruhig. */
+  transition:transform 620ms var(--ease-out);
+}
+@media (hover:hover){
+  .portraetKarte:hover .portraetInnen{transform:rotateY(180deg)}
+}
+/* Steht bewusst NACH der Hover-Regel: eine angeklickte Karte bleibt gedreht,
+   auch wenn die Maus daruebersteht oder wieder weggeht. */
+.portraetInnen[data-gedreht="true"]{transform:rotateY(180deg)}
+
+.portraetVorne,
+.portraetHinten{
+  position:absolute;
+  inset:0;
+  display:block;
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+}
+
+/* --- Vorderseite --- */
+.portraetVorne{
+  background:var(--surface-sunken);
+  /* Die Laibung: eine feine umlaufende Innenkante statt Schlagschatten. */
+  box-shadow:inset 0 0 0 1px rgba(14,30,56,.10);
+}
+.portraetVorne img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 22%;
+  display:block;
+}
+/* Der Schleier liegt in Blue-900, nicht in Grau — kuehles Licht statt einer
+   Graustufen-Entsaettigung von der Stange. */
+.portraetSchleier{
+  position:absolute;
+  inset:0;
+  background:rgba(24,51,91,.14);
+  pointer-events:none;
+}
+/* Verlauf unter Rolle und Hinweis, damit die Schrift auf jedem Motiv traegt. */
+.portraetVorneFuss{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:var(--space-4);
+  padding:var(--space-9) var(--space-5) var(--space-5);
+  background:var(--scrim-bottom);
+}
+.portraetRolle{
+  font-family:var(--font-display);
+  font-size:var(--size-h4);
+  line-height:var(--lh-heading);
+  color:var(--white);
+  text-wrap:balance;
+}
+/* Ohne diesen Hinweis findet niemand die Rueckseite. */
+.portraetDreh{
+  flex:none;
+  padding:var(--space-1) var(--space-3);
+  border:1px solid rgba(255,255,255,.45);
+  border-radius:var(--radius-full);
+  font-size:var(--size-caption);
+  color:var(--white);
+  white-space:nowrap;
+  transition:background-color var(--dur) var(--ease-calm);
+}
+.portraetKarte:hover .portraetDreh{background:rgba(255,255,255,.18)}
+
+/* Sitzt oben: unten liegt jetzt der Rollen-Balken. */
+.portraetMarke{
+  position:absolute;
+  left:var(--space-4);
+  top:var(--space-4);
+  padding:var(--space-1) var(--space-3);
+  border-radius:var(--radius-full);
+  background:rgba(15,23,42,.62);
+  color:var(--white);
+  font-size:var(--size-caption);
+  backdrop-filter:blur(6px);
+}
+
+/* --- Rueckseite --- */
+.portraetHinten{
+  transform:rotateY(180deg);
+  background:var(--surface-inverse);
+  color:var(--text-on-dark);
+  display:flex;
+  flex-direction:column;
+  /* Oben beginnen, nicht unten: sonst sitzt die kurze Karte („Am Stuhl dabei")
+     ganz unten und die lange oben, und die Reihe wirkt unruhig. */
+  justify-content:flex-start;
+  padding:var(--space-7);
+}
+.portraetHintenRolle{
+  font-family:var(--font-display);
+  font-size:var(--size-h4);
+  line-height:var(--lh-heading);
+  color:var(--text-on-dark);
+  margin-bottom:var(--space-4);
+}
+.portraetDetail{
+  font-size:var(--size-body-sm);
+  color:var(--text-on-dark-muted);
+  line-height:var(--lh-loose);
+  text-wrap:pretty;
+}
+/* `auto` statt fester Abstand: der Hinweis bleibt am Fuss der Karte, egal wie
+   lang der Text darueber ist. */
+.portraetHintenFuss{
+  margin-top:auto;
+  padding-top:var(--space-5);
+  border-top:1px solid var(--border-inverse);
+  font-size:var(--size-caption);
+  color:var(--blue-300);
+}
+
+/* Keine Drehung im Raum: die Rueckseite wird eingeblendet statt gewendet.
+   Der Inhalt bleibt derselbe, nur der Weg dorthin ist ruhig. */
+@media (prefers-reduced-motion:reduce){
+  .portraetInnen{transform-style:flat;transition:none}
+  .portraetInnen,
+  .portraetInnen[data-gedreht="true"],
+  .portraetKarte:hover .portraetInnen{transform:none}
+  .portraetVorne,.portraetHinten{backface-visibility:visible;transition:opacity 1ms linear}
+  .portraetHinten{transform:none;opacity:0}
+  .portraetInnen[data-gedreht="true"] .portraetHinten{opacity:1}
+  .portraetInnen[data-gedreht="true"] .portraetVorne{opacity:0}
+}
+@media (prefers-reduced-motion:reduce) and (hover:hover){
+  .portraetKarte:hover .portraetHinten{opacity:1}
+  .portraetKarte:hover .portraetVorne{opacity:0}
+}
+
+@media (max-width:1000px){
+  .behandler{grid-template-columns:1fr;gap:var(--space-9);padding:var(--space-9) var(--space-8)}
+  .hausBild{aspect-ratio:4/3}
+}
+@media (max-width:560px){
+  .portraetReihe{grid-template-columns:repeat(2,1fr);gap:var(--space-8) var(--space-6)}
+  .belegZeile{grid-template-columns:1fr;gap:var(--space-2)}
+
+  /* Die Rueckseite muss in dieselbe 4:5-Flaeche passen wie das Portraet — bei
+     halber Spaltenbreite wird der laengste Rollentext sonst knapp. Deshalb hier
+     enger gesetzt statt abgeschnitten. */
+  .portraetHinten{padding:var(--space-5)}
+  .portraetHintenRolle{font-size:var(--size-body-lg);margin-bottom:var(--space-3)}
+  .portraetDetail{line-height:var(--lh-body)}
+  .portraetHintenFuss{padding-top:var(--space-4)}
+  .portraetVorneFuss{padding:var(--space-8) var(--space-4) var(--space-4)}
+}
+
+.karten{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-9)}
+.karte{
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-lg);
+  padding:var(--space-8);
+}
+.karteBild{border-radius:var(--radius-md);overflow:hidden;aspect-ratio:4/3;margin-bottom:var(--space-6);position:relative}
+.karteBild img{width:100%;height:100%;object-fit:cover}
+.karteTitel{font-family:var(--font-display);font-size:var(--size-h4);color:var(--text-heading);margin-bottom:var(--space-2)}
+.karteText{font-size:var(--size-body-sm);color:var(--text-muted)}
+
+.zeitenTabelle{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:var(--space-4) var(--space-8);
+}
+.zeitenTag{color:var(--text-muted);font-size:var(--size-body-sm)}
+.zeitenWert{font-variant-numeric:tabular-nums}
+.zeitenZu{color:var(--text-subtle)}
+
+.terminKarte{
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);
+  padding:var(--space-9);
+}
+
+.terminNummer{
+  display:inline-block;
+  margin-top:var(--space-7);
+  font-family:var(--font-display);
+  font-size:var(--size-display);
+  line-height:1;
+  color:var(--text-accent);
+  text-decoration:none;
+  border-bottom:2px solid var(--blue-300);
+  padding-bottom:var(--space-3);
+  transition:var(--transition-control);
+}
+.terminNummer:hover{color:var(--blue-900);border-bottom-color:currentColor}
+
+.rechtstext{max-width:var(--measure-body);color:var(--text-body);line-height:var(--lh-loose)}
+.rechtstext h2{
+  font-family:var(--font-display);
+  font-size:var(--size-h3);
+  font-weight:var(--weight-regular);
+  color:var(--text-heading);
+  margin-top:var(--space-10);
+  margin-bottom:var(--space-4);
+}
+.rechtstext p{margin-bottom:var(--space-5)}
+.rechtstext a{color:var(--text-accent)}
+
+.notFound{
+  min-height:60svh;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  padding-top:calc(var(--header-h) + var(--space-13));
+  padding-bottom:var(--space-13);
+}
+
+@media (max-width:1000px){
+  .raster,.rasterKopfLastig{grid-template-columns:1fr;gap:var(--space-9)}
+  .karten{grid-template-columns:1fr;gap:var(--space-7)}
+}

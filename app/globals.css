@@ -1,0 +1,40 @@
+/* Einstiegspunkt fuer alles Globale. Reihenfolge ist bedeutsam:
+   Farben zuerst (alles andere referenziert die semantischen Aliase),
+   dann Schriftdateien, dann die uebrigen Skalen, base.css zuletzt —
+   es verbraucht die Tokens. */
+@import "../styles/tokens/colors.css";
+@import "../styles/tokens/fonts.css";
+@import "../styles/tokens/typography.css";
+@import "../styles/tokens/spacing.css";
+@import "../styles/tokens/elevation.css";
+@import "../styles/tokens/motion.css";
+@import "../styles/tokens/base.css";
+
+/* Layout-Grundfiguren. Bewusst nur zwei — Breite entsteht sonst zufaellig. */
+.container{
+  width:100%;
+  max-width:var(--container);
+  margin-inline:auto;
+  padding-inline:var(--gutter);
+}
+.container-narrow{
+  width:100%;
+  max-width:var(--container-narrow);
+  margin-inline:auto;
+  padding-inline:var(--gutter);
+}
+
+/* Sprungmarke zum Inhalt. Pflicht fuer Tastaturnutzung, sichtbar erst bei Fokus. */
+.skip-link{
+  position:absolute;
+  left:var(--space-5);
+  top:calc(var(--space-5) * -4);
+  z-index:100;
+  background:var(--surface-card);
+  color:var(--text-link);
+  padding:var(--space-4) var(--space-6);
+  border-radius:var(--radius-sm);
+  box-shadow:var(--shadow-md);
+  transition:top var(--dur) var(--ease-calm);
+}
+.skip-link:focus-visible{top:var(--space-5)}

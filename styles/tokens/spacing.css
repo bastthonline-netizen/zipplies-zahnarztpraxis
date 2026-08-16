@@ -1,0 +1,19 @@
+/* Abstaende, Radien, Container. Unveraendert aus dem Claude-Design-System.
+   4px-Skala. --control-h 44px ist die Mindest-Klickflaeche und nicht verhandelbar. */
+:root{
+--space-0:0;--space-1:2px;--space-2:4px;--space-3:8px;--space-4:12px;--space-5:16px;
+--space-6:20px;--space-7:24px;--space-8:32px;--space-9:40px;--space-10:48px;
+--space-11:64px;--space-12:80px;--space-13:96px;--space-14:128px;
+
+--radius-xs:3px;--radius-sm:6px;--radius-md:10px;--radius-lg:16px;--radius-xl:24px;--radius-full:999px;
+
+--border-width:1px;--border-width-thick:2px;
+
+--section-y:var(--space-13);--section-y-tight:var(--space-11);
+--container:1200px;--container-narrow:760px;--gutter:clamp(20px,5vw,64px);
+--control-h-sm:36px;--control-h:44px;--control-h-lg:52px;
+
+/* Tatsaechliche Hoehe von components/site/Header.tsx (gemessen), fuer Seiten
+   mit position:fixed-Header, die den Versatz selbst ausgleichen muessen. */
+--header-h:77px;
+}

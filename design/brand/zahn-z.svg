@@ -1,0 +1,25 @@
+<!-- Bildmarke Zahnarztpraxis Dr. Zipplies — Variante B "Zahn, offene Linie".
+     Loest Variante 05 (Zahn im gefuellten Kreis-Badge, Z ausgestanzt) ab —
+     die wirkte wie klassisches Zahnarzt-Kliparr. Jetzt ein einzelner duenner,
+     offener Strich, kein Kreis, kein Buchstabe im Icon.
+     Faerbung ueber currentColor. Kleinste vorgesehene Groesse: 24px Kantenlaenge. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 72" role="img" aria-label="Zahnarztpraxis Dr. Zipplies">
+  <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="
+    M20 14
+    C20 10 24 8 28 10
+    C30 11 34 11 36 10
+    C40 8 44 10 44 14
+    C45 22 44 30 41 36
+    C40 38 39 40 39 43
+    L38 60
+    C37.6 65 34 65.5 33 61
+    L30.5 45
+    C30.2 43.5 29.8 43.5 29.5 45
+    L27 61
+    C26 65.5 22.4 65 22 60
+    L21 43
+    C21 40 20 38 19 36
+    C16 30 15 22 20 14
+    Z
+  "/>
+</svg>

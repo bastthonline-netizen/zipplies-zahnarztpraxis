@@ -1,0 +1,18 @@
+/* Schatten.
+
+   Abweichung vom Claude-Design-System: dort sind die Schatten petrol-getoent
+   (rgba(8,32,31,…)) — richtig zum Teal-System, falsch zu Blau. Hier navy
+   getoent auf Basis von --blue-950 (#0E1E38 = rgb(14,30,56)).
+   Neutralgraue oder harte Schatten bleiben verboten.
+
+   Die Scrim-Verlaeufe und --glass standen im System ebenfalls hier; sie leben
+   jetzt ausschliesslich in colors.css, damit es nur eine Quelle gibt. */
+:root{
+--shadow-none:none;
+--shadow-xs:0 1px 2px rgba(14,30,56,.05);
+--shadow-sm:0 1px 2px rgba(14,30,56,.05),0 2px 6px rgba(14,30,56,.04);
+--shadow-md:0 2px 4px rgba(14,30,56,.04),0 8px 20px rgba(14,30,56,.06);
+--shadow-lg:0 4px 8px rgba(14,30,56,.05),0 20px 44px rgba(14,30,56,.09);
+--shadow-inset-hairline:inset 0 -1px 0 var(--border-subtle);
+--glass-blur:blur(12px);
+}

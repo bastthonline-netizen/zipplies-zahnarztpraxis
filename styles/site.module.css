@@ -1,0 +1,232 @@
+/* Kopf- und Fussbereich. Beide erscheinen auf jeder Seite,
+   deshalb liegen sie getrennt von den Startseiten-Sektionen. */
+
+/* ============================ Kopfbereich ============================ */
+
+.header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:50;
+  /* Deckender als das --glass-Token des Systems (.82). Ueber dem dunklen
+     Implantologie-Band mischte sich das Navy durch und der Kopf wurde
+     schmutzig grau — das einzige Grau der Seite, ausgerechnet oben. */
+  background:rgba(251,250,247,.94);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border-bottom:1px solid var(--border-subtle);
+  transition:background-color var(--dur) var(--ease-calm),border-color var(--dur) var(--ease-calm);
+}
+
+/* Nur auf der Startseite, nur ganz oben: liegt ueber dem Foto-Hero, dessen
+   eigener Verlauf (.ankunftScrim) den oberen Rand dunkel genug haelt. */
+.headerTransparent{
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  border-bottom-color:transparent;
+}
+.headerTransparent .markeName,
+.headerTransparent .markeOrt,
+.headerTransparent .navLink{color:var(--white)}
+.headerTransparent .navLink:hover{color:var(--blue-200);border-bottom-color:var(--blue-200)}
+.headerTransparent .telefonKnopf{
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.4);
+  backdrop-filter:blur(6px);
+}
+.headerTransparent .telefonKnopf:hover{background:rgba(255,255,255,.24)}
+
+.headerInner{
+  display:flex;
+  align-items:center;
+  gap:var(--space-8);
+  min-height:76px;
+  padding-block:var(--space-4);
+}
+
+.marke{
+  display:flex;
+  align-items:center;
+  gap:var(--space-4);
+  color:var(--text-heading);
+  text-decoration:none;
+  margin-right:auto;
+}
+.marke:hover{color:var(--text-heading)}
+
+.markeText{display:flex;flex-direction:column;line-height:1.1}
+.markeName{
+  font-family:var(--font-display);
+  font-size:var(--size-h4);
+  letter-spacing:var(--tracking-heading);
+}
+.markeOrt{
+  font-size:var(--size-caption);
+  color:var(--text-muted);
+  letter-spacing:0.02em;
+}
+
+.nav{display:flex;align-items:center;gap:var(--space-7)}
+.navLink{
+  font-size:var(--size-body-sm);
+  color:var(--text-body);
+  text-decoration:none;
+  padding-block:var(--space-3);
+  border-bottom:1px solid transparent;
+  transition:var(--transition-control);
+}
+.navLink:hover{color:var(--text-accent);border-bottom-color:var(--blue-300)}
+
+/* ---------- Untermenue Leistungen ---------- */
+/* Oeffnet per :hover und :focus-within — kein JavaScript noetig, und wer
+   sich mit der Tastatur hineintabbt, bekommt es ebenfalls zu sehen.
+   Die Bruecke aus padding-top haelt den Mauszeiger im Element, waehrend er
+   vom Hauptlink nach unten wandert. */
+.navGruppe{position:relative}
+
+.navUnter{
+  position:absolute;
+  top:100%;
+  left:50%;
+  translate:-50% 0;
+  padding-top:var(--space-5);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-4px);
+  transition:opacity var(--dur) var(--ease-calm),transform var(--dur) var(--ease-calm),visibility var(--dur);
+  z-index:60;
+}
+.navGruppe:hover .navUnter,
+.navGruppe:focus-within .navUnter{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
+.navUnterListe{
+  list-style:none;
+  margin:0;
+  padding:var(--space-4);
+  min-width:260px;
+  border-radius:var(--radius-lg);
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  box-shadow:0 24px 48px -24px rgba(14,30,56,.28);
+}
+
+.navUnterLink{
+  display:block;
+  padding:var(--space-3) var(--space-4);
+  border-radius:var(--radius-sm);
+  font-size:var(--size-body-sm);
+  color:var(--text-body);
+  text-decoration:none;
+  white-space:nowrap;
+  transition:var(--transition-control);
+}
+.navUnterLink:hover{background:var(--action-quiet-hover);color:var(--text-accent)}
+.navUnterLink:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+@media (prefers-reduced-motion:reduce){
+  .navUnter{transition:opacity var(--dur) linear,visibility var(--dur);transform:none}
+  .navGruppe:hover .navUnter,
+  .navGruppe:focus-within .navUnter{transform:none}
+}
+
+/* Die Telefonnummer ist die Hauptaktion, nicht ein Formular.
+   Die Zielgruppe ruft an. */
+.telefonKnopf{
+  display:inline-flex;
+  align-items:center;
+  gap:var(--space-3);
+  min-height:var(--control-h);
+  padding-inline:var(--space-6);
+  border-radius:var(--radius-full);
+  background:var(--action-primary);
+  color:var(--white);
+  font-size:var(--size-body-sm);
+  font-weight:var(--weight-medium);
+  text-decoration:none;
+  white-space:nowrap;
+  transition:var(--transition-control);
+}
+.telefonKnopf:hover{background:var(--action-primary-hover);color:var(--white)}
+
+@media (max-width:900px){
+  .nav{display:none}
+  .headerInner{gap:var(--space-5)}
+  .markeOrt{display:none}
+}
+
+/* ============================ Fussbereich ============================ */
+
+.footer{
+  background:var(--blue-950);
+  color:var(--text-on-dark);
+  padding-block:var(--space-12) var(--space-9);
+}
+
+.footerRaster{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  gap:var(--space-10);
+  padding-bottom:var(--space-10);
+  border-bottom:1px solid var(--border-inverse);
+}
+
+.footerMarke{
+  display:flex;
+  align-items:center;
+  gap:var(--space-4);
+  color:var(--text-on-dark);
+  margin-bottom:var(--space-6);
+}
+.footerName{font-family:var(--font-display);font-size:var(--size-h3)}
+
+.footerAdresse{
+  font-style:normal;
+  color:var(--text-on-dark-muted);
+  line-height:var(--lh-loose);
+}
+.footerAdresse a{color:var(--text-on-dark);text-decoration-color:rgba(255,255,255,.32)}
+.footerAdresse a:hover{color:var(--white);text-decoration-color:currentColor}
+
+.footerTitel{
+  font-family:var(--font-body);
+  font-size:var(--size-overline);
+  font-weight:var(--weight-semibold);
+  letter-spacing:var(--tracking-overline);
+  text-transform:uppercase;
+  color:var(--blue-300);
+  margin-bottom:var(--space-5);
+}
+
+.footerListe{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-4)}
+.footerListe a{color:var(--text-on-dark-muted);text-decoration:none}
+.footerListe a:hover{color:var(--white);text-decoration:underline}
+
+.footerZeiten{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:var(--space-2) var(--space-6);
+  font-size:var(--size-body-sm);
+  color:var(--text-on-dark-muted);
+}
+.footerZeitenTag{color:var(--blue-200)}
+
+.footerFuss{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--space-4) var(--space-8);
+  padding-top:var(--space-7);
+  font-size:var(--size-caption);
+  color:var(--blue-300);
+}
+.footerFuss a{color:var(--blue-200);text-decoration:none}
+.footerFuss a:hover{color:var(--white);text-decoration:underline}
+
+@media (max-width:900px){
+  .footerRaster{grid-template-columns:1fr;gap:var(--space-9)}
+}

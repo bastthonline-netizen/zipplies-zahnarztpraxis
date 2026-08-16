@@ -1,0 +1,42 @@
+/* Grundlagen. Aus dem Claude-Design-System, mit zwei Korrekturen:
+   - Linkunterstreichung nutzte --petrol-300; die Variable existiert im
+     Blau-System nicht und der Link haette gar keine Unterstreichungsfarbe
+     bekommen. Ersetzt durch --blue-300.
+   - font-optical-sizing ergaenzt, weil Newsreader eine opsz-Achse hat. */
+*,*::before,*::after{box-sizing:border-box}
+
+html{-webkit-text-size-adjust:100%}
+
+body{
+  margin:0;
+  background:var(--surface-page);
+  color:var(--text-body);
+  font-family:var(--font-body);
+  font-size:var(--size-body);
+  line-height:var(--lh-body);
+  -webkit-font-smoothing:antialiased;
+  font-optical-sizing:auto;
+}
+
+h1,h2,h3,h4{
+  font-family:var(--font-display);
+  color:var(--text-heading);
+  font-weight:var(--weight-regular);
+  letter-spacing:var(--tracking-heading);
+  line-height:var(--lh-heading);
+  margin:0;
+}
+
+p{margin:0;text-wrap:pretty}
+
+a{
+  color:var(--text-link);
+  text-decoration-color:var(--blue-300);
+  text-underline-offset:3px;
+  transition:color var(--dur) var(--ease-calm),text-decoration-color var(--dur) var(--ease-calm);
+}
+a:hover{color:var(--text-link-hover);text-decoration-color:currentColor}
+
+:focus-visible{outline:2px solid var(--border-focus);outline-offset:2px;border-radius:var(--radius-xs)}
+
+img{max-width:100%;display:block}

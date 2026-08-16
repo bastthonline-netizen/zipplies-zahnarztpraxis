@@ -1,0 +1,747 @@
+/* Die Sektionen der Startseite. Jede hat genau einen Job (siehe BAUPLAN.md).
+   Bewusst NICHT die Standardfolge Hero -> 3 Icon-Spalten -> Ueber uns -> Kontakt.
+
+   Farbrhythmus von oben nach unten:
+   Sand -> Sand -> Blau dunkel -> Sand -> Foto -> Sand warm -> Blau hell -> Footer. */
+
+/* ===================== 1 · Ankunft ===================== */
+/* Vollbild-Hero mit Foto-Hintergrund und Verlauf, Referenz: Zen Dental Studio.
+   Der Header liegt transparent darueber (siehe site.module.css) und wird erst
+   beim Scrollen solide. */
+
+.ankunft{
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  background:var(--surface-inverse);
+  overflow:hidden;
+}
+
+.ankunftMedia{position:absolute;inset:0}
+.ankunftMedia img{width:100%;height:100%;object-fit:cover;object-position:50% 38%}
+
+/* Zwei Verlaeufe uebereinander: einer haelt den oberen Rand dunkel genug fuer
+   den transparenten Header, egal wie weit man scrollt; der zweite dunkelt die
+   linke Seite fuer die Textspalte ab — dieselbe rgba-Farbe wie --scrim-side,
+   nur als eigener Verlauf, weil zwei Richtungen gleichzeitig gebraucht werden. */
+.ankunftScrim{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg,rgba(14,30,56,.72) 0,rgba(14,30,56,.32) 140px,rgba(14,30,56,0) 260px),
+    linear-gradient(90deg,rgba(14,30,56,.90) 0%,rgba(14,30,56,.68) 34%,rgba(14,30,56,.28) 62%,rgba(14,30,56,.05) 82%);
+}
+
+.ankunftBildHinweis{
+  position:absolute;
+  right:var(--space-6);
+  bottom:var(--space-6);
+  padding:var(--space-2) var(--space-4);
+  border-radius:var(--radius-full);
+  background:rgba(14,30,56,.55);
+  color:var(--white);
+  font-size:var(--size-caption);
+  letter-spacing:.02em;
+  backdrop-filter:blur(6px);
+}
+
+.ankunftInhalt{
+  position:relative;
+  width:100%;
+  padding-block:var(--space-14);
+}
+
+.ankunftOrt{
+  display:flex;
+  align-items:center;
+  gap:var(--space-4);
+  margin-bottom:var(--space-7);
+  font-size:var(--size-overline);
+  font-weight:var(--weight-semibold);
+  letter-spacing:var(--tracking-overline);
+  text-transform:uppercase;
+  color:var(--blue-200);
+}
+.ankunftOrtStrich{width:28px;height:1px;background:var(--copper-300)}
+
+/* Eigene Skala statt --size-display-xl: die Zeile steht in einer schmalen
+   Textspalte, nicht ueber die volle Breite. */
+.ankunftTitel{
+  font-family:var(--font-display);
+  font-size:clamp(2.5rem,min(4.6vw,6.6vh),4.2rem);
+  font-weight:var(--weight-regular);
+  line-height:var(--lh-tight);
+  letter-spacing:var(--tracking-display);
+  color:var(--white);
+  max-width:14ch;
+}
+
+.ankunftLede{
+  margin-top:var(--space-6);
+  font-size:var(--size-body-lg);
+  line-height:var(--lh-snug);
+  color:var(--blue-100);
+  max-width:38ch;
+}
+
+.ankunftAktionen{
+  margin-top:var(--space-9);
+  display:flex;
+  align-items:center;
+  gap:var(--space-6);
+  flex-wrap:wrap;
+}
+
+.btnPrimary{
+  display:inline-flex;
+  align-items:center;
+  min-height:var(--control-h);
+  padding-inline:var(--space-8);
+  border-radius:var(--radius-full);
+  background:var(--action-primary);
+  color:var(--white);
+  font-size:var(--size-body-sm);
+  font-weight:var(--weight-medium);
+  text-decoration:none;
+  white-space:nowrap;
+  transition:var(--transition-control);
+}
+.btnPrimary:hover{background:var(--action-primary-hover);color:var(--white)}
+
+.btnSecondary{
+  display:inline-flex;
+  align-items:center;
+  min-height:var(--control-h);
+  padding-inline:var(--space-8);
+  border-radius:var(--radius-full);
+  border:1px solid rgba(255,255,255,.5);
+  color:var(--white);
+  font-size:var(--size-body-sm);
+  font-weight:var(--weight-medium);
+  text-decoration:none;
+  white-space:nowrap;
+  transition:var(--transition-control);
+}
+.btnSecondary:hover{border-color:var(--white);background:rgba(255,255,255,.08);color:var(--white)}
+
+.textLink{
+  font-size:var(--size-body-sm);
+  color:var(--text-body);
+  text-decoration:none;
+  border-bottom:1px solid var(--border-strong);
+  padding-bottom:var(--space-1);
+  transition:var(--transition-control);
+}
+.textLink:hover{color:var(--text-accent);border-bottom-color:var(--blue-600)}
+
+@media (max-width:1000px){
+  .ankunft{min-height:88svh}
+  .ankunftTitel{max-width:16ch}
+  .ankunftAktionen{gap:var(--space-5)}
+  .btnPrimary,.btnSecondary{padding-inline:var(--space-6);font-size:var(--size-caption)}
+}
+
+/* ===================== 1.5 · Vertrauen ===================== */
+/* Schmales Band direkt unter dem Hero, Sand-100 gegen die Sand-50-Flaeche
+   darunter. Icons zeichnen sich beim Scrollen nach (siehe Vertrauen.tsx). */
+
+.vertrauen{
+  background:var(--surface-sunken);
+  border-bottom:1px solid var(--border-subtle);
+  padding-block:var(--space-10);
+}
+
+.vertrauenRaster{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:var(--space-8) var(--space-6);
+}
+
+.vertrauenPunkt{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.vertrauenIcon{width:34px;height:34px;margin-bottom:var(--space-5);color:var(--text-accent)}
+
+.vertrauenLabel{
+  font-family:var(--font-display);
+  font-size:var(--size-h4);
+  font-weight:var(--weight-regular);
+  color:var(--text-heading);
+  text-wrap:balance;
+}
+
+.vertrauenText{
+  margin-top:var(--space-2);
+  font-size:var(--size-body-sm);
+  line-height:var(--lh-snug);
+  color:var(--text-muted);
+  max-width:24ch;
+  text-wrap:pretty;
+}
+
+@media (max-width:1000px){
+  .vertrauenRaster{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){
+  .vertrauenRaster{grid-template-columns:1fr;gap:var(--space-7)}
+}
+
+/* ===================== 2 · Vorgehen ===================== */
+/* Ersetzt die frueheren Sektionen "Vertrauen" (Icon-Leiste) und "Expertise"
+   (drei Karten) — beide fuehrten dieselben Nachweise wie das Implantologie-
+   Band darunter. Begruendung steht in components/sections/Vorgehen.tsx.
+
+   Form: Referenz Zen Dental Studio — Textspalte links bleibt beim Scrollen
+   stehen, rechts zwei Kartenspalten, die zweite um eine halbe Karte nach
+   unten versetzt. Karten haben absichtlich unterschiedliche Hoehen (der
+   Inhalt bestimmt sie), damit kein gleichfoermiges Raster entsteht. */
+
+.vorgehen{padding-block:var(--space-14);background:var(--surface-page)}
+
+.vorgehenRaster{
+  display:grid;
+  grid-template-columns:minmax(0,36fr) minmax(0,64fr);
+  gap:var(--space-12);
+  align-items:start;
+}
+
+/* Bleibt stehen, waehrend die Karten daran vorbeilaufen. Der Versatz ist die
+   gemessene Headerhoehe plus Luft, damit der Titel nicht unter dem fixen
+   Header klebt. */
+.vorgehenKopf{position:sticky;top:calc(var(--header-h) + var(--space-9))}
+
+.vorgehenOverline{margin-bottom:var(--space-5)}
+
+.vorgehenTitel{
+  font-family:var(--font-display);
+  font-size:var(--size-display);
+  font-weight:var(--weight-regular);
+  line-height:var(--lh-heading);
+  letter-spacing:var(--tracking-display);
+  color:var(--text-heading);
+  max-width:15ch;
+  text-wrap:balance;
+}
+
+.vorgehenText{
+  margin-top:var(--space-6);
+  max-width:38ch;
+  color:var(--text-body);
+  line-height:var(--lh-loose);
+  text-wrap:pretty;
+}
+
+.vorgehenSpalten{
+  display:flex;
+  align-items:flex-start;
+  gap:var(--space-7);
+}
+
+.vorgehenSpalte{
+  flex:1 1 0;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-7);
+}
+
+/* Der eigentliche Zen-Griff: die zweite Spalte startet tiefer. */
+.vorgehenSpalteVersetzt{padding-top:var(--space-12)}
+
+.vorgehenKarte{
+  background:linear-gradient(158deg,var(--white) 0%,var(--sand-100) 100%);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-xl);
+  padding:var(--space-9) var(--space-8);
+  box-shadow:0 24px 48px -28px rgba(14,30,56,.20);
+  transition:box-shadow var(--dur) var(--ease-calm),transform var(--dur) var(--ease-calm);
+}
+.vorgehenKarte:hover{
+  box-shadow:0 32px 64px -28px rgba(14,30,56,.28);
+  transform:translateY(-2px);
+}
+
+.vorgehenKarteIcon{
+  width:34px;height:34px;
+  margin-bottom:var(--space-8);
+  color:var(--text-accent);
+}
+
+.vorgehenKarteTitel{
+  font-family:var(--font-display);
+  font-size:var(--size-h3);
+  font-weight:var(--weight-regular);
+  line-height:var(--lh-heading);
+  letter-spacing:var(--tracking-heading);
+  color:var(--text-heading);
+  margin-bottom:var(--space-4);
+  text-wrap:balance;
+}
+
+.vorgehenKarteText{
+  font-size:var(--size-body-sm);
+  color:var(--text-muted);
+  line-height:var(--lh-body);
+  text-wrap:pretty;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .vorgehenKarte:hover{transform:none}
+}
+
+@media (max-width:1000px){
+  .vorgehen{padding-block:var(--space-12)}
+  .vorgehenRaster{grid-template-columns:1fr;gap:var(--space-9)}
+  .vorgehenKopf{position:static}
+  .vorgehenTitel{max-width:18ch}
+  .vorgehenSpalteVersetzt{padding-top:0}
+  .vorgehenSpalten{gap:var(--space-6)}
+  .vorgehenKarte{padding:var(--space-8) var(--space-7)}
+}
+
+@media (max-width:640px){
+  .vorgehenSpalten{flex-direction:column;gap:var(--space-6)}
+}
+
+/* ===================== 3 · Implantologie ===================== */
+
+.band{
+  background:var(--surface-inverse);
+  color:var(--text-on-dark);
+  padding-block:var(--space-13);
+}
+
+.bandRaster{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--space-12);
+  align-items:start;
+}
+
+.bandTitel{
+  font-family:var(--font-display);
+  font-size:var(--size-display);
+  font-weight:var(--weight-regular);
+  line-height:var(--lh-heading);
+  letter-spacing:var(--tracking-display);
+  color:var(--text-on-dark);
+  max-width:15ch;
+}
+
+.bandText{
+  margin-top:var(--space-7);
+  color:var(--text-on-dark-muted);
+  max-width:46ch;
+}
+
+.bandLink{
+  display:inline-flex;
+  align-items:center;
+  gap:var(--space-3);
+  margin-top:var(--space-9);
+  color:var(--text-on-dark);
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.32);
+  padding-bottom:var(--space-2);
+  transition:var(--transition-control);
+}
+.bandLink:hover{color:var(--white);border-bottom-color:var(--white)}
+
+.nachweise{list-style:none;margin:0;padding:0}
+.nachweis{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:var(--space-7);
+  padding-block:var(--space-7);
+  border-top:1px solid var(--border-inverse);
+}
+.nachweis:last-child{border-bottom:1px solid var(--border-inverse)}
+.nachweisJahr{
+  font-family:var(--font-display);
+  font-size:var(--size-h4);
+  color:var(--blue-300);
+  font-variant-numeric:tabular-nums;
+}
+.nachweisText{color:var(--text-on-dark);line-height:var(--lh-snug)}
+
+.nachweisFuss{
+  margin-top:var(--space-6);
+  font-size:var(--size-caption);
+  color:var(--blue-300);
+}
+
+@media (max-width:1000px){
+  .bandRaster{grid-template-columns:1fr;gap:var(--space-10)}
+}
+
+/* ===================== 4 · Leistungen ===================== */
+
+.leistungen{padding-block:var(--space-13);background:var(--surface-page)}
+
+.abschnittKopf{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:var(--space-8);
+  margin-bottom:var(--space-10);
+  flex-wrap:wrap;
+}
+
+.abschnittTitel{
+  font-family:var(--font-display);
+  font-size:var(--size-h2);
+  font-weight:var(--weight-regular);
+  color:var(--text-heading);
+}
+
+/* Bewusst eine typografische Indexliste statt Icon-Kacheln.
+   Neun Kacheln mit neun Icons waeren genau das Baukasten-Bild, das vermieden
+   werden soll — und ein Icon fuer "Endodontie" sagt ohnehin nichts. */
+.index{border-top:1px solid var(--border-default)}
+
+.eintrag{border-bottom:1px solid var(--border-default)}
+.eintrag summary{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:var(--space-7);
+  padding-block:var(--space-7);
+  cursor:pointer;
+  list-style:none;
+  min-height:var(--control-h);
+  transition:var(--transition-control);
+}
+.eintrag summary::-webkit-details-marker{display:none}
+.eintrag summary:hover{color:var(--text-accent)}
+.eintrag[open] summary{color:var(--text-accent)}
+
+.eintragNummer{
+  font-size:var(--size-caption);
+  color:var(--text-subtle);
+  font-variant-numeric:tabular-nums;
+}
+.eintragTitel{
+  font-family:var(--font-display);
+  font-size:var(--size-h3);
+  font-weight:var(--weight-regular);
+  color:inherit;
+  letter-spacing:var(--tracking-heading);
+}
+.eintragZeichen{
+  width:24px;height:24px;
+  flex:none;
+  color:var(--text-subtle);
+  transition:transform var(--dur) var(--ease-calm),color var(--dur) var(--ease-calm);
+}
+.eintrag[open] .eintragZeichen{transform:rotate(45deg);color:var(--text-accent)}
+
+.eintragText{
+  padding:0 0 var(--space-8) calc(var(--space-7) + 2ch);
+  max-width:var(--measure-body);
+  color:var(--text-body);
+}
+
+@media (max-width:700px){
+  .eintragText{padding-left:0}
+  .eintragTitel{font-size:var(--size-h4)}
+}
+
+/* ===================== 5 · Karte ===================== */
+/* Ersetzt die fruehere Anfahrts-Bildsequenz "Der Weg". Zeigt den Standort
+   direkt statt ihn zu illustrieren — die Karte laedt erst nach Klick
+   (DSGVO, siehe components/sections/Karte.tsx). */
+
+.karteSektion{background:var(--surface-sunken);padding-block:var(--space-13)}
+
+.karteRaster{
+  display:grid;
+  grid-template-columns:minmax(0,38fr) minmax(0,62fr);
+  gap:var(--space-12);
+  align-items:center;
+}
+
+.karteTitel{
+  font-family:var(--font-display);
+  font-size:var(--size-display);
+  font-weight:var(--weight-regular);
+  line-height:var(--lh-heading);
+  letter-spacing:var(--tracking-display);
+  color:var(--text-heading);
+  max-width:14ch;
+}
+.karteOverline{margin-bottom:var(--space-5)}
+
+.karteText{margin-top:var(--space-6);color:var(--text-body);line-height:var(--lh-loose)}
+
+/* Oeffnungszeiten als Definitionsliste mit Haarlinien. Tabellenziffern,
+   damit die Uhrzeiten untereinander fluchten. */
+.karteZeiten{
+  margin:var(--space-8) 0 0;
+  border-top:1px solid var(--border-subtle);
+}
+.karteZeit{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:var(--space-6);
+  padding-block:var(--space-4);
+  border-bottom:1px solid var(--border-subtle);
+}
+.karteZeitTag{font-size:var(--size-body-sm);color:var(--text-body)}
+.karteZeitWert{
+  margin:0;
+  font-size:var(--size-body-sm);
+  color:var(--text-heading);
+  font-variant-numeric:tabular-nums;
+  text-align:right;
+}
+.karteZeitZu{color:var(--text-subtle)}
+
+.karteAktionen{
+  display:flex;
+  align-items:center;
+  gap:var(--space-7);
+  flex-wrap:wrap;
+  margin-top:var(--space-8);
+}
+
+.karteRahmen{
+  position:relative;
+  aspect-ratio:4/3;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow-lg);
+  background:var(--surface-card);
+}
+
+.karteIframe{width:100%;height:100%;border:0}
+
+.kartePlatzhalter{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:var(--space-6);
+  padding:var(--space-9);
+  background:var(--surface-tint);
+}
+.kartePlatzhalterText{font-size:var(--size-body-sm);color:var(--text-muted);max-width:36ch}
+
+@media (max-width:1000px){
+  .karteRaster{grid-template-columns:1fr;gap:var(--space-8)}
+}
+
+/* ===================== 5 · Galerie ===================== */
+/* Mosaik aus drei Spalten, Referenz Swish. Die mittlere Spalte startet
+   tiefer — derselbe Griff wie im Vorgehen-Raster, damit keine Zeilenkante
+   entsteht. Vorher lief hier ein horizontales Karussell; das hat am Handy
+   die Haelfte der Bilder hinter dem rechten Rand versteckt. */
+
+/* Sand-100 statt Sand-50: Leistungen darueber liegt bereits auf Sand-50,
+   zwei lange Sektionen auf identischer Flaeche lassen die Seitenmitte
+   ausbleichen. Der dunklere Grund traegt ausserdem die Bilder besser. */
+.galerie{background:var(--surface-sunken);padding-block:var(--space-13)}
+
+/* Sechs gleich hohe Zeilen. Jede Kachel belegt zwei oder drei davon, und
+   jede Spalte kommt in Summe auf genau sechs — dadurch schliesst das Mosaik
+   unten buendig ab statt auszufransen.
+
+   Spalte 1: Karte(2) + Behandlung(2) + Holzbalken(2)
+   Spalte 2: Utzhof(3)  + Instrumente(3)
+   Spalte 3: Empfang(3) + Zufahrt(3)                                       */
+.galerieRaster{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:repeat(6,150px);
+  gap:var(--space-6);
+}
+
+.platzKarte{grid-column:1;grid-row:1 / 3}
+.platzBehandlung{grid-column:1;grid-row:3 / 5}
+.platzHolzbalken{grid-column:1;grid-row:5 / 7}
+.platzUtzhof{grid-column:2;grid-row:1 / 4}
+.platzInstrumente{grid-column:2;grid-row:4 / 7}
+.platzEmpfang{grid-column:3;grid-row:1 / 4}
+.platzZufahrt{grid-column:3;grid-row:4 / 7}
+
+/* Textkarte als eine Kachel des Mosaiks statt als abgesetztes Panel. */
+.galerieKarte{
+  display:flex;
+  flex-direction:column;
+  padding:var(--space-8);
+  border-radius:var(--radius-xl);
+  background:var(--surface-tint);
+}
+.galerieOverline{margin-bottom:var(--space-5)}
+.galerieKarteTitel{
+  font-family:var(--font-display);
+  font-size:var(--size-h3);
+  font-weight:var(--weight-regular);
+  line-height:var(--lh-heading);
+  color:var(--text-heading);
+  text-wrap:balance;
+}
+.galerieKarteText{
+  margin-top:var(--space-5);
+  font-size:var(--size-body-sm);
+  line-height:var(--lh-body);
+  color:var(--text-muted);
+  text-wrap:pretty;
+}
+.galerieKarteLink{
+  margin-top:var(--space-7);
+  font-size:var(--size-body-sm);
+  color:var(--text-accent);
+  text-decoration:none;
+  border-bottom:1px solid var(--blue-300);
+  padding-bottom:var(--space-1);
+  width:fit-content;
+  transition:var(--transition-control);
+}
+.galerieKarteLink:hover{border-bottom-color:currentColor}
+
+.galerieKachel{
+  position:relative;
+  margin:0;
+  min-height:0;
+  min-width:0;
+  border-radius:var(--radius-xl);
+  overflow:hidden;
+  background:var(--surface-sunken);
+}
+.galerieKachel img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform var(--dur-slow) var(--ease-calm);
+}
+.galerieKachel:hover img{transform:scale(1.03)}
+
+.galerieHinweis{
+  position:absolute;
+  left:var(--space-4);
+  bottom:var(--space-4);
+  padding:var(--space-2) var(--space-3);
+  border-radius:var(--radius-full);
+  background:rgba(14,30,56,.6);
+  color:var(--white);
+  font-size:var(--size-caption);
+  backdrop-filter:blur(6px);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .galerieKachel:hover img{transform:none}
+}
+
+/* Zwei Spalten: die Rasterplaetze werden aufgehoben, die Kacheln laufen in
+   der Quellreihenfolge durch und bekommen wieder ein Seitenverhaeltnis. */
+@media (max-width:1000px){
+  .galerieRaster{
+    grid-template-columns:repeat(2,1fr);
+    grid-template-rows:none;
+    grid-auto-rows:auto;
+    gap:var(--space-5);
+  }
+  .platzKarte,.platzBehandlung,.platzHolzbalken,
+  .platzUtzhof,.platzInstrumente,.platzEmpfang,.platzZufahrt{
+    grid-column:auto;
+    grid-row:auto;
+  }
+  .galerieKachel{aspect-ratio:1/1}
+  .platzUtzhof,.platzZufahrt{aspect-ratio:3/4}
+  .platzKarte{grid-column:1 / -1}
+}
+
+@media (max-width:640px){
+  .galerieRaster{grid-template-columns:1fr}
+  .galerieKachel{aspect-ratio:4/3}
+  .platzUtzhof,.platzZufahrt{aspect-ratio:1/1}
+}
+
+/* ===================== 7 · Termin ===================== */
+/* Blau-900 statt Blau-50: das ist die Sektion mit der Hauptaktion. Auf
+   Blau-50 (oklch 97.7%) las sie sich als Weiss und hatte kein Gewicht —
+   ausgerechnet dort, wo die Seite hinlaeuft. Das dunkle Band bringt
+   ausserdem Blau in die untere Seitenhaelfte, wo vorher keins war. */
+
+.termin{
+  background:var(--surface-inverse);
+  color:var(--text-on-dark);
+  padding-block:var(--space-13);
+}
+
+/* Eine mittige Spalte statt zwei — die Sektion traegt nur noch die
+   Aufforderung, seit die Zeiten unten im Standortblock stehen. */
+.terminInhalt{max-width:56ch;margin-inline:auto;text-align:center}
+
+.terminTitel{
+  font-family:var(--font-display);
+  font-size:var(--size-display);
+  font-weight:var(--weight-regular);
+  line-height:var(--lh-heading);
+  letter-spacing:var(--tracking-display);
+  color:var(--text-on-dark);
+  text-wrap:balance;
+}
+.terminText{
+  margin-top:var(--space-6);
+  margin-inline:auto;
+  max-width:46ch;
+  color:var(--text-on-dark-muted);
+  text-wrap:pretty;
+}
+
+.terminNummer{
+  display:inline-block;
+  margin-top:var(--space-9);
+  font-family:var(--font-display);
+  font-size:var(--size-display);
+  line-height:1;
+  color:var(--text-on-dark);
+  text-decoration:none;
+  border-bottom:2px solid var(--blue-300);
+  padding-bottom:var(--space-3);
+  transition:var(--transition-control);
+}
+.terminNummer:hover{color:var(--white);border-bottom-color:currentColor}
+
+/* Die Karte bleibt hell — sie ist die einzige helle Flaeche im dunklen
+   Band und traegt dadurch die Oeffnungszeiten als eigenstaendigen Block. */
+.terminKarte{
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);
+  padding:var(--space-9);
+  color:var(--text-body);
+}
+
+.zeitenTabelle{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:var(--space-4) var(--space-8);
+  margin-bottom:var(--space-8);
+}
+.zeitenTag{color:var(--text-muted);font-size:var(--size-body-sm)}
+.zeitenWert{font-variant-numeric:tabular-nums;color:var(--text-heading)}
+.zeitenZu{color:var(--text-subtle)}
+
+.terminAdresse{
+  font-style:normal;
+  padding-top:var(--space-7);
+  border-top:1px solid var(--border-subtle);
+  line-height:var(--lh-loose);
+  color:var(--text-body);
+}
+
+@media (max-width:1000px){
+  .terminRaster{grid-template-columns:1fr;gap:var(--space-9)}
+}

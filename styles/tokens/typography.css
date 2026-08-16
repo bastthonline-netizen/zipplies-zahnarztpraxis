@@ -1,0 +1,34 @@
+/* Typografie-Tokens. Uebernommen aus dem Claude-Design-System
+   (b1d1a264-9e39-491c-ae4a-1c9999c102de), unveraendert bis auf den Hinweis,
+   dass die Schriften jetzt lokal liegen. */
+:root{
+--font-serif:"Newsreader",Georgia,"Times New Roman",serif;
+--font-sans:"Instrument Sans",-apple-system,"Segoe UI",Helvetica,sans-serif;
+--font-body:var(--font-sans);
+--font-display:var(--font-serif);
+
+--weight-light:300;--weight-regular:400;--weight-medium:500;--weight-semibold:600;--weight-bold:700;
+
+/* Display + Ueberschriften: Serif, eng gesetzt, grosse Sprungweiten */
+--size-display-xl:clamp(2.75rem,5.2vw,4.5rem);
+--size-display:clamp(2.25rem,3.8vw,3.25rem);
+--size-h1:2.5rem;--size-h2:2rem;--size-h3:1.5rem;--size-h4:1.25rem;
+/* Text. Untergrenze fuer Fliesstext ist --size-body — die Zielgruppe ist aelter. */
+--size-body-lg:1.1875rem;--size-body:1.0625rem;--size-body-sm:0.9375rem;
+--size-caption:0.8125rem;--size-overline:0.75rem;
+
+--lh-tight:1.08;
+--lh-heading:1.18;
+--lh-snug:1.35;
+--lh-body:1.6;
+--lh-loose:1.75;
+--tracking-display:-0.02em;--tracking-heading:-0.01em;--tracking-normal:0;--tracking-overline:0.14em;
+
+--measure-narrow:34ch;--measure-body:62ch;--measure-wide:78ch;
+}
+/* Rollen-Utilities. Komponenten duerfen auch direkt die Tokens nutzen. */
+.zp-display{font-family:var(--font-display);font-size:var(--size-display);font-weight:var(--weight-regular);line-height:var(--lh-tight);letter-spacing:var(--tracking-display);color:var(--text-heading)}
+.zp-h2{font-family:var(--font-display);font-size:var(--size-h2);font-weight:var(--weight-regular);line-height:var(--lh-heading);letter-spacing:var(--tracking-heading);color:var(--text-heading)}
+.zp-h3{font-family:var(--font-display);font-size:var(--size-h3);font-weight:var(--weight-medium);line-height:var(--lh-heading);color:var(--text-heading)}
+.zp-body{font-family:var(--font-body);font-size:var(--size-body);line-height:var(--lh-body);color:var(--text-body);text-wrap:pretty}
+.zp-overline{font-family:var(--font-body);font-size:var(--size-overline);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--text-accent)}
