@@ -10,7 +10,7 @@ export default function NichtGefunden() {
       <main id="inhalt">
         <section className="container">
           <div className={s.notFound}>
-            <p className="zp-overline" style={{ marginBottom: "var(--space-6)" }}>
+            <p className={`zp-overline ${s.notFoundOverline}`}>
               Seite nicht gefunden
             </p>
             <h1 className={s.heroTitel}>Hier geht es nicht weiter.</h1>
@@ -18,11 +18,14 @@ export default function NichtGefunden() {
               Die gesuchte Seite gibt es nicht mehr oder nie. Zurück zur
               Startseite, oder rufen Sie direkt an.
             </p>
-            <div style={{ display: "flex", gap: "var(--space-8)", marginTop: "var(--space-9)", flexWrap: "wrap" }}>
-              <a href="/" className={s.terminNummer} style={{ marginTop: 0, fontSize: "var(--size-h4)" }}>
+            <div className={s.notFoundAktionen}>
+              <a href="/" className={`${s.terminNummer} ${s.terminNummerOben} ${s.terminNummerKlein}`}>
                 Zur Startseite
               </a>
-              <a href={praxis.telefonHref} className={s.terminNummer} style={{ marginTop: 0, fontSize: "var(--size-h4)" }}>
+              <a
+                href={praxis.telefonHref}
+                className={`${s.terminNummer} ${s.terminNummerOben} ${s.terminNummerKlein}`}
+              >
                 {praxis.telefon}
               </a>
             </div>

@@ -55,7 +55,7 @@ export default function LeistungenSeite() {
               <ol className={s.liste}>
                 {leistungen.map((leistung, i) => (
                   <li key={leistung.kuerzel} id={leistung.kuerzel} className={s.listeEintrag}>
-                    <p className="zp-overline" style={{ marginBottom: "var(--space-3)" }}>
+                    <p className={`zp-overline ${s.etappeOverline}`}>
                       {String(i + 1).padStart(2, "0")}
                     </p>
                     <h2 className={s.listeEintragTitel}>{leistung.titel}</h2>

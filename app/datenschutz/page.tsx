@@ -66,7 +66,7 @@ export default function DatenschutzSeite() {
                 Aufsichtsbehörde.
               </p>
 
-              <p style={{ marginTop: "var(--space-10)", color: "var(--text-muted)", fontSize: "var(--size-body-sm)" }}>
+              <p className={s.rechtstextHinweis}>
                 Diese Seite ist eine Probeversion und noch nicht rechtlich
                 geprüft. Vor Veröffentlichung durch eine Rechtsberatung
                 ergänzen und final abstimmen.

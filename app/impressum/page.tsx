@@ -51,7 +51,7 @@ export default function ImpressumSeite() {
                 {praxis.arzt}, Anschrift wie oben.
               </p>
 
-              <p style={{ marginTop: "var(--space-10)", color: "var(--text-muted)", fontSize: "var(--size-body-sm)" }}>
+              <p className={s.rechtstextHinweis}>
                 Diese Seite ist eine Probeversion und noch nicht rechtlich
                 geprüft. Vor Veröffentlichung ergänzen: Umsatzsteuer-ID,
                 zuständige Kammer, ggf. Berufshaftpflichtversicherung.

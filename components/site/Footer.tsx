@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Logo from "@/components/Logo";
 import Karte from "@/components/sections/Karte";
 import { navigation, oeffnungszeiten, praxis } from "@/content/praxis";
@@ -53,16 +54,17 @@ export default function Footer({ ohneStandort = false }: FooterProps) {
           <div>
             <p className={s.footerTitel}>Sprechzeiten</p>
             <div className={s.footerZeiten}>
+              {/* Fragment statt <div style="display:contents">: die Zeiten sind ein
+                  zweispaltiges Raster, ein Wrapper-Element dazwischen wuerde es
+                  aufbrechen — das Fragment traegt den key, ohne im DOM zu landen. */}
               {geoeffnet.map((z) => (
-                <div key={z.tag} style={{ display: "contents" }}>
+                <Fragment key={z.tag}>
                   <span className={s.footerZeitenTag}>{z.tag.slice(0, 2)}</span>
                   <span>{z.zeit}</span>
-                </div>
+                </Fragment>
               ))}
-              <div style={{ display: "contents" }}>
-                <span className={s.footerZeitenTag}>Sa/So</span>
-                <span>Geschlossen</span>
-              </div>
+              <span className={s.footerZeitenTag}>Sa/So</span>
+              <span>Geschlossen</span>
             </div>
           </div>
         </div>

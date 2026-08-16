@@ -47,40 +47,20 @@ export default function ImplantologieSeite() {
 
         <section className={`${s.abschnitt} ${s.abschnittDunkel}`}>
           <div className="container">
-            <div className={s.rasterKopfLastig} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-12)" }}>
+            <div className={`${s.raster} ${s.rasterKopfLastig}`}>
               <div>
-                <h2 className={s.titel} style={{ color: "var(--text-on-dark)" }}>
-                  Drei Nachweise, keine Behauptungen.
-                </h2>
-                <p className={s.text} style={{ color: "var(--text-on-dark-muted)" }}>
+                <h2 className={s.titel}>Drei Nachweise, keine Behauptungen.</h2>
+                <p className={s.text}>
                   Keine erfundenen Fallzahlen, kein „Ihr Implantat-Spezialist".
                   Diese drei Qualifikationen sind bei den jeweiligen
                   Fachgesellschaften und der Hochschule überprüfbar.
                 </p>
               </div>
-              <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              <ul className={s.belege}>
                 {qualifikationen.map((q) => (
-                  <li
-                    key={q.text}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "auto 1fr",
-                      gap: "var(--space-7)",
-                      paddingBlock: "var(--space-7)",
-                      borderTop: "1px solid var(--border-inverse)",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: "var(--font-display)",
-                        fontSize: "var(--size-h4)",
-                        color: "var(--blue-300)",
-                        fontVariantNumeric: "tabular-nums",
-                      }}
-                    >
-                      {q.jahr}
-                    </span>
-                    <span style={{ color: "var(--text-on-dark)", lineHeight: "var(--lh-snug)" }}>{q.text}</span>
+                  <li key={q.text} className={s.belegZeile}>
+                    <span className={s.belegJahr}>{q.jahr}</span>
+                    <span className={s.belegText}>{q.text}</span>
                   </li>
                 ))}
               </ul>

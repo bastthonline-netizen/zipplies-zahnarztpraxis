@@ -54,7 +54,7 @@ export default function PraxisSeite() {
 
         <section className={`${s.abschnitt} ${s.abschnittSunken}`}>
           <div className="container">
-            <div className={s.raster} style={{ gridTemplateColumns: "1fr 1fr" }}>
+            <div className={s.raster}>
               <div>
                 <h2 className={s.titel}>Vor Ort statt am Ortsrand.</h2>
                 <p className={s.text}>
@@ -62,17 +62,15 @@ export default function PraxisSeite() {
                   sondern der Grund, warum hier ruhiger gearbeitet wird als in
                   einem Ärztehaus mitten in Rosenheim.
                 </p>
-                <p className={s.text} style={{ marginTop: "var(--space-8)", fontStyle: "italic", fontFamily: "var(--font-display)", fontSize: "var(--size-h4)" }}>
+                <p className={`${s.text} ${s.zitat}`}>
                   „Wer einmal hier war, findet beim zweiten Mal auf Anhieb her."
                 </p>
               </div>
-              <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: "var(--space-7)" }}>
+              <ul className={s.liste}>
                 {standort.map((punkt) => (
-                  <li key={punkt.titel} style={{ borderTop: "1px solid var(--border-default)", paddingTop: "var(--space-6)" }}>
-                    <p style={{ fontFamily: "var(--font-display)", fontSize: "var(--size-h4)", color: "var(--text-heading)", marginBottom: "var(--space-2)" }}>
-                      {punkt.titel}
-                    </p>
-                    <p style={{ color: "var(--text-muted)" }}>{punkt.text}</p>
+                  <li key={punkt.titel} className={s.listeEintrag}>
+                    <p className={s.listeEintragTitel}>{punkt.titel}</p>
+                    <p className={s.listeEintragText}>{punkt.text}</p>
                   </li>
                 ))}
               </ul>
