@@ -32,7 +32,7 @@ type Kachel = {
 
 const kacheln: Kachel[] = [
   {
-    src: "/images/utzhof.jpg",
+    src: "/images/utzhof.webp",
     alt: "Handgemalter Schriftzug „Utzhof“ über der Eingangstür",
     echt: true,
     platz: "platzUtzhof",
