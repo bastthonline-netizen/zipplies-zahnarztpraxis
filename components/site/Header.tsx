@@ -9,12 +9,21 @@ import s from "@/styles/site.module.css";
 /* Nur auf der Startseite liegt der Header transparent ueber dem Foto-Hero
    (siehe startseite.module.css .ankunft) und wird solide, sobald gescrollt
    wird — auf allen anderen Seiten bleibt er wie bisher durchgehend solide,
-   weil dort kein Vollbild-Hero darunterliegt. */
+   weil dort kein Vollbild-Hero darunterliegt.
+
+   MENUE UNTER 900px. Die Zeile .nav{display:none} blendete die Navigation auf
+   schmalen Viewports aus, ohne einen Ersatz anzubieten — im Kopf standen dann
+   nur noch Wortmarke und Telefonnummer, und alle sechs Unterseiten waren nur
+   noch ueber den Fussbereich ganz unten erreichbar. Der Knopf hier oeffnet
+   stattdessen ein Panel unter dem Kopf. Es ist bewusst eine schlichte Liste
+   mit grossen Tippflaechen (--control-h-lg) statt eines Vollbild-Overlays:
+   die Zielgruppe ist aelter, und ein Menue soll wie ein Menue aussehen. */
 
 export default function Header() {
   const pathname = usePathname();
   const istStartseite = pathname === "/";
   const [gescrollt, setGescrollt] = useState(!istStartseite);
+  const [menueOffen, setMenueOffen] = useState(false);
 
   useEffect(() => {
     if (!istStartseite) {
@@ -28,10 +37,32 @@ export default function Header() {
     return () => window.removeEventListener("scroll", beiScroll);
   }, [istStartseite]);
 
-  const transparent = istStartseite && !gescrollt;
+  /* Escape schliesst, und solange das Panel offen ist, scrollt die Seite
+     dahinter nicht mit — sonst verliert man beim Wischen den Bezug. */
+  useEffect(() => {
+    if (!menueOffen) return;
+    const beiTaste = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenueOffen(false);
+    };
+    const vorher = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", beiTaste);
+    return () => {
+      document.body.style.overflow = vorher;
+      window.removeEventListener("keydown", beiTaste);
+    };
+  }, [menueOffen]);
+
+  /* Bei offenem Menue nie transparent: das Panel liegt sonst ueber dem Foto
+     und der weisse Kopftext waere auf hellem Grund nicht mehr lesbar. */
+  const transparent = istStartseite && !gescrollt && !menueOffen;
 
   return (
-    <header className={`${s.header} ${transparent ? s.headerTransparent : ""}`}>
+    <header
+      className={`${s.header} ${transparent ? s.headerTransparent : ""} ${
+        menueOffen ? s.headerOffen : ""
+      }`}
+    >
       <div className={`container ${s.headerInner}`}>
         <a href="/" className={s.marke}>
           <Logo size={40} decorative />
@@ -93,7 +124,52 @@ export default function Header() {
           </svg>
           {praxis.telefon}
         </a>
+
+        {/* Nur unter 900px sichtbar (siehe site.module.css). Beschriftet ist
+            der Knopf ueber aria-label, weil daneben kein Text steht. */}
+        <button
+          type="button"
+          className={s.menueKnopf}
+          aria-label={menueOffen ? "Menü schließen" : "Menü öffnen"}
+          aria-expanded={menueOffen}
+          aria-controls="hauptmenue-mobil"
+          onClick={() => setMenueOffen((o) => !o)}
+        >
+          <span className={s.menueStrich} />
+          <span className={s.menueStrich} />
+        </button>
       </div>
+
+      {/* Erst im DOM, wenn geoeffnet — sonst waere die Liste per Tab
+          erreichbar, obwohl sie niemand sieht. */}
+      {menueOffen && (
+        <nav
+          id="hauptmenue-mobil"
+          className={s.menuePanel}
+          aria-label="Hauptnavigation"
+        >
+          <ul className={s.menueListe}>
+            {navigation.map((punkt) => (
+              <li key={punkt.href}>
+                <a
+                  href={punkt.href}
+                  className={s.menueLink}
+                  aria-current={pathname === punkt.href ? "page" : undefined}
+                  onClick={() => setMenueOffen(false)}
+                >
+                  {punkt.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* Die Telefonnummer steht im Panel noch einmal ausgeschrieben:
+              der Knopf oben rutscht bei offenem Menue aus dem Blick. */}
+          <a href={praxis.telefonHref} className={s.menueTelefon}>
+            Jetzt anrufen · {praxis.telefon}
+          </a>
+        </nav>
+      )}
     </header>
   );
 }

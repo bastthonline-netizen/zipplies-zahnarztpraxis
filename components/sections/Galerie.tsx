@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import { stimmungsbilder } from "@/content/praxis";
+import { useSektionsReveal } from "@/components/useSektionsReveal";
 import s from "@/styles/startseite.module.css";
 
 /* Sektion 5 — Job: zeigen, wo man landet. Beides gehoert dazu: das Haus von
@@ -72,8 +73,10 @@ const kacheln: Kachel[] = [
   },
 ];
 
+/* `versteckt` ohne Dauer — der Wechsel passiert unterhalb der Bildkante und
+   soll springen statt wegzublenden (siehe useSektionsReveal). */
 const kachelVariant: Variants = {
-  versteckt: { opacity: 0, y: 20 },
+  versteckt: { opacity: 0, y: 20, transition: { duration: 0 } },
   sichtbar: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
 };
 
@@ -83,16 +86,14 @@ const rasterVariant: Variants = {
 };
 
 export default function Galerie() {
-  const reduziert = useReducedMotion();
-  const start = reduziert ? "sichtbar" : "versteckt";
+  const { ref, zustand } = useSektionsReveal<HTMLDivElement>(0.15);
 
   return (
     <section className={s.galerie}>
       <motion.div
+        ref={ref}
         className={`container ${s.galerieRaster}`}
-        initial={start}
-        whileInView="sichtbar"
-        viewport={{ once: true, amount: 0.15 }}
+        animate={zustand}
         variants={rasterVariant}
       >
         <motion.div className={`${s.galerieKarte} ${s.platzKarte}`} variants={kachelVariant}>

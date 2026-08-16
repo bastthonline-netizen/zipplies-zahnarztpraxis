@@ -142,6 +142,31 @@
   .btnPrimary,.btnSecondary{padding-inline:var(--space-6);font-size:var(--size-caption)}
 }
 
+/* Der seitliche Verlauf oben funktioniert nur, solange die Textspalte die
+   linke Haelfte belegt: er faellt bei 82% Breite auf 5% Deckkraft ab. Auf dem
+   Handy laeuft der Text ueber die volle Breite, die Unterzeile lag dadurch auf
+   dem hellen Fenster im Bild und war praktisch nicht mehr lesbar.
+
+   Deshalb hier eine andere Mechanik statt anderer Werte: eine flaechige
+   Grundabdunklung plus ein vertikaler Verlauf, der oben (Kopfbereich) und
+   unten (Bildhinweis) zusaetzlich nachdunkelt.
+
+   Die Werte sind gemessen, nicht geschaetzt: Bild in ein Canvas gezeichnet,
+   den Verlauf darueber gerechnet und den schlechtesten Pixel hinter jeder
+   Textzeile geprueft. Ergebnis bei 70% Gesamtdeckung im Textbereich —
+   Unterzeile (Blau-100) 5.34:1, Ueberschrift (Weiss) 6.22:1. Bei 62% lag die
+   Unterzeile noch bei 4.05:1 und damit unter der Anforderung.
+
+   Reserve ist Absicht: das Motiv ist ein Platzhalter, ein echtes Praxisfoto
+   kann heller ausfallen. Beim Bildtausch die Messung wiederholen. */
+@media (max-width:900px){
+  .ankunftScrim{
+    background:
+      linear-gradient(180deg,rgba(14,30,56,.82) 0,rgba(14,30,56,.50) 20%,rgba(14,30,56,.50) 76%,rgba(14,30,56,.74) 100%),
+      linear-gradient(0deg,rgba(14,30,56,.40),rgba(14,30,56,.40));
+  }
+}
+
 /* ===================== 1.5 · Vertrauen ===================== */
 /* Schmales Band direkt unter dem Hero, Sand-100 gegen die Sand-50-Flaeche
    darunter. Icons zeichnen sich beim Scrollen nach (siehe Vertrauen.tsx). */

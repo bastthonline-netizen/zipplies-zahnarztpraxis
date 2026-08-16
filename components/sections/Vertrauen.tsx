@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import { praxis } from "@/content/praxis";
+import { useSektionsReveal } from "@/components/useSektionsReveal";
 import s from "@/styles/startseite.module.css";
 
 /* Sektion 1.5 — die schnelle Ebene direkt unter dem Hero: vier Fakten, die
@@ -19,13 +20,16 @@ import s from "@/styles/startseite.module.css";
    nach (pathLength 0->1), danach faedelt der Text darunter ein. Zweite
    dokumentierte Ausnahme neben der Anfahrts-Sequenz, siehe motion.css. */
 
+/* `versteckt` schaltet ohne Dauer. Der Zustandswechsel sichtbar -> versteckt
+   passiert nach dem ersten Rendern und ausserhalb des Sichtfelds (siehe
+   useSektionsReveal) — er soll springen, nicht wegblenden. */
 const strichVariant: Variants = {
-  versteckt: { pathLength: 0 },
+  versteckt: { pathLength: 0, transition: { duration: 0 } },
   sichtbar: { pathLength: 1, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } },
 };
 
 const textVariant: Variants = {
-  versteckt: { opacity: 0, y: 8 },
+  versteckt: { opacity: 0, y: 8, transition: { duration: 0 } },
   sichtbar: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } },
 };
 
@@ -79,16 +83,14 @@ const signale = [
 ];
 
 export default function Vertrauen() {
-  const reduziert = useReducedMotion();
-  const start = reduziert ? "sichtbar" : "versteckt";
+  const { ref, zustand } = useSektionsReveal<HTMLDivElement>(0.4);
 
   return (
     <section className={s.vertrauen}>
       <motion.div
+        ref={ref}
         className={`container ${s.vertrauenRaster}`}
-        initial={start}
-        whileInView="sichtbar"
-        viewport={{ once: true, amount: 0.4 }}
+        animate={zustand}
         variants={rasterVariant}
       >
         {signale.map((signal) => (

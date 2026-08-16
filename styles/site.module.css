@@ -154,10 +154,118 @@
 }
 .telefonKnopf:hover{background:var(--action-primary-hover);color:var(--white)}
 
+/* ---------- Menue unter 900px ---------- */
+/* Der Knopf existiert nur auf schmalen Viewports; darueber traegt die
+   Navigationsleiste alles. Zwei Striche statt eines Icon-Fonts — die Marke
+   arbeitet ohnehin mit offenen Linien (siehe components/Logo.tsx). */
+
+.menueKnopf{
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+  width:var(--control-h);
+  height:var(--control-h);
+  padding:0;
+  border:1px solid var(--border-default);
+  border-radius:var(--radius-full);
+  background:transparent;
+  cursor:pointer;
+  transition:var(--transition-control);
+}
+.menueKnopf:hover{border-color:var(--border-strong)}
+
+.menueStrich{
+  display:block;
+  width:17px;
+  height:1.5px;
+  margin-inline:auto;
+  border-radius:2px;
+  background:var(--text-heading);
+  transition:transform var(--dur) var(--ease-calm),opacity var(--dur) var(--ease-calm);
+}
+
+/* Offen: der obere Strich kippt nach unten, der untere nach oben — zusammen
+   ein Kreuz. Die 3.75px sind die halbe Luecke plus halbe Strichstaerke. */
+.headerOffen .menueStrich:first-child{transform:translateY(3.75px) rotate(45deg)}
+.headerOffen .menueStrich:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+
+.headerTransparent .menueKnopf{border-color:rgba(255,255,255,.4)}
+.headerTransparent .menueStrich{background:var(--white)}
+
+.menuePanel{
+  border-top:1px solid var(--border-subtle);
+  background:var(--surface-page);
+  padding:var(--space-6) var(--gutter) var(--space-8);
+  /* Bei kurzen Fenstern (Landscape am Handy) scrollt das Panel selbst,
+     statt unter die Bildkante zu laufen. */
+  max-height:calc(100svh - var(--header-h));
+  overflow-y:auto;
+  animation:menueAuf var(--dur) var(--ease-out);
+}
+
+@keyframes menueAuf{
+  from{opacity:0;transform:translateY(-6px)}
+  to{opacity:1;transform:none}
+}
+
+.menueListe{
+  list-style:none;
+  margin:0 0 var(--space-6);
+  padding:0;
+}
+
+/* Grosse Zeilen mit Haarlinie dazwischen — dieselbe Figur wie die
+   Leistungs-Indexliste auf der Startseite, damit das Menue nicht wie ein
+   Fremdkoerper wirkt. */
+.menueLink{
+  display:flex;
+  align-items:center;
+  min-height:var(--control-h-lg);
+  padding-block:var(--space-3);
+  border-bottom:1px solid var(--border-subtle);
+  font-family:var(--font-display);
+  font-size:var(--size-h4);
+  color:var(--text-heading);
+  text-decoration:none;
+  transition:var(--transition-control);
+}
+.menueLink:hover{color:var(--text-accent)}
+.menueLink[aria-current="page"]{color:var(--text-accent)}
+
+.menueTelefon{
+  display:inline-flex;
+  align-items:center;
+  min-height:var(--control-h);
+  padding-inline:var(--space-8);
+  border-radius:var(--radius-full);
+  background:var(--action-primary);
+  color:var(--white);
+  font-size:var(--size-body-sm);
+  font-weight:var(--weight-medium);
+  text-decoration:none;
+  transition:var(--transition-control);
+}
+.menueTelefon:hover{background:var(--action-primary-hover);color:var(--white)}
+
+@media (prefers-reduced-motion:reduce){
+  .menuePanel{animation:none}
+  .menueStrich{transition:none}
+}
+
 @media (max-width:900px){
   .nav{display:none}
+  .menueKnopf{display:flex}
   .headerInner{gap:var(--space-5)}
   .markeOrt{display:none}
+  /* Der Kopf bleibt beim offenen Menue solide, damit das Panel eine Kante hat. */
+  .headerOffen{background:var(--surface-page)}
+}
+
+/* Ueber 900px kann das Panel nie offen sein — falls doch (Fenster wird
+   waehrend des Betrachtens breiter gezogen), verschwindet es hier. */
+@media (min-width:901px){
+  .menuePanel{display:none}
 }
 
 /* ============================ Fussbereich ============================ */

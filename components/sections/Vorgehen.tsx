@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import { praxis } from "@/content/praxis";
+import { useSektionsReveal } from "@/components/useSektionsReveal";
 import s from "@/styles/startseite.module.css";
 
 /* Sektion 2 — Job: zeigen, dass hier fachlich gut gearbeitet wird, und zwar
@@ -23,13 +24,15 @@ import s from "@/styles/startseite.module.css";
    Kartenspalten, von denen die zweite um eine Kartenhoehe nach unten versetzt
    ist. Kein gleichfoermiges Raster. */
 
+/* `versteckt` ohne Dauer — der Wechsel passiert unterhalb der Bildkante und
+   soll springen statt wegzublenden (siehe useSektionsReveal). */
 const strichVariant: Variants = {
-  versteckt: { pathLength: 0 },
+  versteckt: { pathLength: 0, transition: { duration: 0 } },
   sichtbar: { pathLength: 1, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 
 const karteVariant: Variants = {
-  versteckt: { opacity: 0, y: 16 },
+  versteckt: { opacity: 0, y: 16, transition: { duration: 0 } },
   sichtbar: {
     opacity: 1,
     y: 0,
@@ -116,17 +119,16 @@ function Karte({ karte }: { karte: (typeof karten)[number] }) {
 }
 
 export default function Vorgehen() {
-  const reduziert = useReducedMotion();
-  const start = reduziert ? "sichtbar" : "versteckt";
+  const kopf = useSektionsReveal<HTMLDivElement>(0.5);
+  const spalten = useSektionsReveal<HTMLDivElement>(0.2);
 
   return (
     <section className={s.vorgehen} id="vorgehen">
       <div className={`container ${s.vorgehenRaster}`}>
         <motion.div
+          ref={kopf.ref}
           className={s.vorgehenKopf}
-          initial={start}
-          whileInView="sichtbar"
-          viewport={{ once: true, amount: 0.5 }}
+          animate={kopf.zustand}
           variants={karteVariant}
         >
           <p className={`zp-overline ${s.vorgehenOverline}`}>Wie hier gearbeitet wird</p>
@@ -139,10 +141,9 @@ export default function Vorgehen() {
         </motion.div>
 
         <motion.div
+          ref={spalten.ref}
           className={s.vorgehenSpalten}
-          initial={start}
-          whileInView="sichtbar"
-          viewport={{ once: true, amount: 0.2 }}
+          animate={spalten.zustand}
           variants={spalteVariant}
         >
           <div className={s.vorgehenSpalte}>
