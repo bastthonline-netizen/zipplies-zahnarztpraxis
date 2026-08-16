@@ -1,0 +1,59 @@
+# Baut die Seite bei jedem Push auf main und veroeffentlicht sie auf GitHub
+# Pages.
+#
+# Der Ordner out/ liegt bewusst NICHT im Repo (siehe .gitignore) — er entsteht
+# hier frisch. Vorher zeigte Pages direkt auf die Repo-Wurzel und fand dort nur
+# Quellcode, kein index.html; das war der Grund fuer den 404.
+#
+# BASIS_PFAD muss dem Repo-Namen entsprechen: unter Pages laeuft die Seite in
+# einem Unterordner, nicht auf einer eigenen Adresse. scripts/unterpfad.mjs
+# schreibt den Praefix in den fertigen Export.
+name: Seite bauen und veroeffentlichen
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Laeuft ein Deploy schon, wird es nicht abgebrochen — der neue wartet.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  bauen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build:pages
+        env:
+          BASIS_PFAD: /zipplies-zahnarztpraxis
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  veroeffentlichen:
+    needs: bauen
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
