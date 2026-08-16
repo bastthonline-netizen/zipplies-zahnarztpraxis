@@ -52,7 +52,7 @@ export default function KontaktSeite() {
           <div className="container">
             <div className={s.raster}>
               <div>
-                <a href={praxis.telefonHref} className={s.terminNummer} style={{ marginTop: 0 }}>
+                <a href={praxis.telefonHref} className={`${s.terminNummer} ${s.terminNummerOben}`}>
                   {praxis.telefon}
                 </a>
                 <p className={s.text}>
@@ -61,19 +61,19 @@ export default function KontaktSeite() {
               </div>
 
               <div className={s.terminKarte}>
-                <p className="zp-overline" style={{ marginBottom: "var(--space-6)" }}>
+                <p className={`zp-overline ${s.terminKarteOverline}`}>
                   Sprechzeiten
                 </p>
                 <div className={s.zeitenTabelle}>
                   {oeffnungszeiten.map((zeit) => (
-                    <div key={zeit.tag} style={{ display: "contents" }}>
+                    <div key={zeit.tag} className={s.zeitenZeile}>
                       <span className={s.zeitenTag}>{zeit.tag}</span>
                       <span className={`${s.zeitenWert} ${zeit.geschlossen ? s.zeitenZu : ""}`}>{zeit.zeit}</span>
                     </div>
                   ))}
                 </div>
 
-                <address style={{ fontStyle: "normal", marginTop: "var(--space-8)", paddingTop: "var(--space-7)", borderTop: "1px solid var(--border-subtle)", lineHeight: "var(--lh-loose)", color: "var(--text-body)" }}>
+                <address className={s.terminAdresse}>
                   {praxis.adresse.hof} · {praxis.adresse.strasse}
                   <br />
                   {praxis.adresse.plz} {praxis.adresse.ort}

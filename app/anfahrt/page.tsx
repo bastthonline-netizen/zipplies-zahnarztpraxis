@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
+import Kartenrahmen from "@/components/sections/Kartenrahmen";
 import { echteFotos, etappen, praxis, standort } from "@/content/praxis";
 import s from "@/styles/unterseite.module.css";
 
@@ -33,7 +34,7 @@ export default function AnfahrtSeite() {
                 {praxis.adresse.ort}. Von Raubling mit dem Auto wenige Minuten,
                 Richtung Thalreit.
               </p>
-              <a href={praxis.karteHref} target="_blank" rel="noreferrer" className={s.terminNummer} style={{ fontSize: "var(--size-h4)" }}>
+              <a href={praxis.karteHref} target="_blank" rel="noreferrer" className={`${s.terminNummer} ${s.terminNummerKlein}`}>
                 Route in Google Maps öffnen
               </a>
             </div>
@@ -54,15 +55,15 @@ export default function AnfahrtSeite() {
             <ol className={s.liste}>
               {etappen.map((etappe, i) => (
                 <li key={etappe.schritt} className={s.listeEintrag}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: "var(--space-9)", alignItems: "center" }}>
+                  <div className={s.etappe}>
                     <div>
-                      <p className="zp-overline" style={{ marginBottom: "var(--space-3)" }}>
+                      <p className={`zp-overline ${s.etappeOverline}`}>
                         Etappe {etappe.schritt} von {String(etappen.length).padStart(2, "0")}
                       </p>
                       <h2 className={s.listeEintragTitel}>{etappe.titel}</h2>
                       <p className={s.listeEintragText}>{etappe.text}</p>
                     </div>
-                    <div className={s.bild} style={{ boxShadow: "none" }}>
+                    <div className={`${s.bild} ${s.bildFlach}`}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={etappe.bild} alt={etappe.alt} loading={i === 0 ? "eager" : "lazy"} />
                       {etappe.schritt !== "04" && <span className={s.bildHinweis}>Stimmungsbild, kein Praxisfoto</span>}
@@ -83,6 +84,26 @@ export default function AnfahrtSeite() {
                   <p className={s.karteText}>{punkt.text}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Die Karte zum Schluss. Der Standortblock des Footers ist auf
+            dieser Seite unterdrueckt (Adresse und Zugangsfakten stehen
+            oben schon), die Karte selbst fehlte damit aber ausgerechnet
+            auf der Seite, die den Weg beschreibt. Hier steht sie vollbreit
+            und ohne die Oeffnungszeiten-Spalte — die gehoert nicht zum
+            Thema Anfahrt. */}
+        <section className={`${s.abschnitt} ${s.abschnittSunken}`} id="karte">
+          <div className="container">
+            <h2 className={s.titel}>Der Hof auf der Karte</h2>
+            <p className={`${s.text} ${s.kartenblockText}`}>
+              {praxis.adresse.hof} · {praxis.adresse.strasse}, {praxis.adresse.plz}{" "}
+              {praxis.adresse.ort}. Der Parkplatz liegt direkt am Kiesweg vor
+              dem Haus.
+            </p>
+            <div className={s.kartenblockRahmen}>
+              <Kartenrahmen format="breit" />
             </div>
           </div>
         </section>

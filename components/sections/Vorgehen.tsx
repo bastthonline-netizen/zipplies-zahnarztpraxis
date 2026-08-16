@@ -1,44 +1,43 @@
 "use client";
 
 import { motion, type Variants } from "motion/react";
+import { praxis } from "@/content/praxis";
 import { useSektionsReveal } from "@/components/useSektionsReveal";
 import s from "@/styles/startseite.module.css";
 
 /* Sektion 2 — Job: zeigen, dass hier fachlich gut gearbeitet wird, und zwar
-   ueber nachpruefbare Ausstattung statt ueber Zertifikatskuerzel.
+   ueber nachpruefbare Faehigkeiten statt ueber Zertifikatskuerzel.
 
-   WAS SICH GEAENDERT HAT UND WARUM.
+   Ersetzt die frueheren Sektionen "Vertrauen" (schmale Icon-Leiste) und
+   "Expertise" (drei Karten). Grund fuer die Zusammenlegung: beide fuehrten
+   dieselben drei Nachweise (ICOI, DGOI, M.Sc.) wie das Implantologie-Band
+   direkt darunter — dreimal dieselbe Aussage hintereinander schwaecht sie,
+   statt sie zu staerken. Die Nachweise stehen jetzt nur noch einmal, im
+   Implantologie-Band.
 
-   Vier Karten wurden zwei Eintraege. Die Sektion fuehrte "Implantologie seit
-   2005" und "Ein Haus seit 1994" als eigene Karten — beide Aussagen stehen
-   aber bereits direkt daneben: das Jahr 1994 in der Vertrauensleiste
-   unmittelbar darueber, der Schwerpunkt seit 2005 im Implantologie-Band
-   unmittelbar darunter. Dieselbe Aussage dreimal in Folge schwaecht sie,
-   statt sie zu staerken. Genau diese Begruendung stand schon im alten
-   Kommentar dieser Datei, war aber nur auf die Zertifikatskuerzel angewandt.
+   Der Inhalt hier ist bewusst Ausstattung und Vorgehen: DVT und CEREC lagen
+   vorher als Punkt 8 und 9 in der Leistungs-Akkordeonliste begraben, obwohl
+   sie das Konkreteste sind, was die Praxis vorzuweisen hat. "Kein Abdruck,
+   kein Provisorium" ist fuer Patienten greifbarer als jedes Kuerzel.
 
-   Uebrig bleibt, was es sonst nirgends auf der Seite gibt: DVT und CEREC.
-   Das Konkreteste, was die Praxis vorzuweisen hat, und fuer Patienten
-   greifbarer als jedes Kuerzel.
+   Form: Referenz Zen Dental Studio — feste Textspalte links, rechts zwei
+   Kartenspalten, von denen die zweite um eine Kartenhoehe nach unten versetzt
+   ist. Kein gleichfoermiges Raster.
 
-   Karten wurden Zeilen. Vier gleich gebaute Karten mit Icon, Ueberschrift und
-   Text sind die Baukastenseite, die PRODUCT.md ausdruecklich ablehnt — der
-   versetzte Spaltenstart mildert das optisch, aendert aber nichts an der
-   Grammatik. Zwei Eintraege brauchen keine Karten: sie stehen jetzt als
-   typografische Zeilen mit Haarlinie, dieselbe Figur wie die
-   Leistungs-Indexliste weiter unten und das Menue am Handy.
+   16.08.2026: Diese Kartenfassung war zwischenzeitlich durch zwei
+   typografische Zeilen ersetzt. Auf Ansage von Basti wieder zurueckgebaut —
+   die vier Karten bleiben. Der Copper-Akzent im Titel stammt aus derselben
+   Runde und bleibt bestehen. */
 
-   Icons sind entfallen. Die selbstzeichnende Kontur ist laut DESIGN.md eine
-   dokumentierte Ausnahme — sie lief hier und in der Vertrauensleiste, war
-   also keine mehr. Sie bleibt der Vertrauensleiste vorbehalten. */
-
-const zeileVariant: Variants = {
-  versteckt: { opacity: 0, y: 14, transition: { duration: 0 } },
-  sichtbar: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
+/* `versteckt` ohne Dauer — der Wechsel passiert unterhalb der Bildkante und
+   soll springen statt wegzublenden (siehe useSektionsReveal). */
+const strichVariant: Variants = {
+  versteckt: { pathLength: 0, transition: { duration: 0 } },
+  sichtbar: { pathLength: 1, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 
-const kopfVariant: Variants = {
-  versteckt: { opacity: 0, y: 14, transition: { duration: 0 } },
+const karteVariant: Variants = {
+  versteckt: { opacity: 0, y: 16, transition: { duration: 0 } },
   sichtbar: {
     opacity: 1,
     y: 0,
@@ -46,31 +45,87 @@ const kopfVariant: Variants = {
   },
 };
 
-const listeVariant: Variants = {
+const spalteVariant: Variants = {
   versteckt: {},
-  sichtbar: { transition: { staggerChildren: 0.14 } },
+  sichtbar: { transition: { staggerChildren: 0.12 } },
 };
 
-/* `kuerzel` ist die echte Geraetebezeichnung, keine Kicker-Zeile: DVT und
-   CEREC sind nachschlagbar, und wer sie kennt, weiss sofort Bescheid. */
-const verfahren = [
+const karten = [
   {
-    kuerzel: "DVT",
-    gattung: "Dreidimensionale Röntgendiagnostik",
     titel: "Geplant, bevor gebohrt wird",
-    text: "Die Aufnahme zeigt den Knochen vor dem Eingriff. Wo das Implantat sitzt, steht am Bildschirm fest, bevor der erste Schnitt gesetzt wird — nicht erst im Behandlungsstuhl.",
+    text: "Dreidimensionale Diagnostik zeigt den Knochen vor dem Eingriff. Wo das Implantat sitzt, steht fest, bevor der erste Schnitt gesetzt wird — nicht erst im Behandlungsstuhl.",
+    icon: (
+      <>
+        <motion.path variants={strichVariant} d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3Z" />
+        <motion.path variants={strichVariant} d="M12 12l8-4.5" />
+        <motion.path variants={strichVariant} d="M12 12v9" />
+        <motion.path variants={strichVariant} d="M12 12L4 7.5" />
+      </>
+    ),
   },
   {
-    kuerzel: "CEREC",
-    gattung: "Keramik aus dem eigenen Haus",
-    titel: "Die Krone entsteht, während Sie warten",
-    text: "Vollkeramische Kronen und Inlays werden hier gefräst statt eingeschickt. Kein Abdruck, kein Provisorium, keine zweite Sitzung — Sie gehen mit dem fertigen Zahn nach Hause.",
+    titel: "Keramik an einem Tag",
+    text: "Vollkeramische Kronen und Inlays entstehen im Haus. Kein Abdruck, kein Provisorium, keine zweite Sitzung — Sie gehen mit dem fertigen Zahn nach Hause.",
+    icon: (
+      <>
+        <motion.path
+          variants={strichVariant}
+          d="M11.5 5c-1.7 0-2.5-.8-3.8-.8-1.5 0-2.5 1.3-2.5 3.2 0 2.1.8 3.5 1.2 5.6.5 2.1.6 5.5 1.9 5.5 1.1 0 1.3-2.7 1.6-4.4.2-1 .5-1.4 1.6-1.4s1.3.4 1.5 1.4c.3 1.7.5 4.4 1.6 4.4 1.3 0 1.4-3.4 1.9-5.5.2-1 .5-1.9.8-2.8"
+        />
+        <motion.path variants={strichVariant} d="M18.5 3.2v3.6M16.7 5h3.6" />
+      </>
+    ),
+  },
+  {
+    titel: `Implantologie seit ${praxis.schwerpunktSeit}`,
+    text: "Das Fachgebiet, in dem sich die Praxis seit zwanzig Jahren fortbildet und zertifizieren lässt — kein Punkt unter neun auf einer Leistungsliste.",
+    icon: (
+      <>
+        <motion.path variants={strichVariant} d="M7.6 4.8c0-.6.5-1.1 1.1-1.1h6.6c.6 0 1.1.5 1.1 1.1v3.4H7.6V4.8Z" />
+        <motion.path variants={strichVariant} d="M9 11h6" />
+        <motion.path variants={strichVariant} d="M9.4 14.2h5.2" />
+        <motion.path variants={strichVariant} d="M10 17.4h4" />
+        <motion.path variants={strichVariant} d="M11 20.5h2" />
+      </>
+    ),
+  },
+  {
+    titel: `Ein Haus seit ${praxis.seit}`,
+    text: "Durchgehend dieselbe Praxis am Utzhof — keine Übernahme, keine wechselnde Trägerschaft. Ihre Behandlungsgeschichte bleibt an einem Ort.",
+    icon: (
+      <>
+        <motion.path variants={strichVariant} d="M4 11l8-7 8 7" />
+        <motion.path variants={strichVariant} d="M6 10v10h12V10" />
+        <motion.path variants={strichVariant} d="M10 20v-6h4v6" />
+      </>
+    ),
   },
 ];
 
+function Karte({ karte }: { karte: (typeof karten)[number] }) {
+  return (
+    <motion.article className={s.vorgehenKarte} variants={karteVariant}>
+      <svg
+        className={s.vorgehenKarteIcon}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        {karte.icon}
+      </svg>
+      <h3 className={s.vorgehenKarteTitel}>{karte.titel}</h3>
+      <p className={s.vorgehenKarteText}>{karte.text}</p>
+    </motion.article>
+  );
+}
+
 export default function Vorgehen() {
   const kopf = useSektionsReveal<HTMLDivElement>(0.5);
-  const liste = useSektionsReveal<HTMLDivElement>(0.2);
+  const spalten = useSektionsReveal<HTMLDivElement>(0.2);
 
   return (
     <section className={s.vorgehen} id="vorgehen">
@@ -79,7 +134,7 @@ export default function Vorgehen() {
           ref={kopf.ref}
           className={s.vorgehenKopf}
           animate={kopf.zustand}
-          variants={kopfVariant}
+          variants={karteVariant}
         >
           <p className={`zp-overline ${s.vorgehenOverline}`}>Wie hier gearbeitet wird</p>
           <h2 className={s.vorgehenTitel}>
@@ -97,21 +152,21 @@ export default function Vorgehen() {
         </motion.div>
 
         <motion.div
-          ref={liste.ref}
-          className={s.vorgehenListe}
-          animate={liste.zustand}
-          variants={listeVariant}
+          ref={spalten.ref}
+          className={s.vorgehenSpalten}
+          animate={spalten.zustand}
+          variants={spalteVariant}
         >
-          {verfahren.map((v) => (
-            <motion.article key={v.kuerzel} className={s.vorgehenZeile} variants={zeileVariant}>
-              <p className={s.vorgehenKuerzel}>
-                <span className={s.vorgehenKuerzelWort}>{v.kuerzel}</span>
-                <span className={s.vorgehenGattung}>{v.gattung}</span>
-              </p>
-              <h3 className={s.vorgehenZeileTitel}>{v.titel}</h3>
-              <p className={s.vorgehenZeileText}>{v.text}</p>
-            </motion.article>
-          ))}
+          <div className={s.vorgehenSpalte}>
+            {karten.slice(0, 2).map((karte) => (
+              <Karte key={karte.titel} karte={karte} />
+            ))}
+          </div>
+          <div className={`${s.vorgehenSpalte} ${s.vorgehenSpalteVersetzt}`}>
+            {karten.slice(2).map((karte) => (
+              <Karte key={karte.titel} karte={karte} />
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

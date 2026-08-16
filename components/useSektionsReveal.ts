@@ -28,7 +28,10 @@ import { useReducedMotion } from "motion/react";
 
 export type RevealZustand = "sichtbar" | "versteckt";
 
-export function useSektionsReveal<T extends HTMLElement = HTMLDivElement>(
+/* `Element` statt `HTMLElement`: die Lageskizze haengt den Hook an ein
+   <svg>, und der Hook braucht nur getBoundingClientRect und den
+   IntersectionObserver — beides kann jedes Element. */
+export function useSektionsReveal<T extends Element = HTMLDivElement>(
   /** Anteil des Elements, der im Bild stehen muss, damit eingeblendet wird. */
   anteil = 0.2,
 ) {

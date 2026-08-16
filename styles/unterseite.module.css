@@ -232,6 +232,25 @@
 }
 .listeEintragText{color:var(--text-body);max-width:var(--measure-body)}
 
+/* ---------- Etappen der Anfahrts-Sequenz (/anfahrt) ---------- */
+/* Text links, Bild rechts. Ab 1000px untereinander — vorher stand das
+   Raster inline im JSX und blieb deshalb auch am Handy zweispaltig, was
+   die Etappentexte auf halbe Handybreite gequetscht hat. */
+.etappe{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:var(--space-9);
+  align-items:center;
+}
+.etappeOverline{margin-bottom:var(--space-3)}
+/* Etappe 04 zeigt das echte Foto ohne Schlagschatten — es sitzt hier als
+   Abschluss der Sequenz flach in der Flaeche. */
+.bildFlach{box-shadow:none}
+
+@media (max-width:1000px){
+  .etappe{grid-template-columns:1fr;gap:var(--space-7)}
+}
+
 /* ---------- Vollbreites Bildband mit Unterschrift ---------- */
 /* Genutzt fuer das Schlussbild auf /praxis (echtes Foto vom Utzhof) und fuer
    das Gemeinschaftsbild auf /team. Die Unterschrift steht UNTER dem Bild, nicht
@@ -549,11 +568,20 @@
 .karteTitel{font-family:var(--font-display);font-size:var(--size-h4);color:var(--text-heading);margin-bottom:var(--space-2)}
 .karteText{font-size:var(--size-body-sm);color:var(--text-muted)}
 
+/* ---------- Kartenblock am Fuss von /anfahrt ---------- */
+/* Der Standortblock des Footers ist auf dieser Seite unterdrueckt; die
+   Karte steht hier stattdessen allein, ohne Oeffnungszeiten-Spalte. */
+.kartenblockText{max-width:54ch}
+.kartenblockRahmen{margin-top:var(--space-9)}
+
 .zeitenTabelle{
   display:grid;
   grid-template-columns:auto 1fr;
   gap:var(--space-4) var(--space-8);
 }
+/* Tag und Uhrzeit gehoeren im Markup zusammen (ein Element pro Tag, damit
+   der React-key sitzt), sollen im Raster aber zwei eigene Zellen sein. */
+.zeitenZeile{display:contents}
 .zeitenTag{color:var(--text-muted);font-size:var(--size-body-sm)}
 .zeitenWert{font-variant-numeric:tabular-nums}
 .zeitenZu{color:var(--text-subtle)}
@@ -564,6 +592,18 @@
   border-radius:var(--radius-lg);
   box-shadow:var(--shadow-sm);
   padding:var(--space-9);
+}
+.terminKarteOverline{margin-bottom:var(--space-6)}
+
+/* Adressblock am Fuss der Oeffnungszeiten-Karte, durch eine Haarlinie
+   abgesetzt. */
+.terminAdresse{
+  font-style:normal;
+  margin-top:var(--space-8);
+  padding-top:var(--space-7);
+  border-top:1px solid var(--border-subtle);
+  line-height:var(--lh-loose);
+  color:var(--text-body);
 }
 
 .terminNummer{
@@ -579,6 +619,11 @@
   transition:var(--transition-control);
 }
 .terminNummer:hover{color:var(--blue-900);border-bottom-color:currentColor}
+/* Auf /kontakt steht die Nummer als erstes Element ihrer Spalte und braucht
+   den Vorabstand nicht — sonst haengt sie tiefer als die Karte daneben. */
+.terminNummerOben{margin-top:0}
+/* Als Linktext statt als Telefonnummer: dieselbe Behandlung, kleinerer Grad. */
+.terminNummerKlein{font-size:var(--size-h4)}
 
 .rechtstext{max-width:var(--measure-body);color:var(--text-body);line-height:var(--lh-loose)}
 .rechtstext h2{

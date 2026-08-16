@@ -1,7 +1,5 @@
-"use client";
-
-import { useState } from "react";
 import { oeffnungszeiten, praxis } from "@/content/praxis";
+import Kartenrahmen from "@/components/sections/Kartenrahmen";
 import s from "@/styles/startseite.module.css";
 
 /* Standortblock am Fuss JEDER Seite (der Footer rendert ihn, siehe
@@ -12,16 +10,12 @@ import s from "@/styles/startseite.module.css";
    Zugangsfakten wuerden sonst auf jeder Unterseite mitlaufen; sie stehen
    auf der Startseite in der Vertrauensleiste und ausfuehrlich auf /anfahrt.
 
-   DSGVO: Die Karte laedt erst nach Klick (Zwei-Klick-Loesung), wie in
-   BAUPLAN.md Schritt 6 und der Datenschutzerklaerung festgelegt — sonst
-   baut der Browser beim reinen Seitenaufruf schon eine Verbindung zu
-   Google auf, ohne dass jemand zugestimmt hat. */
+   Die Karte selbst samt Zwei-Klick-Loesung und Lageskizze steckt in
+   Kartenrahmen.tsx — /anfahrt unterdrueckt diesen Standortblock hier und
+   setzt den Rahmen dort allein und vollbreit ein. Deshalb ist diese Datei
+   reine Server-Komponente ohne Zustand. */
 
 export default function Karte() {
-  const [geladen, setGeladen] = useState(false);
-  const adresse = `${praxis.adresse.strasse}, ${praxis.adresse.plz} ${praxis.adresse.ort}`;
-  const embedSrc = `https://www.google.com/maps?q=${encodeURIComponent(adresse)}&output=embed`;
-
   return (
     <section id="karte" className={s.karteSektion}>
       <div className={`container ${s.karteRaster}`}>
@@ -55,28 +49,7 @@ export default function Karte() {
           </div>
         </div>
 
-        <div className={s.karteRahmen}>
-          {geladen ? (
-            <iframe
-              src={embedSrc}
-              className={s.karteIframe}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title={`Karte: ${praxis.adresse.hof}, ${adresse}`}
-            />
-          ) : (
-            <div className={s.kartePlatzhalter}>
-              <p className={s.kartePlatzhalterText}>
-                Aus Datenschutzgründen wird die Karte erst nach Klick geladen —
-                dabei baut Ihr Browser eine Verbindung zu Google Maps
-                (Google LLC, USA) auf.
-              </p>
-              <button type="button" onClick={() => setGeladen(true)} className={s.btnPrimary}>
-                Karte laden
-              </button>
-            </div>
-          )}
-        </div>
+        <Kartenrahmen />
       </div>
     </section>
   );
