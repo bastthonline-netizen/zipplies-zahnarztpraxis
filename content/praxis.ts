@@ -239,8 +239,20 @@ export const etappen: { schritt: string; titel: string; text: string; bild: stri
    faellt beim ersten Besuch auf. Diese beiden Dateien stammen aus der
    Vorgaengerseite und sind die einzigen belegten Aufnahmen, die wir haben. */
 export const echteFotos = {
+  /* Das Haus von der Zufahrt aus — das einzige Motiv, das die Kernaussage
+     der Startseite ("Der Zahnarzt, zu dem man rausfaehrt") tatsaechlich
+     zeigt, und dazu ein echtes Foto.
+
+     `src` ist die auf 1800px gerechnete Fassung fuer den Hero (511 KB statt
+     1,6 MB im Original), `srcKlein` die 1000px-Fassung fuers Handy. Das
+     unveraenderte Original bleibt als zufahrt.jpg liegen, falls spaeter neu
+     zugeschnitten werden muss. breite/hoehe stehen hier, damit das Bild im
+     Markup ein Seitenverhaeltnis mitbekommt und beim Laden nichts springt. */
   hof: {
-    src: "/images/zufahrt.jpg",
+    src: "/images/hof-hero.jpg",
+    srcKlein: "/images/hof-hero-klein.jpg",
+    breite: 1800,
+    hoehe: 1350,
     alt: "Der Utzhof von der Zufahrt aus: weiß gekalkte Giebelwand, Lüftlmalerei unter dem Dachfirst, blau gestrichene Balkonbrüstung",
   },
   lueftlmalerei: {

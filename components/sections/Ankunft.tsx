@@ -1,4 +1,4 @@
-import { praxis, stimmungsbilder } from "@/content/praxis";
+import { echteFotos, praxis } from "@/content/praxis";
 import s from "@/styles/startseite.module.css";
 
 /* Sektion 1 — Job: in fuenf Sekunden klarmachen, wo das hier ist,
@@ -9,22 +9,38 @@ import s from "@/styles/startseite.module.css";
    erst beim Scrollen solide — das gehoert zusammen mit diesem Hero, siehe
    components/site/Header.tsx.
 
-   Bild: Probewebsite-Platzhalter aus Higgsfield (Behandlungsraum), klar
-   ausgezeichnet. Sobald echte Praxisfotos vorliegen, nur die Quelle tauschen —
-   die Verlauf-Mechanik bleibt. */
+   BILD: das Haus, nicht der Behandlungsstuhl. Hier stand vorher der
+   generierte Behandlungsraum — ein Motiv, das die eigene Bildnotiz in
+   content/praxis.ts als "beliebige Stadtpraxis mit Gardine und Estrich"
+   beschreibt, also genau die sterile Klinik-Optik, die PRODUCT.md als
+   Anti-Referenz fuehrt. Ueber der Zeile "Der Zahnarzt, zu dem man rausfaehrt"
+   widersprachen sich Bild und Aussage.
+
+   Jetzt steht dort der Utzhof von der Zufahrt aus: ein echtes Foto, kein
+   Platzhalter. Deshalb faellt auch der Hinweis "Stimmungsbild" weg — das
+   Erste, was jemand sieht, ist damit belegt statt behauptet. Das passt zur
+   Regel, dass jede Aussage nachpruefbar sein muss.
+
+   Zwei Groessen ueber srcset: am Handy laedt die 1000px-Fassung (157 KB)
+   statt der 1800px-Fassung (511 KB). */
 
 export default function Ankunft() {
+  const bild = echteFotos.hof;
+
   return (
     <section className={s.ankunft}>
       <div className={s.ankunftMedia}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={stimmungsbilder.behandlungsraum.src}
-          alt={stimmungsbilder.behandlungsraum.alt}
+          src={bild.src}
+          srcSet={`${bild.srcKlein} 1000w, ${bild.src} 1800w`}
+          sizes="100vw"
+          width={bild.breite}
+          height={bild.hoehe}
+          alt={bild.alt}
           fetchPriority="high"
         />
         <div className={s.ankunftScrim} />
-        <span className={s.ankunftBildHinweis}>Stimmungsbild, kein Praxisfoto</span>
       </div>
 
       <div className={s.ankunftInhalt}>

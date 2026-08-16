@@ -58,12 +58,16 @@ const kacheln: Kachel[] = [
     platz: "platzInstrumente",
     fokus: "50% 55%",
   },
+  /* Hier lag das Hof-Foto. Es traegt jetzt den Hero (siehe Ankunft.tsx) und
+     stuende sonst zweimal auf derselben Seite. An seiner Stelle die Hofecke:
+     gekalkte Wand, Balken, Fensterlaibung — dieselbe Erzaehlung vom Haus,
+     nur ein anderer Ausschnitt davon. */
   {
-    src: "/images/zufahrt.jpg",
-    alt: "Der Weg zum Utzhof in Thalreit",
-    echt: true,
+    src: stimmungsbilder.hofecke.src,
+    alt: stimmungsbilder.hofecke.alt,
+    echt: false,
     platz: "platzZufahrt",
-    fokus: "50% 60%",
+    fokus: "50% 45%",
   },
   {
     src: stimmungsbilder.holzbalken.src,

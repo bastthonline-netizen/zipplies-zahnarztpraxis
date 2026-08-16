@@ -261,62 +261,71 @@
   text-wrap:pretty;
 }
 
-.vorgehenSpalten{
-  display:flex;
-  align-items:flex-start;
-  gap:var(--space-7);
+/* Der einzige Copper-Auftritt dieser Ansicht. Eine Haarlinie unter dem Wort,
+   das die These traegt — nicht die Schrift einfaerben, sonst liest sich das
+   Wort als Link. Der Versatz haelt die Linie unter den Unterlaengen. */
+.vorgehenBetont{
+  text-decoration:underline;
+  text-decoration-color:var(--copper-500);
+  text-decoration-thickness:2px;
+  text-underline-offset:6px;
 }
 
-.vorgehenSpalte{
-  flex:1 1 0;
-  min-width:0;
+/* Zwei Eintraege, keine Karten. Haarlinie oben an jedem — dieselbe Figur wie
+   die Leistungs-Indexliste weiter unten, damit die Seite eine Sprache spricht
+   statt in jeder Sektion eine neue anzufangen. */
+.vorgehenListe{
   display:flex;
   flex-direction:column;
-  gap:var(--space-7);
+  border-top:1px solid var(--border-default);
 }
 
-/* Der eigentliche Zen-Griff: die zweite Spalte startet tiefer. */
-.vorgehenSpalteVersetzt{padding-top:var(--space-12)}
-
-.vorgehenKarte{
-  background:linear-gradient(158deg,var(--white) 0%,var(--sand-100) 100%);
-  border:1px solid var(--border-subtle);
-  border-radius:var(--radius-xl);
-  padding:var(--space-9) var(--space-8);
-  box-shadow:0 24px 48px -28px rgba(14,30,56,.20);
-  transition:box-shadow var(--dur) var(--ease-calm),transform var(--dur) var(--ease-calm);
-}
-.vorgehenKarte:hover{
-  box-shadow:0 32px 64px -28px rgba(14,30,56,.28);
-  transform:translateY(-2px);
+.vorgehenZeile{
+  padding-block:var(--space-9);
+  border-bottom:1px solid var(--border-default);
 }
 
-.vorgehenKarteIcon{
-  width:34px;height:34px;
-  margin-bottom:var(--space-8);
+/* Kuerzel und Gattung in einer Zeile: das Kuerzel traegt die Erkennung,
+   die Gattung erklaert es fuer alle anderen. */
+.vorgehenKuerzel{
+  display:flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:var(--space-3) var(--space-5);
+  margin-bottom:var(--space-6);
+}
+
+.vorgehenKuerzelWort{
+  font-size:var(--size-overline);
+  font-weight:var(--weight-semibold);
+  letter-spacing:var(--tracking-overline);
   color:var(--text-accent);
 }
 
-.vorgehenKarteTitel{
+.vorgehenGattung{
+  font-size:var(--size-caption);
+  color:var(--text-muted);
+}
+
+/* Deutlich groesser als die alten Kartentitel: bei zwei Eintraegen statt
+   vier ist Platz da, und die Aussage traegt ihn. */
+.vorgehenZeileTitel{
   font-family:var(--font-display);
-  font-size:var(--size-h3);
+  font-size:clamp(1.5rem,2.4vw,2rem);
   font-weight:var(--weight-regular);
   line-height:var(--lh-heading);
   letter-spacing:var(--tracking-heading);
   color:var(--text-heading);
-  margin-bottom:var(--space-4);
+  margin-bottom:var(--space-5);
+  max-width:20ch;
   text-wrap:balance;
 }
 
-.vorgehenKarteText{
-  font-size:var(--size-body-sm);
-  color:var(--text-muted);
+.vorgehenZeileText{
+  color:var(--text-body);
   line-height:var(--lh-body);
+  max-width:54ch;
   text-wrap:pretty;
-}
-
-@media (prefers-reduced-motion:reduce){
-  .vorgehenKarte:hover{transform:none}
 }
 
 @media (max-width:1000px){
@@ -324,13 +333,7 @@
   .vorgehenRaster{grid-template-columns:1fr;gap:var(--space-9)}
   .vorgehenKopf{position:static}
   .vorgehenTitel{max-width:18ch}
-  .vorgehenSpalteVersetzt{padding-top:0}
-  .vorgehenSpalten{gap:var(--space-6)}
-  .vorgehenKarte{padding:var(--space-8) var(--space-7)}
-}
-
-@media (max-width:640px){
-  .vorgehenSpalten{flex-direction:column;gap:var(--space-6)}
+  .vorgehenZeile{padding-block:var(--space-8)}
 }
 
 /* ===================== 3 · Implantologie ===================== */
