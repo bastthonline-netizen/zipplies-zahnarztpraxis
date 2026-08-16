@@ -31,7 +31,7 @@ export default function TeamSeite() {
       <Header />
       <main id="inhalt">
         <section className={s.hero}>
-          <div className="container">
+          <div className="container zp-auftritt">
             <p className={`zp-overline ${s.heroOverline}`}>Team</p>
             <h1 className={s.heroTitel}>Eine Praxis, ein Behandler.</h1>
             <p className={s.heroLede}>

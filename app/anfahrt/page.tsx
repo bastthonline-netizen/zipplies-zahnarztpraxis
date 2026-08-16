@@ -26,7 +26,7 @@ export default function AnfahrtSeite() {
             Motiv und die Sequenz verliert ihren Schlusspunkt. */}
         <section className={`${s.hero} ${s.heroMitBild}`}>
           <div className={`container ${s.heroRaster}`}>
-            <div>
+            <div className="zp-auftritt">
               <p className={`zp-overline ${s.heroOverline}`}>Anfahrt</p>
               <h1 className={s.heroTitel}>Der Weg zum Utzhof</h1>
               <p className={s.heroLede}>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
+import Reveal from "@/components/Reveal";
 import { praxis, qualifikationen, stimmungsbilder } from "@/content/praxis";
 import s from "@/styles/unterseite.module.css";
 
@@ -22,7 +23,7 @@ export default function ImplantologieSeite() {
             bevor gebohrt wird". */}
         <section className={`${s.hero} ${s.heroMitBild}`}>
           <div className={`container ${s.heroRaster}`}>
-            <div>
+            <div className="zp-auftritt">
               <p className={`zp-overline ${s.heroOverline}`}>Schwerpunkt</p>
               <h1 className={s.heroTitel}>Implantologie ist hier kein Zusatzangebot.</h1>
               <p className={s.heroLede}>
@@ -56,11 +57,16 @@ export default function ImplantologieSeite() {
                   Fachgesellschaften und der Hochschule überprüfbar.
                 </p>
               </div>
+              {/* Gestaffelt statt gleichzeitig: die drei Nachweise sind eine
+                  Chronologie (2003, 2005, 2007) — sie sollen nacheinander
+                  ankommen, weil sie nacheinander erworben wurden. */}
               <ul className={s.belege}>
-                {qualifikationen.map((q) => (
-                  <li key={q.text} className={s.belegZeile}>
-                    <span className={s.belegJahr}>{q.jahr}</span>
-                    <span className={s.belegText}>{q.text}</span>
+                {qualifikationen.map((q, i) => (
+                  <li key={q.text} className={s.belegZeileGestaffelt}>
+                    <Reveal delay={i * 90} className={s.belegInhalt}>
+                      <span className={s.belegJahr}>{q.jahr}</span>
+                      <span className={s.belegText}>{q.text}</span>
+                    </Reveal>
                   </li>
                 ))}
               </ul>
@@ -71,11 +77,11 @@ export default function ImplantologieSeite() {
         <section className={s.abschnitt}>
           <div className="container">
             <div className={s.raster}>
-              <div className={s.bild}>
+              <Reveal variante="bild" className={s.bild}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={stimmungsbilder.monitor.src} alt={stimmungsbilder.monitor.alt} loading="lazy" />
                 <span className={s.bildHinweis}>Stimmungsbild, kein Praxisfoto</span>
-              </div>
+              </Reveal>
               <div>
                 <h2 className={s.titel}>Wie eine Behandlung abläuft</h2>
                 <p className={s.text}>

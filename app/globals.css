@@ -38,3 +38,33 @@
   transition:top var(--dur) var(--ease-calm);
 }
 .skip-link:focus-visible{top:var(--space-5)}
+
+/* ---------- Ladechoreografie im Seitenkopf ----------
+   Der Kopf jeder Seite baut sich einmal beim Ankommen auf: Overline, dann
+   Ueberschrift, dann Lede, dann die Aktionen. Bewusst als CSS-Animation und
+   nicht per JavaScript — sie laeuft dadurch schon im ersten Frame, braucht
+   keinen Beobachter und ist im Druck und in Vorschau-Renderings laengst
+   abgeschlossen statt haengengeblieben.
+
+   Nur der Seitenkopf bekommt diese Behandlung. Alles weiter unten wird beim
+   Hereinscrollen eingeblendet (components/Reveal.tsx) — sonst waere die
+   Bewegung wieder ueberall dieselbe. */
+@keyframes zp-aufsteigen{
+  from{opacity:0;transform:translateY(9px)}
+  to{opacity:1;transform:none}
+}
+.zp-auftritt > *{
+  animation:zp-aufsteigen var(--dur-reveal) var(--ease-out) backwards;
+}
+.zp-auftritt > :nth-child(1){animation-delay:40ms}
+.zp-auftritt > :nth-child(2){animation-delay:120ms}
+.zp-auftritt > :nth-child(3){animation-delay:200ms}
+.zp-auftritt > :nth-child(4){animation-delay:280ms}
+.zp-auftritt > :nth-child(n+5){animation-delay:340ms}
+
+/* Ohne Bewegung steht der Kopf sofort vollstaendig da. `animation:none` statt
+   Dauer 0, damit `backwards` den Inhalt nicht fuer die Dauer der Verzoegerung
+   unsichtbar haelt. */
+@media (prefers-reduced-motion:reduce){
+  .zp-auftritt > *{animation:none}
+}

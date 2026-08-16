@@ -44,7 +44,7 @@ export default function Ankunft() {
       </div>
 
       <div className={s.ankunftInhalt}>
-        <div className="container">
+        <div className="container zp-auftritt">
           <p className={s.ankunftOrt}>
             <span className={s.ankunftOrtStrich} />
             {praxis.region}

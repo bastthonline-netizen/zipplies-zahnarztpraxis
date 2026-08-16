@@ -92,4 +92,8 @@
 --scrim-bottom:linear-gradient(to top,rgba(14,30,56,.72) 0%,rgba(14,30,56,0) 60%);
 --scrim-side:linear-gradient(to right,rgba(14,30,56,.72) 0%,rgba(14,30,56,0) 60%);
 --glass:rgba(251,250,247,.82);
+/* Plakette auf einem Foto („Stimmungsbild", Rollen auf /team). Vorher stand an
+   beiden Stellen ein hartes rgba(15,23,42,.62) im Modul — ein Schieferton aus
+   einem fremden System, der neben dem eigenen Navy leicht gruenstichig wirkt. */
+--plakette-auf-bild:rgba(14,30,56,.62);
 }

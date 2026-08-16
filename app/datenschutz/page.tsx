@@ -16,7 +16,7 @@ export default function DatenschutzSeite() {
       <Header />
       <main id="inhalt">
         <section className={s.hero}>
-          <div className="container">
+          <div className="container zp-auftritt">
             <p className={`zp-overline ${s.heroOverline}`}>Rechtliches</p>
             <h1 className={s.heroTitel}>Datenschutzerklärung</h1>
           </div>

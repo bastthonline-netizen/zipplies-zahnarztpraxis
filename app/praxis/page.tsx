@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
+import Reveal from "@/components/Reveal";
 import { echteFotos, praxis, standort, stimmungsbilder } from "@/content/praxis";
 import s from "@/styles/unterseite.module.css";
 
@@ -16,7 +17,7 @@ export default function PraxisSeite() {
       <Header />
       <main id="inhalt">
         <section className={s.hero}>
-          <div className="container">
+          <div className="container zp-auftritt">
             <p className={`zp-overline ${s.heroOverline}`}>Die Praxis</p>
             <h1 className={s.heroTitel}>Der Hof war zuerst da.</h1>
             <p className={s.heroLede}>
@@ -30,11 +31,11 @@ export default function PraxisSeite() {
         <section className={s.abschnitt}>
           <div className="container">
             <div className={s.raster}>
-              <div className={s.bild}>
+              <Reveal variante="bild" className={s.bild}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={stimmungsbilder.hofecke.src} alt={stimmungsbilder.hofecke.alt} loading="lazy" />
                 <span className={s.bildHinweis}>Stimmungsbild, kein Praxisfoto</span>
-              </div>
+              </Reveal>
               <div>
                 <h2 className={s.titel}>Dicke Wände, weiches Licht.</h2>
                 <p className={s.text}>
@@ -87,10 +88,10 @@ export default function PraxisSeite() {
         <section className={s.abschnitt}>
           <div className="container">
             <figure className={s.hausBand}>
-              <div className={s.hausBild}>
+              <Reveal variante="bild" className={s.hausBild}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={echteFotos.hof.src} alt={echteFotos.hof.alt} loading="lazy" />
-              </div>
+              </Reveal>
               <figcaption className={s.hausUnterschrift}>
                 <strong className={s.hausUnterschriftStark}>Der Utzhof, Thalreit 7.</strong>{" "}
                 Dieses Foto ist echt. Die übrigen Bilder auf dieser Seite sind

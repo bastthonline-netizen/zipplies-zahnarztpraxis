@@ -22,7 +22,7 @@ export default function LeistungenSeite() {
             zur Bildergalerie machen. */}
         <section className={`${s.hero} ${s.heroMitBild}`}>
           <div className={`container ${s.heroRaster}`}>
-            <div>
+            <div className="zp-auftritt">
               <p className={`zp-overline ${s.heroOverline}`}>Leistungen</p>
               <h1 className={s.heroTitel}>Was wir behandeln</h1>
               <p className={s.heroLede}>

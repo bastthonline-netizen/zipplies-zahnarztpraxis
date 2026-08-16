@@ -12,6 +12,11 @@
 --dur:220ms;
 --dur-slow:380ms;
 --dur-reveal:640ms;
+/* Bilder brauchen laenger als Text: das Aufziehen soll nicht huschen. */
+--dur-reveal-bild:820ms;
+/* Versatz je Zeile in gestaffelten Reihen. Gedeckelt in den Komponenten,
+   damit die letzte Zeile einer langen Liste nicht sekundenlang wartet. */
+--stagger:45ms;
 --ease-calm:cubic-bezier(.2,.6,.2,1);
 --ease-out:cubic-bezier(.16,1,.3,1);
 --ease-in-out:cubic-bezier(.5,0,.3,1);

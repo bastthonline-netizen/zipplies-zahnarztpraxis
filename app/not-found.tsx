@@ -9,7 +9,7 @@ export default function NichtGefunden() {
       <Header />
       <main id="inhalt">
         <section className="container">
-          <div className={s.notFound}>
+          <div className={`${s.notFound} zp-auftritt`}>
             <p className={`zp-overline ${s.notFoundOverline}`}>
               Seite nicht gefunden
             </p>

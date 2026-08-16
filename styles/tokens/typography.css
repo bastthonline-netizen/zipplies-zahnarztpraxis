@@ -15,7 +15,10 @@
 --size-h1:2.5rem;--size-h2:2rem;--size-h3:1.5rem;--size-h4:1.25rem;
 /* Text. Untergrenze fuer Fliesstext ist --size-body — die Zielgruppe ist aelter. */
 --size-body-lg:1.1875rem;--size-body:1.0625rem;--size-body-sm:0.9375rem;
---size-caption:0.8125rem;--size-overline:0.75rem;
+/* Beschriftungen eine Stufe groesser als im Ausgangssystem: 12px Overlines und
+   13px Bildunterschriften waren am Handy fuer die aeltere Zielgruppe zu klein
+   (siehe PRODUCT.md, Accessibility). */
+--size-caption:0.875rem;--size-overline:0.8125rem;
 
 --lh-tight:1.08;
 --lh-heading:1.18;

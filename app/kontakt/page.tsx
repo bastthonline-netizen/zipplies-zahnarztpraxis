@@ -25,7 +25,7 @@ export default function KontaktSeite() {
             Pfad getauscht, dann darf der Name dazu. */}
         <section className={`${s.hero} ${s.heroMitBild}`}>
           <div className={`container ${s.heroRaster}`}>
-            <div>
+            <div className="zp-auftritt">
               <p className={`zp-overline ${s.heroOverline}`}>Kontakt</p>
               <h1 className={s.heroTitel}>Rufen Sie einfach an.</h1>
               <p className={s.heroLede}>
