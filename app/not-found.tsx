@@ -1,3 +1,4 @@
+import { pfad } from "@/lib/pfad";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
 import { praxis } from "@/content/praxis";
@@ -19,7 +20,7 @@ export default function NichtGefunden() {
               Startseite, oder rufen Sie direkt an.
             </p>
             <div className={s.notFoundAktionen}>
-              <a href="/" className={`${s.terminNummer} ${s.terminNummerOben} ${s.terminNummerKlein}`}>
+              <a href={pfad("/")} className={`${s.terminNummer} ${s.terminNummerOben} ${s.terminNummerKlein}`}>
                 Zur Startseite
               </a>
               <a

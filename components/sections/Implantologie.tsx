@@ -1,3 +1,4 @@
+import { pfad } from "@/lib/pfad";
 import Reveal from "@/components/Reveal";
 import { praxis, qualifikationen } from "@/content/praxis";
 import s from "@/styles/startseite.module.css";
@@ -21,7 +22,7 @@ export default function Implantologie() {
               wird geplant, bevor gebohrt wird, dreidimensional und anhand des
               vorhandenen Knochens.
             </p>
-            <a href="/implantologie/" className={s.bandLink}>
+            <a href={pfad("/implantologie/")} className={s.bandLink}>
               Wie eine Behandlung abläuft
               <svg
                 width="18"

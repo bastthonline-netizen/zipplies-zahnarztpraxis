@@ -1,3 +1,4 @@
+import { pfad } from "@/lib/pfad";
 /* Stammdaten und Inhalte der Praxis.
 
    HERKUNFT: uebernommen aus der bestehenden Praxis-Website ueber die Datendatei
@@ -33,12 +34,12 @@ export const praxis = {
 } as const;
 
 export const navigation = [
-  { label: "Implantologie", href: "/implantologie/" },
-  { label: "Leistungen", href: "/leistungen/" },
-  { label: "Praxis", href: "/praxis/" },
-  { label: "Team", href: "/team/" },
-  { label: "Anfahrt", href: "/anfahrt/" },
-  { label: "Kontakt", href: "/kontakt/" },
+  { label: "Implantologie", href: pfad("/implantologie/") },
+  { label: "Leistungen", href: pfad("/leistungen/") },
+  { label: "Praxis", href: pfad("/praxis/") },
+  { label: "Team", href: pfad("/team/") },
+  { label: "Anfahrt", href: pfad("/anfahrt/") },
+  { label: "Kontakt", href: pfad("/kontakt/") },
 ] as const;
 
 /* Das Behandlungsspektrum, wie es die Praxis selbst fuehrt.
@@ -205,21 +206,21 @@ export const etappen: { schritt: string; titel: string; text: string; bild: stri
     schritt: "01",
     titel: "Raus aus Raubling",
     text: "Richtung Thalreit. Die Bebauung hört auf, es wird still.",
-    bild: "/images/generated/etappe-01-landstrasse.webp",
+    bild: pfad("/images/generated/etappe-01-landstrasse.webp"),
     alt: "Landstraße im Inntal Richtung Thalreit, Nebel über den Feldern",
   },
   {
     schritt: "02",
     titel: "Nach Thalreit",
     text: "An der Hauptstraße steht kein Praxisschild. Das ist keine Nachlässigkeit, hier steht einfach keins.",
-    bild: "/images/generated/etappe-02-hecke.webp",
+    bild: pfad("/images/generated/etappe-02-hecke.webp"),
     alt: "Landstraße mit Hecke Richtung Thalreit",
   },
   {
     schritt: "03",
     titel: "Die Hofeinfahrt",
     text: "Thalreit 7. Der Kiesweg führt direkt an den Parkplatz.",
-    bild: "/images/generated/etappe-03-kiesweg.webp",
+    bild: pfad("/images/generated/etappe-03-kiesweg.webp"),
     alt: "Kiesweg zwischen zwei Bäumen zum Hof",
   },
   {
@@ -229,7 +230,7 @@ export const etappen: { schritt: string; titel: string; text: string; bild: stri
        jetzt der Kopf der Seite — der Schlusspunkt zeigt dafuer den ganzen Hof,
        damit die Seite nicht zweimal dieselbe Tuer zeigt. Beides echte Fotos. */
     text: "Das Haus mit der Lüftlmalerei am Giebel. Parkplatz direkt davor, der Eingang liegt ebenerdig.",
-    bild: "/images/zufahrt.webp",
+    bild: pfad("/images/zufahrt.webp"),
     alt: "Der Utzhof von der Zufahrt aus: weiß gekalkte Giebelwand mit Lüftlmalerei, Kiesweg davor",
   },
 ];
@@ -249,14 +250,14 @@ export const echteFotos = {
      zugeschnitten werden muss. breite/hoehe stehen hier, damit das Bild im
      Markup ein Seitenverhaeltnis mitbekommt und beim Laden nichts springt. */
   hof: {
-    src: "/images/hof-hero.webp",
-    srcKlein: "/images/hof-hero-klein.webp",
+    src: pfad("/images/hof-hero.webp"),
+    srcKlein: pfad("/images/hof-hero-klein.webp"),
     breite: 1800,
     hoehe: 1350,
     alt: "Der Utzhof von der Zufahrt aus: weiß gekalkte Giebelwand, Lüftlmalerei unter dem Dachfirst, blau gestrichene Balkonbrüstung",
   },
   lueftlmalerei: {
-    src: "/images/utzhof.webp",
+    src: pfad("/images/utzhof.webp"),
     alt: "Handgemalter Schriftzug „Utzhof“ über der Eingangstür",
   },
 } as const;
@@ -265,13 +266,13 @@ export const echteFotos = {
    Higgsfield, klar als Platzhalter gekennzeichnet — kein echtes Praxisfoto.
    Sobald ein Fototermin stattgefunden hat, werden nur die Pfade getauscht. */
 export const stimmungsbilder = {
-  hofecke: { src: "/images/generated/praxis-hofecke.webp", alt: "Leere Hofecke im alten Bauernhaus: gekalkte Wand, dunkler Holzbalken, tief eingelassenes Fenster" },
-  holzbalken: { src: "/images/generated/praxis-holzbalken.webp", alt: "Nahaufnahme eines alten, handbehauenen Eichenbalkens im Streiflicht" },
-  eingang: { src: "/images/generated/praxis-eingang.webp", alt: "Platzhalter: Eingangsbereich einer modernen Zahnarztpraxis" },
-  empfang: { src: "/images/generated/praxis-empfang.webp", alt: "Platzhalter: Empfang und Wartebereich einer Zahnarztpraxis" },
-  behandlungsraum: { src: "/images/generated/praxis-behandlungsraum.webp", alt: "Platzhalter: Behandlungsraum mit Zahnarztstuhl" },
-  instrumente: { src: "/images/generated/praxis-instrumente.webp", alt: "Platzhalter: Instrumentenablage, unscharf und abstrakt" },
-  monitor: { src: "/images/generated/praxis-monitor.webp", alt: "Platzhalter: Monitor mit abstrakter Grafik im Behandlungsraum" },
+  hofecke: { src: pfad("/images/generated/praxis-hofecke.webp"), alt: "Leere Hofecke im alten Bauernhaus: gekalkte Wand, dunkler Holzbalken, tief eingelassenes Fenster" },
+  holzbalken: { src: pfad("/images/generated/praxis-holzbalken.webp"), alt: "Nahaufnahme eines alten, handbehauenen Eichenbalkens im Streiflicht" },
+  eingang: { src: pfad("/images/generated/praxis-eingang.webp"), alt: "Platzhalter: Eingangsbereich einer modernen Zahnarztpraxis" },
+  empfang: { src: pfad("/images/generated/praxis-empfang.webp"), alt: "Platzhalter: Empfang und Wartebereich einer Zahnarztpraxis" },
+  behandlungsraum: { src: pfad("/images/generated/praxis-behandlungsraum.webp"), alt: "Platzhalter: Behandlungsraum mit Zahnarztstuhl" },
+  instrumente: { src: pfad("/images/generated/praxis-instrumente.webp"), alt: "Platzhalter: Instrumentenablage, unscharf und abstrakt" },
+  monitor: { src: pfad("/images/generated/praxis-monitor.webp"), alt: "Platzhalter: Monitor mit abstrakter Grafik im Behandlungsraum" },
   /* Ersetzt das alte `praxis-team.jpg` (sterile Klinik-Stockoptik, blaue Wand,
      Masken unterm Kinn) — genau die Aesthetik, die PRODUCT.md als Anti-Referenz
      fuehrt. Neu: Gruppe im Flur eines alten Bauernhauses, gedaempfte Farben. */
@@ -283,18 +284,18 @@ export const stimmungsbilder = {
      zum Fototermin traegt das Bild deshalb die Marke „Platzhalter", nicht nur
      „Stimmungsbild" — es zeigt einen Raum, den es so noch nicht gibt. */
   behandlungsraumHof: {
-    src: "/images/generated/praxis-behandlungsraum-hof.webp",
+    src: pfad("/images/generated/praxis-behandlungsraum-hof.webp"),
     alt: "Platzhalter: Behandlungsraum unter einem alten Eichenbalken, gekalkte Wände, Dielenboden, Fenster mit Blick ins Grüne",
   },
   /* Fuer den Kopf der Kontaktseite: wer abnimmt, wenn man anruft. Wie alle
      Gesichter auf dieser Probewebsite ein Platzhalter und als solcher
      ausgezeichnet — die Bildunterschrift nennt bewusst KEINEN Namen. */
   behandler: {
-    src: "/images/generated/behandler-portraet.webp",
+    src: pfad("/images/generated/behandler-portraet.webp"),
     alt: "Platzhalter-Porträt: Zahnarzt im weißen Kittel vor einer gekalkten Wand unter einem alten Holzbalken",
   },
   team: {
-    src: "/images/generated/team-gemeinschaft.webp",
+    src: pfad("/images/generated/team-gemeinschaft.webp"),
     alt: "Platzhalter: vier Personen in Kittel, Kasack und Strickjacke stehen im Flur eines alten Bauernhauses",
   },
 } as const;
@@ -318,25 +319,25 @@ export const teamPortraets: { rolle: string; text: string; bild: string; alt: st
   {
     rolle: "Prophylaxe",
     text: "Professionelle Zahnreinigung und Vorsorge — mit eigenen Intervallen für Implantatträger.",
-    bild: "/images/generated/team-portrait-01.webp",
+    bild: pfad("/images/generated/team-portrait-01.webp"),
     alt: "Platzhalter-Porträt: Frau in blaugrauem Kasack vor einer gekalkten Wand",
   },
   {
     rolle: "Assistenz",
     text: "Am Stuhl dabei, von der Vorbereitung bis zur Nachkontrolle.",
-    bild: "/images/generated/team-portrait-02.webp",
+    bild: pfad("/images/generated/team-portrait-02.webp"),
     alt: "Platzhalter-Porträt: Frau in blaugrauem Kasack an einer Fensterlaibung",
   },
   {
     rolle: "Empfang und Verwaltung",
     text: "Termine, Rückrufe und Heil- und Kostenpläne — die Stimme am Telefon.",
-    bild: "/images/generated/team-portrait-03.webp",
+    bild: pfad("/images/generated/team-portrait-03.webp"),
     alt: "Platzhalter-Porträt: Frau mit Brille im Haar an der Anmeldung",
   },
   {
     rolle: "Chirurgische Assistenz",
     text: "Assistenz bei Implantationen und operativen Eingriffen.",
-    bild: "/images/generated/team-portrait-04.webp",
+    bild: pfad("/images/generated/team-portrait-04.webp"),
     alt: "Platzhalter-Porträt: Mann in blaugrauem Kasack in einem Türdurchgang",
   },
 ];

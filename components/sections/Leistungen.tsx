@@ -1,3 +1,4 @@
+import { pfad } from "@/lib/pfad";
 import Reveal from "@/components/Reveal";
 import { leistungen } from "@/content/praxis";
 import s from "@/styles/startseite.module.css";
@@ -14,7 +15,7 @@ export default function Leistungen() {
       <div className="container">
         <div className={s.abschnittKopf}>
           <h2 className={s.abschnittTitel}>Was wir behandeln</h2>
-          <a href="/leistungen/" className={s.textLink}>
+          <a href={pfad("/leistungen/")} className={s.textLink}>
             Alle Leistungen im Detail
           </a>
         </div>

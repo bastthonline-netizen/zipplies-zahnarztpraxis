@@ -1,5 +1,7 @@
 "use client";
 
+import { pfad } from "@/lib/pfad";
+
 import { motion, type Variants } from "motion/react";
 import { stimmungsbilder } from "@/content/praxis";
 import { useSektionsReveal } from "@/components/useSektionsReveal";
@@ -108,7 +110,7 @@ export default function Galerie() {
             Hand aufgetragen. Die Praxis hat sich dem Haus angepasst — innen
             steht trotzdem alles, was moderne Behandlung braucht.
           </p>
-          <a href="/praxis/" className={s.galerieKarteLink}>
+          <a href={pfad("/praxis/")} className={s.galerieKarteLink}>
             Mehr über die Praxis
           </a>
         </motion.div>

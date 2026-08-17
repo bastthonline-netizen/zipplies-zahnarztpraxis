@@ -40,6 +40,11 @@ jobs:
 
       - run: npm run build:pages
         env:
+          # NEXT_PUBLIC_ backt den Praefix ins Browser-Bundle — noetig fuer
+          # alles, was React erst im Browser rendert (Mobilmenue!).
+          # BASIS_PFAD deckt danach die Schriftpfade in der CSS ab, die kein
+          # JavaScript sieht.
+          NEXT_PUBLIC_BASIS_PFAD: /zipplies-zahnarztpraxis
           BASIS_PFAD: /zipplies-zahnarztpraxis
 
       - uses: actions/configure-pages@v5

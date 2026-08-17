@@ -1,5 +1,7 @@
 "use client";
 
+import { pfad } from "@/lib/pfad";
+
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Logo from "@/components/Logo";
@@ -64,7 +66,7 @@ export default function Header() {
       }`}
     >
       <div className={`container ${s.headerInner}`}>
-        <a href="/" className={s.marke}>
+        <a href={pfad("/")} className={s.marke}>
           <Logo size={40} decorative />
           <span className={s.markeText}>
             <span className={s.markeName}>Dr. Zipplies</span>

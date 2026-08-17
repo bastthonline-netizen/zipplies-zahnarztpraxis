@@ -1,3 +1,4 @@
+import { pfad } from "@/lib/pfad";
 import { Fragment } from "react";
 import Logo from "@/components/Logo";
 import Karte from "@/components/sections/Karte";
@@ -73,8 +74,8 @@ export default function Footer({ ohneStandort = false }: FooterProps) {
           <span>
             © {new Date().getFullYear()} {praxis.name}
           </span>
-          <a href="/impressum/">Impressum</a>
-          <a href="/datenschutz/">Datenschutz</a>
+          <a href={pfad("/impressum/")}>Impressum</a>
+          <a href={pfad("/datenschutz/")}>Datenschutz</a>
         </div>
       </div>
       </footer>
