@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
-import { oeffnungszeiten, praxis, stimmungsbilder } from "@/content/praxis";
+import { praxis, stimmungsbilder, telefonzeiten } from "@/content/praxis";
 import s from "@/styles/unterseite.module.css";
 
 export const metadata: Metadata = {
+  /* Canonical auf DIESE Seite. Das Root-Layout setzt "/" als Vorgabe;
+     ohne eigene Angabe erbt jede Unterseite sie und erklaert damit die
+     Startseite zur maßgeblichen Fassung — Google wuerde die Unterseite
+     dann gar nicht fuehren. */
+  alternates: { canonical: "/kontakt/" },
   title: "Kontakt",
   description: "Termin anfragen bei der Zahnarztpraxis Dr. Zipplies am Utzhof, Raubling — telefonisch unter 08035 6505.",
 };
@@ -62,16 +67,18 @@ export default function KontaktSeite() {
 
               <div className={s.terminKarte}>
                 <p className={`zp-overline ${s.terminKarteOverline}`}>
-                  Sprechzeiten
+                  Telefonisch erreichbar
                 </p>
                 <div className={s.zeitenTabelle}>
-                  {oeffnungszeiten.map((zeit) => (
+                  {telefonzeiten.map((zeit) => (
                     <div key={zeit.tag} className={s.zeitenZeile}>
                       <span className={s.zeitenTag}>{zeit.tag}</span>
                       <span className={`${s.zeitenWert} ${zeit.geschlossen ? s.zeitenZu : ""}`}>{zeit.zeit}</span>
                     </div>
                   ))}
                 </div>
+
+                <p className={s.text}>{praxis.terminHinweis}.</p>
 
                 <address className={s.terminAdresse}>
                   {praxis.adresse.hof} · {praxis.adresse.strasse}

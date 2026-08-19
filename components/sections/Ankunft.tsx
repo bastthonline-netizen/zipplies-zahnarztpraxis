@@ -22,7 +22,18 @@ import s from "@/styles/startseite.module.css";
    Regel, dass jede Aussage nachpruefbar sein muss.
 
    Zwei Groessen ueber srcset: am Handy laedt die 1000px-Fassung (157 KB)
-   statt der 1800px-Fassung (511 KB). */
+   statt der 1800px-Fassung (511 KB).
+
+   19.08.2026 — TITELZEILE GEAENDERT. Vorher: "Der Zahnarzt, zu dem man
+   rausfaehrt." Die Zeile machte die Anfahrt zur Hauptbotschaft, also
+   ausgerechnet den einzigen Nachteil des Standorts, und widersprach der
+   Praxis selbst: die beschreibt sich auf ihrer eigenen Seite als
+   "verkehrsguenstig gelegen". Wer eine Zahnarztpraxis sucht, entscheidet
+   nicht ueber die Strecke, sondern ueber den Behandler.
+
+   Jetzt steht die Kompetenz oben und der Hof in der Unterzeile. Das Bild
+   traegt den Ort ohnehin, und die ganze Anfahrts-Sequenz weiter unten ist
+   genau fuer die Wegfrage da. */
 
 export default function Ankunft() {
   const bild = echteFotos.hof;
@@ -50,12 +61,15 @@ export default function Ankunft() {
             {praxis.region}
           </p>
 
-          <h1 className={s.ankunftTitel}>Der Zahnarzt, zu dem man rausfährt.</h1>
+          <h1 className={s.ankunftTitel}>
+            Implantologie seit {praxis.schwerpunktSeit}, an einem Hof aus dem
+            13. Jahrhundert.
+          </h1>
 
           <p className={s.ankunftLede}>
-            Seit {praxis.seit} am Utzhof in Thalreit. Ein Bauernhaus statt
-            Ärztehaus, Parkplatz vor der Tür — und Implantologie als
-            Schwerpunkt seit {praxis.schwerpunktSeit}.
+            Zahnarztpraxis Dr. Zipplies am Utzhof in Thalreit. Seit{" "}
+            {praxis.seit} dieselbe Praxis, derselbe Behandler — Beratung,
+            Eingriff und Zahnersatz aus einer Hand. Parkplatz vor der Tür.
           </p>
 
           <div className={s.ankunftAktionen}>

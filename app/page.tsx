@@ -7,7 +7,7 @@ import Implantologie from "@/components/sections/Implantologie";
 import Leistungen from "@/components/sections/Leistungen";
 import Galerie from "@/components/sections/Galerie";
 import Termin from "@/components/sections/Termin";
-import { oeffnungszeiten, praxis } from "@/content/praxis";
+import { praxis } from "@/content/praxis";
 
 /* Startseite. Reihenfolge und Job jeder Sektion stehen im BAUPLAN.md.
    Bewusst nicht: Hero -> drei Icon-Spalten -> Ueber uns -> Kontakt. */
@@ -23,6 +23,7 @@ const strukturierteDaten = {
   founder: { "@type": "Person", name: praxis.arzt },
   foundingDate: String(praxis.seit),
   telephone: praxis.telefon,
+  email: praxis.email,
   faxNumber: praxis.fax,
   medicalSpecialty: "Dentistry",
   address: {
@@ -33,18 +34,32 @@ const strukturierteDaten = {
     addressCountry: "DE",
   },
   areaServed: ["Raubling", "Rosenheim", "Inntal"],
-  openingHoursSpecification: oeffnungszeiten
-    .filter((zeit) => !zeit.geschlossen)
-    .map((zeit) => ({
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: `https://schema.org/${
-        { Montag: "Monday", Dienstag: "Tuesday", Mittwoch: "Wednesday", Donnerstag: "Thursday", Freitag: "Friday" }[
-          zeit.tag
-        ]
-      }`,
-      description: zeit.zeit,
-    })),
+  /* BEWUSST KEINE openingHoursSpecification.
+
+     Hier standen frueher die Telefonzeiten als Oeffnungszeiten. Google haette
+     sie so ins Suchergebnis und ins Unternehmensprofil uebernommen — mit dem
+     Ergebnis, dass jemand Mittwochnachmittag nach Thalreit faehrt, weil dort
+     "geoeffnet bis 17:00" stand. Falsche Zeiten sind an dieser Stelle
+     schaedlicher als gar keine: ohne Angabe zeigt Google nichts an, mit
+     falscher Angabe zeigt es etwas Falsches.
+
+     Wieder eintragen, sobald die Praxis ihre echten Behandlungszeiten nennt
+     (dann als eigene Konstante, nicht aus `telefonzeiten`). */
 };
+
+/* JSON.stringify maskiert `<` nicht. Steht in einem der Werte irgendwann eine
+   Zeichenfolge wie "</script>", beendet der Browser das Skript-Element mitten
+   im JSON und liest den Rest als Markup — der klassische Weg, aus einem
+   JSON-LD-Block auszubrechen.
+
+   Heute sind alle Werte fest in content/praxis.ts geschrieben, also harmlos.
+   Die Maskierung steht hier fuer den Fall, dass die Daten spaeter aus einem
+   CMS oder einem Formular kommen: dann ist die Luecke schon zu, bevor sie
+   entsteht. Kostet ein replace und macht das JSON nicht ungueltig — < ist
+   fuer jeden JSON-Leser dasselbe Zeichen wie <. */
+function alsJsonLd(daten: unknown): string {
+  return JSON.stringify(daten).replace(/</g, "\\u003c");
+}
 
 export default function Startseite() {
   return (
@@ -64,7 +79,7 @@ export default function Startseite() {
       <Footer />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }}
+        dangerouslySetInnerHTML={{ __html: alsJsonLd(strukturierteDaten) }}
       />
     </>
   );

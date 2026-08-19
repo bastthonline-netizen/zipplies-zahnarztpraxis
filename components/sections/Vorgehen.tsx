@@ -15,7 +15,7 @@ import s from "@/styles/startseite.module.css";
    statt sie zu staerken. Die Nachweise stehen jetzt nur noch einmal, im
    Implantologie-Band.
 
-   Der Inhalt hier ist bewusst Ausstattung und Vorgehen: DVT und CEREC lagen
+   Der Inhalt hier ist bewusst Ausstattung und Vorgehen: 3D-Planung und CEREC lagen
    vorher als Punkt 8 und 9 in der Leistungs-Akkordeonliste begraben, obwohl
    sie das Konkreteste sind, was die Praxis vorzuweisen hat. "Kein Abdruck,
    kein Provisorium" ist fuer Patienten greifbarer als jedes Kuerzel.

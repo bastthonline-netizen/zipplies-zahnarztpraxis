@@ -9,8 +9,15 @@ import { pfad } from "@/lib/pfad";
    Sabine W.). Erfundene Patientenstimmen sind nach UWG abmahnbar. Entweder
    echte Google-Rezensionen oder gar keine.
 
-   NOCH ZU BESTAETIGEN durch Dr. Zipplies: Oeffnungszeiten (auf der Altseite
-   waren nur Telefonzeiten publiziert) und die Namen des Teams. */
+   19.08.2026 gegen die echte Praxisseite (zahnarztpraxis-zipplies.de, leitet
+   auf zipplies.com/joomla) geprueft. Bestaetigt: Utzhof mit Ursprung im 13.
+   Jahrhundert, Gruendung 1994, ebenerdig, kostenlose Parkplaetze, ICOI/DGOI
+   2005, M.Sc. 2007, CEREC mit Omnicam und Fraesmaschine im Haus, dazu
+   Telefon, Fax, E-Mail und die Impressumsangaben.
+
+   NOCH ZU BESTAETIGEN durch Dr. Zipplies: die tatsaechlichen Behandlungszeiten
+   (publiziert sind nur Telefonzeiten, siehe unten) und die Namen des Teams.
+   Die ROLLEN des Teams sind dagegen belegt, siehe `teamRollen`. */
 
 export const praxis = {
   name: "Zahnarztpraxis Dr. Zipplies",
@@ -22,6 +29,17 @@ export const praxis = {
   telefon: "08035 6505",
   telefonHref: "tel:+4980356505",
   fax: "08035 6686",
+  /* Von der Praxisseite uebernommen, dort als "info(at)..." gegen Harvester
+     geschrieben. Hier ausgeschrieben, weil § 5 DDG eine Adresse verlangt, an
+     die man tatsaechlich schreiben kann — und weil ein mailto:, das nicht
+     funktioniert, schlimmer ist als keins. */
+  email: "info@zahnarztpraxis-zipplies.de",
+  emailHref: "mailto:info@zahnarztpraxis-zipplies.de",
+  /* Der Satz der Praxis, woertlich. Er gehoert ueberall dorthin, wo Zeiten
+     stehen: die Praxis arbeitet auf Termin, nicht auf Zulauf. */
+  terminHinweis: "Termine nach telefonischer Vereinbarung",
+  /* Aus dem Impressum der Praxis. */
+  ustId: "DE184196678",
   adresse: {
     hof: "Utzhof",
     strasse: "Thalreit 7",
@@ -149,11 +167,19 @@ export const leistungen: {
   {
     titel: "Diagnostik",
     kuerzel: "diagnostik",
-    text: "Digitales Röntgen und dreidimensionale Diagnostik (DVT) als strahlungsarme Grundlage.",
-    lang: "Digitales Röntgen kommt mit deutlich weniger Strahlung aus als Filmaufnahmen und liegt sofort auf dem Bildschirm vor. Für Fragestellungen, bei denen ein zweidimensionales Bild nicht ausreicht — die Lage eines Nervs, das Knochenangebot vor einem Implantat, ein verlagerter Weisheitszahn — steht die dreidimensionale Diagnostik zur Verfügung. Eine Aufnahme wird nur gemacht, wenn sie die Behandlung tatsächlich beeinflusst.",
+    /* KEIN "DVT". Die Praxis nennt auf ihrer Diagnostik-Seite digitale
+       Roentgentechnik, Diagnodent-Laserdiagnostik und diagnostische Sehhilfen;
+       von dreidimensionaler Diagnostik spricht sie ausschliesslich im
+       Zusammenhang mit der Implantatplanung. Das Kuerzel DVT stammt aus
+       unserer Astro-Zwischenfassung, nicht von der Praxis — und ein Geraet zu
+       behaupten, das es womoeglich nicht gibt, waere irrefuehrende Werbung
+       nach dem HWG. Wir schreiben, was die Praxis schreibt. */
+    text: "Digitales Röntgen und Laserdiagnostik als strahlungsarme Grundlage jeder Behandlung.",
+    lang: "Digitales Röntgen kommt mit deutlich weniger Strahlung aus als Filmaufnahmen und liegt sofort auf dem Bildschirm vor. Ergänzend kommt die Diagnodent-Laserdiagnostik zum Einsatz: Sie erkennt beginnende Karies, ohne dass dafür gebohrt oder geröntgt werden muss. Für die Implantatplanung tritt die dreidimensionale Diagnostik hinzu, wenn ein zweidimensionales Bild die Frage nicht beantwortet — die Lage eines Nervs etwa oder das Knochenangebot. Eine Aufnahme wird nur gemacht, wenn sie die Behandlung tatsächlich beeinflusst.",
     punkte: [
       "Digitales Röntgen, strahlungsarm",
-      "Dreidimensionale Aufnahme bei Bedarf",
+      "Diagnodent-Laserdiagnostik ohne Strahlung",
+      "Dreidimensionale Aufnahme für die Implantatplanung",
       "Befund gemeinsam am Bildschirm",
       "Aufnahmen nur mit Fragestellung",
     ],
@@ -186,7 +212,21 @@ export const standort: { titel: string; text: string }[] = [
   { titel: "Im Grünen", text: "Thalreit liegt außerhalb, mit dem Auto von Raubling in wenigen Minuten." },
 ];
 
-export const oeffnungszeiten: { tag: string; zeit: string; geschlossen?: boolean }[] = [
+/* ACHTUNG — das sind TELEFONZEITEN, keine Oeffnungszeiten.
+
+   Die Praxis publiziert auf zahnarztpraxis-zipplies.de ausschliesslich diese
+   Zeiten, und zwar ausdruecklich unter der Ueberschrift "Telefonzeiten". Zur
+   Praxis selbst steht dort nur: "Die Praxis ist werktaeglich von Montag bis
+   Freitag geoeffnet. Termine nach telefonischer Vereinbarung."
+
+   Der Unterschied ist nicht kosmetisch: als Oeffnungszeiten ausgezeichnet
+   faehrt jemand Mittwochnachmittag nach Thalreit raus und steht vor einer
+   verschlossenen Tuer. Deshalb heisst die Konstante so, wie die Daten
+   wirklich heissen — wer sie als Oeffnungszeiten ausgeben will, muss es
+   beim Schreiben merken.
+
+   Echte Behandlungszeiten erst eintragen, wenn die Praxis sie nennt. */
+export const telefonzeiten: { tag: string; zeit: string; geschlossen?: boolean }[] = [
   { tag: "Montag", zeit: "8:30–12:00 · 15:00–17:00" },
   { tag: "Dienstag", zeit: "8:30–12:00 · 15:00–17:00" },
   { tag: "Mittwoch", zeit: "8:30–12:00" },
@@ -315,29 +355,43 @@ export const stimmungsbilder = {
    selbst fuehrt (siehe `leistungen`), und behaupten keine Qualifikation, die
    nicht bestaetigt ist. Beim Fototermin werden nur `bild`, `alt` und die
    Rollennamen getauscht. */
+/* Die vier Rollen sind KEINE Annahme mehr: die Praxis fuehrt auf ihrer
+   Teamseite woertlich "fortgebildete Zahnmedizinische Fachangestellte, eine
+   Zahnmedizinische Prophylaxeangestellte, eine Zahnmedizinische
+   Verwaltungsangestellte und einen Zahntechniker".
+
+   Der Zahntechniker ist der wichtigste Zugewinn: eigene Zahntechnik im Haus
+   hat kaum eine Praxis dieser Groesse, und sie ist der Grund, warum Zahnersatz
+   hier tatsaechlich "aus einer Hand" kommt — der Satz, den die Praxis selbst
+   ueber ihr Implantologiekonzept schreibt. Vorher stand hier als vierte Karte
+   eine erfundene "Chirurgische Assistenz".
+
+   Offen bleiben nur die Namen und die Fotofreigabe. Genau deshalb tragen die
+   Karten eine Rolle und keinen Namen. */
 export const teamPortraets: { rolle: string; text: string; bild: string; alt: string }[] = [
   {
     rolle: "Prophylaxe",
-    text: "Professionelle Zahnreinigung und Vorsorge — mit eigenen Intervallen für Implantatträger.",
+    text: "Zahnmedizinische Prophylaxeangestellte. Professionelle Zahnreinigung und Vorsorge — mit eigenen Intervallen für Implantatträger.",
     bild: pfad("/images/generated/team-portrait-01.webp"),
     alt: "Platzhalter-Porträt: Frau in blaugrauem Kasack vor einer gekalkten Wand",
   },
   {
     rolle: "Assistenz",
-    text: "Am Stuhl dabei, von der Vorbereitung bis zur Nachkontrolle.",
+    text: "Fortgebildete Zahnmedizinische Fachangestellte. Am Stuhl dabei, von der Vorbereitung bis zur Nachkontrolle.",
     bild: pfad("/images/generated/team-portrait-02.webp"),
     alt: "Platzhalter-Porträt: Frau in blaugrauem Kasack an einer Fensterlaibung",
   },
   {
     rolle: "Empfang und Verwaltung",
-    text: "Termine, Rückrufe und Heil- und Kostenpläne — die Stimme am Telefon.",
+    text: "Zahnmedizinische Verwaltungsangestellte. Termine, Rückrufe und Heil- und Kostenpläne — die Stimme am Telefon.",
     bild: pfad("/images/generated/team-portrait-03.webp"),
     alt: "Platzhalter-Porträt: Frau mit Brille im Haar an der Anmeldung",
   },
   {
-    rolle: "Chirurgische Assistenz",
-    text: "Assistenz bei Implantationen und operativen Eingriffen.",
+    rolle: "Zahntechnik",
+    text: "Zahntechniker im Haus. Kronen, Brücken und Prothesen entstehen hier statt in einem auswärtigen Labor — kurze Wege bei Anproben und Korrekturen.",
     bild: pfad("/images/generated/team-portrait-04.webp"),
     alt: "Platzhalter-Porträt: Mann in blaugrauem Kasack in einem Türdurchgang",
   },
 ];
+

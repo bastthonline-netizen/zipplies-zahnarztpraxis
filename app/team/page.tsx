@@ -7,6 +7,11 @@ import { praxis, qualifikationen, stimmungsbilder } from "@/content/praxis";
 import s from "@/styles/unterseite.module.css";
 
 export const metadata: Metadata = {
+  /* Canonical auf DIESE Seite. Das Root-Layout setzt "/" als Vorgabe;
+     ohne eigene Angabe erbt jede Unterseite sie und erklaert damit die
+     Startseite zur maßgeblichen Fassung — Google wuerde die Unterseite
+     dann gar nicht fuehren. */
+  alternates: { canonical: "/team/" },
   title: "Team",
   description:
     "Das Team der Zahnarztpraxis Dr. Zipplies am Utzhof in Raubling: ein Behandler seit 1994, dahinter ein kleines Team, das den Betrieb trägt.",
@@ -17,14 +22,19 @@ export const metadata: Metadata = {
    2. Gemeinschaftsbild zeigt, wie es hier aussieht
    3. Der Behandler     die einzige Person, die wir benennen duerfen — mit
                         Belegen statt Gesicht (Begruendung: content/praxis.ts)
-   4. Einzelkarten      die Rollen dahinter, mit Hover auf den Portraets
+   4. Einzelkarten      die Rollen dahinter, als drehbare Portraetkarten
 
-   Zum Hover: die Karten geben NICHTS frei, was vorher verborgen war. Rolle und
-   Beschreibung stehen immer im Klartext da; der Hover laesst nur das Licht auf
-   dem Portraet angehen. Sonst waere die Information per Touch und Tastatur weg
-   — und die Zielgruppe ist aelter, nicht experimentierfreudig. Deshalb auch
-   kein tabIndex auf den Karten: sie sind Dekoration, kein Bedienelement, und
-   ein Tabstopp ohne Ziel waere schlechter als keiner. */
+   ZU DEN KARTEN: Dieser Absatz beschrieb sie frueher als reine Dekoration ohne
+   Bedienelement — "kein tabIndex, ein Tabstopp ohne Ziel waere schlechter als
+   keiner". Seit der Umstellung auf echte Drehkarten stimmt das nicht mehr:
+   components/TeamKarten.tsx rendert jede Karte als <button> mit aria-pressed,
+   weil hinter der Drehung Text liegt, den Touch- und Tastaturnutzer sonst nie
+   erreichen wuerden. Ein Tabstopp ist dort also genau richtig — er hat ein
+   Ziel.
+
+   Was weiter gilt: der Rueckseitentext steht immer im HTML, nicht erst nach der
+   Drehung. Suchmaschinen und Screenreader sehen ihn ohne Interaktion, und ohne
+   JavaScript geht keine Information verloren. */
 export default function TeamSeite() {
   return (
     <>
@@ -33,12 +43,12 @@ export default function TeamSeite() {
         <section className={s.hero}>
           <div className="container zp-auftritt">
             <p className={`zp-overline ${s.heroOverline}`}>Team</p>
-            <h1 className={s.heroTitel}>Eine Praxis, ein Behandler.</h1>
+            <h1 className={s.heroTitel}>Ein Behandler, ein Team, das bleibt.</h1>
             <p className={s.heroLede}>
               Dr. Zipplies behandelt seit {praxis.seit} selbst. Wer hier einen
               Termin bekommt, sitzt beim Praxisinhaber — nicht bei wechselnden
-              Angestellten. Dahinter steht ein kleines Team, das den Betrieb
-              trägt.
+              Angestellten. Dahinter arbeiten Prophylaxe, Assistenz, Verwaltung
+              und eine eigene Zahntechnik im Haus.
             </p>
             <p className={s.heroFussnote}>
               Probeversion: Die Gesichter auf dieser Seite sind Platzhalter.
@@ -108,8 +118,10 @@ export default function TeamSeite() {
           <div className="container">
             <h2 className={s.titel}>Wer Sie empfängt</h2>
             <p className={s.text}>
-              Vier Rollen, die den Alltag am Utzhof tragen. Die Namen tragen wir
-              nach, sobald sie freigegeben sind.
+              Vier Rollen, die den Alltag am Utzhof tragen — darunter ein
+              Zahntechniker, der im Haus arbeitet und nicht in einem
+              auswärtigen Labor. Die Namen tragen wir nach, sobald sie
+              freigegeben sind.
             </p>
             <TeamKarten />
           </div>

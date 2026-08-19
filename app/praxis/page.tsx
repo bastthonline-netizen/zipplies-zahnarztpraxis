@@ -6,6 +6,11 @@ import { echteFotos, praxis, standort, stimmungsbilder } from "@/content/praxis"
 import s from "@/styles/unterseite.module.css";
 
 export const metadata: Metadata = {
+  /* Canonical auf DIESE Seite. Das Root-Layout setzt "/" als Vorgabe;
+     ohne eigene Angabe erbt jede Unterseite sie und erklaert damit die
+     Startseite zur maßgeblichen Fassung — Google wuerde die Unterseite
+     dann gar nicht fuehren. */
+  alternates: { canonical: "/praxis/" },
   title: "Die Praxis",
   description:
     "Der Utzhof in Thalreit bei Raubling: ein historisches Bauernhaus, seit 1994 Sitz der Zahnarztpraxis Dr. Zipplies — ebenerdig, mit Parkplatz vor der Tür.",
@@ -21,9 +26,12 @@ export default function PraxisSeite() {
             <p className={`zp-overline ${s.heroOverline}`}>Die Praxis</p>
             <h1 className={s.heroTitel}>Der Hof war zuerst da.</h1>
             <p className={s.heroLede}>
-              Der Utzhof trägt seinen Namen über der Tür, in Lüftlmalerei, von
-              Hand aufgetragen. Die Praxis ist {praxis.seit} eingezogen und
-              hat sich dem Haus angepasst, nicht umgekehrt.
+              Der Utzhof ist nach einem Ulrich benannt — „Utz" ist die
+              Kurzform — und seine Ursprünge reichen bis ins 13. Jahrhundert
+              zurück. Den Namen trägt er bis heute über der Tür, in
+              Lüftlmalerei, von Hand aufgetragen. Die Praxis ist{" "}
+              {praxis.seit} eingezogen und hat sich dem Haus angepasst, nicht
+              umgekehrt.
             </p>
           </div>
         </section>
@@ -37,16 +45,17 @@ export default function PraxisSeite() {
                 <span className={s.bildHinweis}>Stimmungsbild, kein Praxisfoto</span>
               </Reveal>
               <div>
-                <h2 className={s.titel}>Dicke Wände, weiches Licht.</h2>
+                <h2 className={s.titel}>Ein Haus, kein Ärztehaus.</h2>
                 <p className={s.text}>
-                  Das Haus ist alt, die Wände sind entsprechend dick, und
-                  genau das prägt die Räume: kein grelles Klinikweiß, sondern
-                  Fensterlaibungen, die tief genug sind, um das Licht zu
-                  brechen, bevor es den Raum erreicht.
+                  Die Praxis sitzt seit {praxis.seit} im Erdgeschoss des Hofs:
+                  ebenerdig erreichbar, ohne Treppenhaus und ohne Aufzug, mit
+                  kostenlosen Parkplätzen in unmittelbarer Nähe.
                 </p>
                 <p className={s.text}>
-                  Ebenerdig, ohne Wartesaal mit Nummernanzeige, mit Blick ins
-                  Grüne statt auf einen Parkplatz.
+                  Vor der Tür liegt kein Parkdeck, sondern der Hof. Wie es
+                  innen aussieht, zeigt das Bild daneben ausdrücklich noch
+                  nicht: es ist ein Stimmungsbild und als solches markiert.
+                  Echte Aufnahmen folgen nach dem Fototermin.
                 </p>
               </div>
             </div>
@@ -63,8 +72,10 @@ export default function PraxisSeite() {
                   sondern der Grund, warum hier ruhiger gearbeitet wird als in
                   einem Ärztehaus mitten in Rosenheim.
                 </p>
-                <p className={`${s.text} ${s.zitat}`}>
-                  „Wer einmal hier war, findet beim zweiten Mal auf Anhieb her."
+                <p className={s.text}>
+                  Die Praxis selbst nennt ihre Lage „verkehrsgünstig": Thalreit
+                  liegt an der Straße, nicht hinter einer Fußgängerzone, und
+                  der Weg von Raubling dauert wenige Minuten.
                 </p>
               </div>
               <ul className={s.liste}>

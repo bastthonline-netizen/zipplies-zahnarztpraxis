@@ -2,7 +2,7 @@ import { pfad } from "@/lib/pfad";
 import { Fragment } from "react";
 import Logo from "@/components/Logo";
 import Karte from "@/components/sections/Karte";
-import { navigation, oeffnungszeiten, praxis } from "@/content/praxis";
+import { navigation, praxis, telefonzeiten } from "@/content/praxis";
 import s from "@/styles/site.module.css";
 
 /* Die Karte haengt bewusst am Footer und nicht an den einzelnen Seiten:
@@ -17,7 +17,7 @@ type FooterProps = {
 };
 
 export default function Footer({ ohneStandort = false }: FooterProps) {
-  const geoeffnet = oeffnungszeiten.filter((z) => !z.geschlossen);
+  const erreichbar = telefonzeiten.filter((z) => !z.geschlossen);
 
   return (
     <>
@@ -53,12 +53,12 @@ export default function Footer({ ohneStandort = false }: FooterProps) {
           </div>
 
           <div>
-            <p className={s.footerTitel}>Sprechzeiten</p>
+            <p className={s.footerTitel}>Telefonzeiten</p>
             <div className={s.footerZeiten}>
               {/* Fragment statt <div style="display:contents">: die Zeiten sind ein
                   zweispaltiges Raster, ein Wrapper-Element dazwischen wuerde es
                   aufbrechen — das Fragment traegt den key, ohne im DOM zu landen. */}
-              {geoeffnet.map((z) => (
+              {erreichbar.map((z) => (
                 <Fragment key={z.tag}>
                   <span className={s.footerZeitenTag}>{z.tag.slice(0, 2)}</span>
                   <span>{z.zeit}</span>

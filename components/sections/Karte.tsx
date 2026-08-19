@@ -1,10 +1,14 @@
-import { oeffnungszeiten, praxis } from "@/content/praxis";
+import { praxis, telefonzeiten } from "@/content/praxis";
 import Kartenrahmen from "@/components/sections/Kartenrahmen";
 import s from "@/styles/startseite.module.css";
 
 /* Standortblock am Fuss JEDER Seite (der Footer rendert ihn, siehe
    components/site/Footer.tsx). Job: die zwei Fragen beantworten, die nach
-   dem Lesen offen bleiben — wann hat die Praxis auf, und wo ist sie.
+   dem Lesen offen bleiben — wann erreicht man die Praxis, und wo ist sie.
+
+   Die Zeiten sind TELEFONZEITEN und stehen genau so beschriftet da. Die
+   Praxis arbeitet auf Termin; eine Zeitentabelle ohne diese Beschriftung
+   liest sich als Einladung, einfach vorbeizufahren.
 
    Bewusst NICHT hier: ebenerdig / Parkplatz / im Gruenen. Die drei
    Zugangsfakten wuerden sonst auf jeder Unterseite mitlaufen; sie stehen
@@ -28,8 +32,9 @@ export default function Karte() {
             {praxis.adresse.plz} {praxis.adresse.ort}
           </p>
 
+          <p className={`zp-overline ${s.karteOverline}`}>Telefonisch erreichbar</p>
           <dl className={s.karteZeiten}>
-            {oeffnungszeiten.map((zeit) => (
+            {telefonzeiten.map((zeit) => (
               <div key={zeit.tag} className={s.karteZeit}>
                 <dt className={s.karteZeitTag}>{zeit.tag}</dt>
                 <dd className={`${s.karteZeitWert} ${zeit.geschlossen ? s.karteZeitZu : ""}`}>
@@ -38,6 +43,8 @@ export default function Karte() {
               </div>
             ))}
           </dl>
+
+          <p className={s.karteText}>{praxis.terminHinweis}.</p>
 
           <div className={s.karteAktionen}>
             <a href={praxis.telefonHref} className={s.btnPrimary}>
