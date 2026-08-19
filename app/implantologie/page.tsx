@@ -6,6 +6,11 @@ import { praxis, qualifikationen, stimmungsbilder } from "@/content/praxis";
 import s from "@/styles/unterseite.module.css";
 
 export const metadata: Metadata = {
+  /* Canonical auf DIESE Seite. Das Root-Layout setzt "/" als Vorgabe;
+     ohne eigene Angabe erbt jede Unterseite sie und erklaert damit die
+     Startseite zur maßgeblichen Fassung — Google wuerde die Unterseite
+     dann gar nicht fuehren. */
+  alternates: { canonical: "/implantologie/" },
   title: "Implantologie",
   description:
     "Zahnimplantat Rosenheim: Implantologie als Schwerpunkt der Zahnarztpraxis Dr. Zipplies am Utzhof, Raubling — seit 2005, mit dreidimensionaler Diagnostik geplant.",

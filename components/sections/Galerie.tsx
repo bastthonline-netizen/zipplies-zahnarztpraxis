@@ -34,7 +34,11 @@ type Kachel = {
 
 const kacheln: Kachel[] = [
   {
-    src: "/images/utzhof.webp",
+    /* pfad() ist Pflicht, auch wenn scripts/unterpfad.mjs das HTML nachtraeglich
+       umschreibt: diese Kachel steckt in einer Client-Komponente, der rohe Pfad
+       landete also im JS-Bundle und ueberschrieb nach der Hydration den bereits
+       korrigierten Wert aus dem HTML. Ergebnis war ein totes Bild. */
+    src: pfad("/images/utzhof.webp"),
     alt: "Handgemalter Schriftzug „Utzhof“ über der Eingangstür",
     echt: true,
     platz: "platzUtzhof",

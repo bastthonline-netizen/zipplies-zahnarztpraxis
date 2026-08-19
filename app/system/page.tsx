@@ -1,9 +1,20 @@
+import type { Metadata } from "next";
 import Logo from "@/components/Logo";
 
 /* Systemkontrolle — Schritt 1.6 des BAUPLAN.md.
    Zweck: Wenn diese Seite schon richtig aussieht, stimmt das Fundament.
    Sie zeigt ausschliesslich Tokens, keine gestalteten Sektionen, und ist
-   nicht Teil der spaeteren Website (vor dem Deploy loeschen oder sperren). */
+   nicht Teil der spaeteren Website.
+
+   GESPERRT, NICHT GELOESCHT. Der Kommentar sagte "vor dem Deploy loeschen oder
+   sperren" — passiert war keins von beidem: die Seite lieferte oeffentlich 200
+   aus und war indexierbar. Geloescht wird sie trotzdem nicht, sie ist das
+   Kontrollblatt fuer jede kuenftige Aenderung an den Tokens. Stattdessen zwei
+   Riegel: noindex hier und ein Disallow in app/robots.ts. */
+export const metadata: Metadata = {
+  title: "Systemkontrolle",
+  robots: { index: false, follow: false },
+};
 
 const SKALEN = [
   { name: "Blue", praefix: "blue", stufen: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"] },

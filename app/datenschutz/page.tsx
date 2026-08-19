@@ -4,7 +4,14 @@ import Footer from "@/components/site/Footer";
 import { praxis } from "@/content/praxis";
 import s from "@/styles/unterseite.module.css";
 
-export const metadata: Metadata = { title: "Datenschutz" };
+export const metadata: Metadata = {
+  title: "Datenschutz",
+  /* Canonical auf DIESE Seite. Das Root-Layout setzt "/" als Vorgabe;
+     ohne eigene Angabe erbt jede Unterseite sie und erklaert damit die
+     Startseite zur maßgeblichen Fassung — Google wuerde die Unterseite
+     dann gar nicht fuehren. */
+  alternates: { canonical: "/datenschutz/" },
+};
 
 /* Probewebsite: Platzhaltertext. Aktuell erhebt die Seite selbst keine
    Daten (kein Formular, keine Analytics, keine externen Einbettungen) —
@@ -36,13 +43,25 @@ export default function DatenschutzSeite() {
                 keine Google-Fonts, keine Analytics. Schriften werden selbst
                 gehostet, damit keine Anfragen an Drittserver gehen.
               </p>
+              {/* "am Fuß jeder Seite", nicht "auf der Startseite": den
+                  Standortblock rendert der Footer (components/site/Footer.tsx),
+                  die Karte steht damit auf jeder Seite unten, und auf /anfahrt
+                  zusaetzlich vollbreit im Inhalt. Der Text sagte noch
+                  "Startseite" — bei einer Arztpraxis ist die
+                  Datenschutzerklaerung der Text, der am genauesten stimmen
+                  muss, gerade wenn er eine Drittanbieter-Verbindung
+                  beschreibt. */}
               <p>
-                Die Standortkarte auf der Startseite ist eine Ausnahme und
-                bewusst als Zwei-Klick-Lösung umgesetzt: Erst nach einem Klick
-                auf „Karte laden" baut Ihr Browser eine Verbindung zu Google
-                Maps (Google LLC, 1600 Amphitheatre Parkway, Mountain View,
-                CA 94043, USA) auf, wobei Ihre IP-Adresse an Google übertragen
-                wird. Ohne diesen Klick findet keine Verbindung statt.
+                Die Standortkarte ist eine Ausnahme und bewusst als
+                Zwei-Klick-Lösung umgesetzt. Sie steht am Fuß jeder Seite sowie
+                auf der Seite „Anfahrt“. Erst nach einem Klick auf „Karte
+                laden“ baut Ihr Browser eine Verbindung zu Google Maps (Google
+                LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA)
+                auf, wobei Ihre IP-Adresse an Google übertragen wird. Ohne
+                diesen Klick findet keine Verbindung statt. Solange die Karte
+                nicht geladen ist, sehen Sie an ihrer Stelle eine selbst
+                gezeichnete Lageskizze, die ohne jeden externen Abruf
+                auskommt.
               </p>
               <p>
                 Server-Logs des Hosting-Anbieters können technisch bedingt

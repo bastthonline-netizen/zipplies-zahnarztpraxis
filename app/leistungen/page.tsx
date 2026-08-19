@@ -6,6 +6,11 @@ import { leistungen, praxis, stimmungsbilder } from "@/content/praxis";
 import s from "@/styles/unterseite.module.css";
 
 export const metadata: Metadata = {
+  /* Canonical auf DIESE Seite. Das Root-Layout setzt "/" als Vorgabe;
+     ohne eigene Angabe erbt jede Unterseite sie und erklaert damit die
+     Startseite zur maßgeblichen Fassung — Google wuerde die Unterseite
+     dann gar nicht fuehren. */
+  alternates: { canonical: "/leistungen/" },
   title: "Leistungen",
   description:
     "Das Behandlungsspektrum der Zahnarztpraxis Dr. Zipplies am Utzhof: Implantologie, Prophylaxe, konservierende Behandlung, Endodontie, Parodontologie, Prothetik, Chirurgie, Diagnostik und CEREC.",

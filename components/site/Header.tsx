@@ -81,8 +81,15 @@ export default function Header() {
                Uebersicht zu laden. Der Hauptlink bleibt bedienbar und fuehrt
                weiterhin auf die Uebersicht. Ein-/Ausblenden laeuft ueber
                :hover und :focus-within in CSS — dadurch auch per Tastatur
-               erreichbar. */
-            punkt.href === "/leistungen/" ? (
+               erreichbar.
+
+               ACHTUNG UNTERPFAD: verglichen wird gegen pfad("/leistungen/"),
+               nicht gegen den nackten Pfad. `navigation` in content/praxis.ts
+               baut die Hrefs mit pfad(), unter GitHub Pages heissen sie also
+               /<repo-name>/leistungen/. Ein Vergleich mit "/leistungen/"
+               schlug dort nie an — das Untermenue fiel still aus, waehrend
+               lokal alles richtig aussah. */
+            punkt.href === pfad("/leistungen/") ? (
               <div key={punkt.href} className={s.navGruppe}>
                 <a href={punkt.href} className={s.navLink}>
                   {punkt.label}
@@ -92,7 +99,7 @@ export default function Header() {
                     {leistungen.map((leistung) => (
                       <li key={leistung.kuerzel}>
                         <a
-                          href={`/leistungen/#${leistung.kuerzel}`}
+                          href={pfad(`/leistungen/#${leistung.kuerzel}`)}
                           className={s.navUnterLink}
                         >
                           {leistung.titel}

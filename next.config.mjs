@@ -9,8 +9,21 @@
    geschriebenen Pfade deckt es NICHT ab; die laufen ueber lib/pfad.ts. */
 const basis = (process.env.NEXT_PUBLIC_BASIS_PFAD ?? "").replace(/\/$/, "");
 
+/* Wurzel fuer die Dateiverfolgung fest auf dieses Projekt.
+
+   Ohne die Angabe sucht Next sich die Wurzel selbst und waehlte dabei
+   /Users/<benutzer>/package-lock.json im Heimatverzeichnis — ein Lockfile, das
+   nichts mit diesem Projekt zu tun hat. Der Build lief trotzdem, warnte aber
+   bei jedem Durchlauf. import.meta.url zeigt auf diese Datei, ihr Ordner ist
+   also immer das Projekt, egal von wo aus gebaut wird. */
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const projektWurzel = dirname(fileURLToPath(import.meta.url));
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  outputFileTracingRoot: projektWurzel,
   ...(basis ? { basePath: basis, assetPrefix: basis } : {}),
   // Statischer Export: jede Seite wird beim Build zu echtem HTML vorgerechnet.
   // Das ist der Grund fuer die Framework-Wahl -- lokales SEO braucht fertiges Markup.

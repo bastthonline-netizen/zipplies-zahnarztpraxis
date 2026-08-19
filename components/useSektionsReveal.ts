@@ -61,7 +61,24 @@ export function useSektionsReveal<T extends Element = HTMLDivElement>(
       { rootMargin: "0px 0px -10% 0px", threshold: anteil },
     );
     beobachter.observe(el);
-    return () => beobachter.disconnect();
+
+    /* Notausgang fuers Drucken und fuer PDF- und Vorschau-Renderings: dabei
+       wird die ganze Seite auf einmal ausgegeben, ohne dass je gescrollt wird.
+       Der Beobachter loest fuer alles unterhalb der Kante nie aus, und ohne
+       diesen Listener blieben Vertrauen, Vorgehen und Galerie leer — die halbe
+       Startseite. components/Reveal.tsx macht das seit immer so; dass es hier
+       fehlte, war das eine Stueck der gemeinsamen Regel, das beim Uebertragen
+       liegengeblieben ist. */
+    const beimDrucken = () => {
+      setZustand("sichtbar");
+      beobachter.disconnect();
+    };
+    window.addEventListener("beforeprint", beimDrucken);
+
+    return () => {
+      beobachter.disconnect();
+      window.removeEventListener("beforeprint", beimDrucken);
+    };
   }, [reduziert, anteil]);
 
   return { ref, zustand };

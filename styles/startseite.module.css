@@ -537,22 +537,37 @@
   margin-top:var(--space-8);
 }
 
+/* Der Rahmen selbst hat KEIN festes Seitenverhaeltnis mehr: das traegt jetzt
+   .karteFlaeche darin. Der Rahmen ist nur noch die Klammer aus Radius, Schatten
+   und Hintergrund, und er waechst um die Hinweisleiste, statt sie ueber die
+   Karte zu legen (Begruendung in components/sections/Kartenrahmen.tsx).
+
+   Hintergrund in Sand statt Weiss: auf /anfahrt ist die Flaeche 21:9, die
+   Zeichnung aber 4:3 und mit "meet" eingepasst — links und rechts bleibt also
+   Rand stehen. In derselben Sandfarbe wie die Grundflaeche der Skizze ist die
+   Kante unsichtbar; in Weiss waeren es zwei sichtbare Balken. */
 .karteRahmen{
   position:relative;
-  aspect-ratio:4/3;
   border-radius:var(--radius-lg);
   overflow:hidden;
   box-shadow:var(--shadow-lg);
-  background:var(--surface-card);
+  background:var(--sand-100);
 }
 
-/* Vollbreiter Einsatz auf /anfahrt: bei ganzer Containerbreite waere 4:3
-   uebermannshoch, deshalb flacher. Am Handy zurueck auf 4:3, sonst bleibt
-   von der Skizze ein Streifen uebrig. */
-.karteRahmenBreit{aspect-ratio:21/9}
-@media (max-width:760px){
-  .karteRahmenBreit{aspect-ratio:4/3}
-}
+/* Die Bildflaeche: hier sitzt das Seitenverhaeltnis, damit Skizze und Karte
+   dieselbe Buehne haben und die Leiste darunter nichts verdeckt. */
+.karteFlaeche{position:relative;aspect-ratio:4/3}
+
+/* Einsatz auf /anfahrt. Hier stand 21:9, damit der Rahmen ueber die ganze
+   Containerbreite nicht uebermannshoch wird. Das Format passt aber nicht zur
+   Zeichnung (4:3): "meet" liess links und rechts je rund 230px Rand stehen, und
+   weil ein SVG an seiner viewBox abschneidet, endete die Landstrasse mitten in
+   der Sandflaeche statt am Rahmen — eine Strasse, die einfach aufhoert.
+
+   Stattdessen behaelt der Rahmen das Format der Zeichnung und wird in der
+   Breite gedeckelt. Bei 760px sind das 570px Hoehe: nicht uebermannshoch, kein
+   Rand, und die Strasse laeuft wieder aus dem Bild heraus. */
+.karteRahmenBreit{max-width:760px;margin-inline:auto}
 
 .karteIframe{width:100%;height:100%;border:0}
 
@@ -587,18 +602,42 @@
   fill:var(--ink-500);
 }
 
+/* Am Handy wird die 800er-viewBox auf rund 350px gerechnet, also auf gut 44
+   Prozent. Bei den Desktop-Werten landet die Fussnote damit unter 8px. Die
+   Schriftgrade sind Einheiten der viewBox, lassen sich also hier hochsetzen,
+   ohne die Zeichnung selbst anzufassen — die Zielgruppe ist aelter, und die
+   Fussnote ist der Satz, der den Anspruch der Skizze begrenzt. Er muss lesbar
+   bleiben, nicht bloss vorhanden sein. */
+@media (max-width:760px){
+  .karteSkizzeOrt{font-size:30px}
+  .karteSkizzeZiel{font-size:46px}
+  .karteSkizzeAdresse{font-size:26px}
+  .karteSkizzeFussnote{font-size:23px}
+}
+
+/* Die Leiste fliesst unter der Zeichnung, statt sie zu ueberdecken. Damit
+   entfaellt auch der Milchglas-Hintergrund: er hatte nur den Zweck, die Karte
+   darunter noch durchscheinen zu lassen. */
 .karteConsent{
-  position:absolute;
-  left:0;right:0;bottom:0;
+  position:relative;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:var(--space-6);
   flex-wrap:wrap;
   padding:var(--space-6) var(--space-7);
-  background:rgba(255,255,255,.86);
-  backdrop-filter:blur(8px);
+  background:var(--surface-card);
   border-top:1px solid var(--border-subtle);
+}
+/* Am Handy stehen Text und Knopf untereinander: nebeneinander bleiben bei
+   390px fuer den Text keine 20 Zeichen pro Zeile uebrig. */
+@media (max-width:560px){
+  .karteConsent{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:var(--space-5);
+    padding:var(--space-6);
+  }
 }
 .karteConsentText{
   font-size:var(--size-body-sm);

@@ -1,0 +1,44 @@
+# Sicherheits-Header.
+#
+# WO DAS GILT: Cloudflare Pages liest diese Datei aus der Wurzel des Deploys.
+# Alles unter public/ kopiert Next unveraendert nach out/, sie landet also von
+# selbst an der richtigen Stelle. GitHub Pages kann keine eigenen Header setzen
+# und ignoriert die Datei folgenlos — sie steht hier fuer den Umzug auf
+# zahnarzt-zipplies.de, der laut PROJEKT.md das Ziel ist.
+#
+# WARUM UEBERHAUPT: Die Seite hat kein Formular, keine Anmeldung und keine
+# Datenbank, die Angriffsflaeche ist also klein. Was bleibt, ist der Ruf der
+# Domain einer Arztpraxis. Diese Header kosten nichts und schliessen genau die
+# Luecken, die man einer statischen Seite sonst laesst.
+
+/*
+  # Kein Fremdeinbinden der Praxisseite in einen anderen Rahmen. Sonst kann
+  # jemand die Seite in seine eigene einbetten und sie so aussehen lassen, als
+  # gehoere die Praxis zu seinem Angebot. frame-ancestors ist der moderne
+  # Nachfolger, X-Frame-Options der Rueckfall fuer aeltere Browser.
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'self'
+
+  # Browser sollen den gemeldeten Dateityp glauben und nicht selbst raten. Ohne
+  # den Header laesst sich eine harmlos deklarierte Datei unter Umstaenden als
+  # Skript ausfuehren.
+  X-Content-Type-Options: nosniff
+
+  # Beim Verlassen der Seite wird nur die Domain uebertragen, nicht die genaue
+  # Unterseite. Fuer eine Zahnarztpraxis ist das mehr als Hygiene: welche
+  # Behandlungsseite jemand gelesen hat, bevor er auf Google Maps klickt, ist
+  # ein Hinweis auf seine Gesundheit und geht Dritte nichts an.
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Sensoren und Geraete, die diese Seite nie braucht, werden pauschal
+  # abgeschaltet — auch fuer eingebettete Inhalte wie die Google-Karte.
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=()
+
+# Schriften und Bilder aendern ihren Inhalt nicht; kommt ein anderes Motiv,
+# kommt es unter anderem Namen. Ein Jahr Cache erspart dem wiederkehrenden
+# Patienten den erneuten Download von rund 2,5 MB.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
