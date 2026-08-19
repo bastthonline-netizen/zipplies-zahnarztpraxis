@@ -24,14 +24,13 @@ export default function PraxisSeite() {
         <section className={s.hero}>
           <div className="container zp-auftritt">
             <p className={`zp-overline ${s.heroOverline}`}>Die Praxis</p>
-            <h1 className={s.heroTitel}>Der Hof war zuerst da.</h1>
+            <h1 className={s.heroTitel}>Seit {praxis.seit} derselbe Zahnarzt.</h1>
             <p className={s.heroLede}>
-              Der Utzhof ist nach einem Ulrich benannt — „Utz" ist die
-              Kurzform — und seine Ursprünge reichen bis ins 13. Jahrhundert
-              zurück. Den Namen trägt er bis heute über der Tür, in
-              Lüftlmalerei, von Hand aufgetragen. Die Praxis ist{" "}
-              {praxis.seit} eingezogen und hat sich dem Haus angepasst, nicht
-              umgekehrt.
+              Dr. Zipplies hat die Praxis {praxis.seit} gegründet und führt
+              sie seither selbst — Schwerpunkt Implantologie seit{" "}
+              {praxis.schwerpunktSeit}. Das Haus drumherum ist der Utzhof:
+              benannt nach einem Ulrich, „Utz" ist die Kurzform, mit
+              Ursprüngen bis ins 13. Jahrhundert.
             </p>
           </div>
         </section>
@@ -93,7 +92,8 @@ export default function PraxisSeite() {
         {/* Schlussbild der Seite. Vorher stand hier `praxis-holzbalken.jpg` —
             ein generierter Hochkant-Makro, in ein 21:9-Band gezwaengt, von dem
             nur ein Streifen Holz und viel Schwarz uebrig blieb. Jetzt das echte
-            Haus: die Seite heisst „Der Hof war zuerst da“ und endet auf dem Hof.
+            Haus. Die Seite fuehrt mit dem Zahnarzt und endet auf dem Hof — in
+            der Reihenfolge, nicht andersherum.
             Damit kippt auch die Bildunterschrift von „Stimmungsbild“ auf
             „echtes Foto“ — der Unterschied ist der Punkt. */}
         <section className={s.abschnitt}>

@@ -24,16 +24,19 @@ import s from "@/styles/startseite.module.css";
    Zwei Groessen ueber srcset: am Handy laedt die 1000px-Fassung (157 KB)
    statt der 1800px-Fassung (511 KB).
 
-   19.08.2026 — TITELZEILE GEAENDERT. Vorher: "Der Zahnarzt, zu dem man
-   rausfaehrt." Die Zeile machte die Anfahrt zur Hauptbotschaft, also
-   ausgerechnet den einzigen Nachteil des Standorts, und widersprach der
-   Praxis selbst: die beschreibt sich auf ihrer eigenen Seite als
-   "verkehrsguenstig gelegen". Wer eine Zahnarztpraxis sucht, entscheidet
-   nicht ueber die Strecke, sondern ueber den Behandler.
+   19.08.2026 — TITELZEILE ZWEIMAL GEAENDERT. Zuerst stand hier "Der Zahnarzt,
+   zu dem man rausfaehrt": die Zeile machte die Anfahrt zur Hauptbotschaft,
+   also ausgerechnet den einzigen Nachteil des Standorts, und widersprach der
+   Praxis selbst, die sich "verkehrsguenstig gelegen" nennt. Danach kurz die
+   Implantologie mit Jahreszahl — fachlich richtig, aber als erster Satz an
+   einen Menschen gerichtet zu kuehl.
 
-   Jetzt steht die Kompetenz oben und der Hof in der Unterzeile. Das Bild
-   traegt den Ort ohnehin, und die ganze Anfahrts-Sequenz weiter unten ist
-   genau fuer die Wegfrage da. */
+   Jetzt steht dort der Satz, mit dem sich die Praxis auf ihrer eigenen
+   Startseite vorstellt: "Bei uns steht der Mensch im Mittelpunkt." Er ist
+   nicht von uns erfunden, er ist ihr eigener, und er sagt das, was jemand
+   mit Zahnarztangst zuerst hoeren muss. Die Fakten — seit wann, welcher
+   Schwerpunkt, wo — ruecken in die Unterzeile, wo sie belegen statt zu
+   behaupten. */
 
 export default function Ankunft() {
   const bild = echteFotos.hof;
@@ -61,24 +64,27 @@ export default function Ankunft() {
             {praxis.region}
           </p>
 
-          <h1 className={s.ankunftTitel}>
-            Implantologie seit {praxis.schwerpunktSeit}, an einem Hof aus dem
-            13. Jahrhundert.
-          </h1>
+          <h1 className={s.ankunftTitel}>Bei uns steht der Mensch im Mittelpunkt.</h1>
 
           <p className={s.ankunftLede}>
             Zahnarztpraxis Dr. Zipplies am Utzhof in Thalreit. Seit{" "}
-            {praxis.seit} dieselbe Praxis, derselbe Behandler — Beratung,
-            Eingriff und Zahnersatz aus einer Hand. Parkplatz vor der Tür.
+            {praxis.seit} dieselbe Praxis, derselbe Behandler, Schwerpunkt
+            Implantologie seit {praxis.schwerpunktSeit} — Beratung, Eingriff
+            und Zahnersatz aus einer Hand.
           </p>
 
           <div className={s.ankunftAktionen}>
+            {/* "Termin vereinbaren" statt "Jetzt anrufen": der Knopf nennt
+                das Ziel, nicht die Handlung. Die Nummer bleibt sichtbar
+                daneben — wer lieber selbst waehlt, muss dafuer nicht erst
+                tippen oder auf eine Unterseite. */}
             <a href={praxis.telefonHref} className={s.btnPrimary}>
-              Jetzt anrufen · {praxis.telefon}
+              Termin vereinbaren · {praxis.telefon}
             </a>
             <a href="#karte" className={s.btnSecondary}>
               Standort ansehen
             </a>
+            <p className={s.ankunftHinweis}>{praxis.terminHinweis}</p>
           </div>
         </div>
       </div>

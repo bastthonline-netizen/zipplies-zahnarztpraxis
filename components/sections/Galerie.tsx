@@ -64,22 +64,31 @@ const kacheln: Kachel[] = [
     platz: "platzInstrumente",
     fokus: "50% 55%",
   },
-  /* Hier lag das Hof-Foto. Es traegt jetzt den Hero (siehe Ankunft.tsx) und
-     stuende sonst zweimal auf derselben Seite. An seiner Stelle die Hofecke:
-     gekalkte Wand, Balken, Fensterlaibung — dieselbe Erzaehlung vom Haus,
-     nur ein anderer Ausschnitt davon. */
+  /* Die beiden unteren Kacheln zeigten bis 19.08.2026 Hofecke und Eichenbalken
+     — zusammen mit der Lueftlmalerei und dem Hof-Hero waren damit vier von
+     sieben Bildern der Startseite das Haus und keines die Zahnmedizin. Das
+     Mosaik erzaehlte vom Bauernhof, nicht von der Praxis.
+
+     Unten rechts stehen jetzt Menschen: die Kachel hat das hoechste Format
+     der Reihe, und ein Hochformat traegt eine Gruppe besser als eine Wand.
+     Sie belegt ausserdem die Zeile im Hero — der Mensch im Mittelpunkt
+     braucht mindestens ein Bild, auf dem Menschen zu sehen sind. */
   {
-    src: stimmungsbilder.hofecke.src,
-    alt: stimmungsbilder.hofecke.alt,
+    src: stimmungsbilder.team.src,
+    alt: stimmungsbilder.team.alt,
     echt: false,
     platz: "platzZufahrt",
-    fokus: "50% 45%",
+    fokus: "50% 40%",
   },
+  /* Unten links die dreidimensionale Planung am Bildschirm: das einzige Bild
+     der Seite, das die Behauptung "geplant, bevor gebohrt wird" aus der
+     Sektion darueber tatsaechlich zeigt. */
   {
-    src: stimmungsbilder.holzbalken.src,
-    alt: stimmungsbilder.holzbalken.alt,
+    src: stimmungsbilder.monitor.src,
+    alt: stimmungsbilder.monitor.alt,
     echt: false,
     platz: "platzHolzbalken",
+    fokus: "50% 50%",
   },
 ];
 
@@ -108,11 +117,11 @@ export default function Galerie() {
       >
         <motion.div className={`${s.galerieKarte} ${s.platzKarte}`} variants={kachelVariant}>
           <p className={`zp-overline ${s.galerieOverline}`}>Praxis und Hof</p>
-          <p className={s.galerieKarteTitel}>Der Hof war zuerst da.</p>
+          <p className={s.galerieKarteTitel}>Moderne Zahnmedizin, altes Haus.</p>
           <p className={s.galerieKarteText}>
-            Der Utzhof trägt seinen Namen über der Tür, in Lüftlmalerei, von
-            Hand aufgetragen. Die Praxis hat sich dem Haus angepasst — innen
-            steht trotzdem alles, was moderne Behandlung braucht.
+            Digitale Diagnostik, Keramik aus der eigenen Fräse, Zahntechnik im
+            Haus — untergebracht in einem Hof, der seinen Namen in
+            Lüftlmalerei über der Tür trägt.
           </p>
           <a href={pfad("/praxis/")} className={s.galerieKarteLink}>
             Mehr über die Praxis
