@@ -81,19 +81,6 @@
   flex-wrap:wrap;
 }
 
-/* Der Terminhinweis steht in derselben Flex-Reihe wie die beiden Knoepfe,
-   nimmt aber die volle Breite und rutscht damit immer in eine eigene Zeile
-   darunter. So gehoert er sichtbar zum Termin-Knopf, ohne ihn zu verdraengen.
-   Der kleinere Abstand nach oben bindet ihn an die Knoepfe statt an den Rand. */
-.ankunftHinweis{
-  flex-basis:100%;
-  margin-top:calc(var(--space-6) * -0.35);
-  font-size:var(--size-caption);
-  color:var(--blue-100);
-  opacity:.8;
-  letter-spacing:.01em;
-}
-
 .btnPrimary{
   display:inline-flex;
   align-items:center;

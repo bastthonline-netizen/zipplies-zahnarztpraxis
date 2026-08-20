@@ -84,7 +84,6 @@ export default function Ankunft() {
             <a href="#karte" className={s.btnSecondary}>
               Standort ansehen
             </a>
-            <p className={s.ankunftHinweis}>{praxis.terminHinweis}</p>
           </div>
         </div>
       </div>
